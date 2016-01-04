@@ -25,7 +25,7 @@
     "ava":                             "0.9.1"
   },
   "scripts": {
-    "clean": "rm *.js",
+    "clean": "rm *.js || echo 'Already cleaned'",
     "build": "npm run clean && babel -d ./ *.es6",
     "test":  "npm run build && ava && eslint *.es6 test/*.js"
   }
