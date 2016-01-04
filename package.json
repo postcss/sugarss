@@ -1,0 +1,32 @@
+{
+  "name": "sugarss",
+  "version": "0.0.0",
+  "description": "Compact alternate syntax for CSS",
+  "keywords": [
+    "css",
+    "postcss",
+    "syntax",
+    "indent"
+  ],
+  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "license": "MIT",
+  "repository": "postcss/sugarss",
+  "dependencies": {
+    "postcss": "^5.0.13"
+  },
+  "devDependencies": {
+    "babel-plugin-add-module-exports": "0.1.2",
+    "babel-preset-es2015-loose":       "6.1.4",
+    "babel-preset-stage-0":            "6.3.13",
+    "babel-eslint":                    "5.0.0-beta6",
+    "babel-core":                      "6.3.26",
+    "babel-cli":                       "6.3.17",
+    "eslint":                          "1.10.3",
+    "ava":                             "0.9.1"
+  },
+  "scripts": {
+    "clean": "rm *.js",
+    "build": "npm run clean && babel -d ./ *.es6",
+    "test":  "npm run build && ava && eslint *.es6 test/*.js"
+  }
+}

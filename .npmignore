@@ -1,0 +1,12 @@
+.gitignore
+
+node_modules/
+npm-debug.log
+
+*.es6
+.babelrc
+
+test/
+.travis.yml
+.editorconfig
+.eslintrc
