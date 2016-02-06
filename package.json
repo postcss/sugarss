@@ -17,6 +17,7 @@
   "devDependencies": {
     "babel-plugin-add-module-exports": "0.1.2",
     "babel-preset-es2015-loose":       "7.0.0",
+    "eslint-config-postcss":           "1.0.0",
     "babel-preset-stage-0":            "6.3.13",
     "babel-eslint":                    "5.0.0-beta9",
     "babel-core":                      "6.4.5",
