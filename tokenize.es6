@@ -45,11 +45,6 @@ export default function tokenize(input) {
         }
 
         switch ( code ) {
-        case TAB:
-            throw input.error(
-                'In SugarSS you must replace tab indents to spaces',
-                line, pos - offset);
-
         case CR:
             if ( css.charCodeAt(pos + 1) === NEWLINE ) {
                 offset = pos;
@@ -67,6 +62,7 @@ export default function tokenize(input) {
 
         case SPACE:
         case FEED:
+        case TAB:
             next = pos;
             do {
                 next += 1;

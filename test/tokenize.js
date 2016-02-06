@@ -27,9 +27,3 @@ test('tokenizes single carriage return', t => {
 test('tokenizes last carriage return', t => {
     run(t, '\r', [ ['space', '\r'] ]);
 });
-
-test('throws a error on tab symbol', t => {
-    t.throws( () => {
-        run(t, '\t', []);
-    }, '<css input>:1:1: In SugarSS you must replace tab indents to spaces');
-});
