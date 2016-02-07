@@ -1,4 +1,4 @@
-export default function lines(tokens) {
+export default function liner(tokens) {
     let line = [];
     let result = [line];
     for ( let token of tokens ) {

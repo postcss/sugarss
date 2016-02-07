@@ -3,13 +3,13 @@ import Input from 'postcss/lib/input';
 import preprocess from './preprocess';
 import tokenizer  from './tokenize';
 import Parser     from './parser';
-import lines      from './lines';
+import liner      from './liner';
 
 export default function parse(source, opts) {
     let input = new Input(source, opts);
 
-    let parser   = new Parser(input);
-    parser.lines = preprocess(lines(tokenizer(input)));
+    let parser = new Parser(input);
+    parser.lines = preprocess(liner(tokenizer(input)));
     parser.loop();
 
     return parser.root;
