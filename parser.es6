@@ -5,7 +5,7 @@ export default class Parser {
     constructor(input) {
         this.input = input;
 
-        this.pos     = 0;
+        this.line    = 0;
         this.root    = new Root();
         this.current = this.root;
         this.spaces  = '';
@@ -14,6 +14,9 @@ export default class Parser {
     }
 
     loop() {
+        while ( this.line < this.lines.length ) {
+            this.line += 1;
+        }
     }
 
 }
