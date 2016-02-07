@@ -50,6 +50,18 @@ test('detects last comma', t => {
     ]);
 });
 
+test('detects last comma with trailing spaces', t => {
+    t.same(preprocess([[['word', 'ab'], [',', ','], ['space', ' ']]]), [
+        {
+            indent:    '',
+            tokens:    [['word', 'ab'], [',', ','], ['space', ' ']],
+            colon:     false,
+            atrule:    false,
+            lastComma: true
+        }
+    ]);
+});
+
 test('ignore comma inside', t => {
     t.same(preprocess([[['word', 'ab'], [',', ','], ['word', 'ba']]]), [
         {

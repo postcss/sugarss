@@ -13,9 +13,16 @@ export default function preprocess(lines) {
         let atrule    = false;
         let colon     = false;
         if ( tokens.length ) {
-            lastComma = tokens[tokens.length - 1][0] === ',';
-            atrule    = tokens[0][0] === 'at-word';
-            colon     = tokens.some( i => i[0] === ':' );
+            for ( let j = tokens.length - 1; j >= 0; j-- )  {
+                if ( tokens[j][0] === ',' ) {
+                    lastComma = true;
+                    break;
+                } else if ( tokens[j][0] !== 'space' ) {
+                    break;
+                }
+            }
+            atrule = tokens[0][0] === 'at-word';
+            colon  = tokens.some( i => i[0] === ':' );
         }
 
         return { indent, tokens, atrule, colon, lastComma };
