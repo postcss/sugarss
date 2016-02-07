@@ -17,7 +17,7 @@ const COLON             =  58; // `:'
 const COMMA             =  44; // ','
 const AT                =  64; // `@'
 const RE_AT_END         = /[ \n\t\r\{\(\)'"\\;/]/g;
-const RE_WORD_END       = /[ \n\t\r\(\)\{\}:;@!'"\\#]|\/(?=\*)/g;
+const RE_WORD_END       = /[ \n\t\r\(\)\{\}:;,@!'"\\#]|\/(?=\*)/g;
 const RE_BAD_BRACKET    = /.[\\\/\("'\n]/;
 
 export default function tokenize(input) {
@@ -98,8 +98,7 @@ export default function tokenize(input) {
             break;
 
         case COMMA:
-            tokens.push(['word', ',', line, pos - offset,
-                                      line, pos - offset + 1]);
+            tokens.push([',', ',', line, pos - offset]);
             break;
 
         case OPEN_PARENTHESES:

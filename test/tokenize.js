@@ -27,3 +27,9 @@ test('tokenizes single carriage return', t => {
 test('tokenizes last carriage return', t => {
     run(t, '\r', [ ['space', '\r'] ]);
 });
+
+test('tokenizes comma', t => {
+    run(t, 'a,b', [ ['word', 'a', 1, 1, 1, 1],
+                    [',',    ',', 1, 2],
+                    ['word', 'b', 1, 3, 1, 3] ]);
+});
