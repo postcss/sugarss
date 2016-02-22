@@ -21,11 +21,15 @@ test('tokenizes Windows new lines', t => {
 });
 
 test('tokenizes single carriage return', t => {
-    run(t, '\ra', [ ['space', '\r'], ['word', 'a', 1, 2, 1, 2] ]);
+    run(t, '\ra', [ ['newline', '\r'], ['word', 'a', 1, 2, 1, 2] ]);
 });
 
 test('tokenizes last carriage return', t => {
-    run(t, '\r', [ ['space', '\r'] ]);
+    run(t, '\r', [ ['newline', '\r'] ]);
+});
+
+test('tokenizes last carriage return', t => {
+    run(t, '\f', [ ['newline', '\f'] ]);
 });
 
 test('tokenizes comma', t => {

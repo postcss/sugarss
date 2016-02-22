@@ -52,7 +52,7 @@ export default function tokenize(input) {
                 pos   += 1;
                 tokens.push(['newline', '\r\n']);
             } else {
-                tokens.push(['space', '\r']);
+                tokens.push(['newline', '\r']);
             }
             break;
 
@@ -60,8 +60,11 @@ export default function tokenize(input) {
             tokens.push(['newline', '\n']);
             break;
 
-        case SPACE:
         case FEED:
+            tokens.push(['newline', '\f']);
+            break;
+
+        case SPACE:
         case TAB:
             next = pos;
             do {
