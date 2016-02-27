@@ -206,6 +206,9 @@ export default function tokenize(input) {
         case BACKSLASH:
             next   = pos;
             escape = true;
+
+            nextLine = line;
+
             while ( css.charCodeAt(next + 1) === BACKSLASH ) {
                 next  += 1;
                 escape = !escape;
@@ -213,7 +216,13 @@ export default function tokenize(input) {
             code = css.charCodeAt(next + 1);
             if ( escape ) {
                 if ( code === CR && css.charCodeAt(next + 2) === NEWLINE ) {
-                    next += 2;
+                    next      += 2;
+                    nextLine  += 1;
+                    nextOffset = next;
+                } else if ( code === CR || code === NEWLINE || code === FEED ) {
+                    next      += 1;
+                    nextLine  += 1;
+                    nextOffset = next;
                 } else {
                     next += 1;
                 }
@@ -222,6 +231,10 @@ export default function tokenize(input) {
                 line, pos  - offset,
                 line, next - offset
             ]);
+            if ( nextLine !== line ) {
+                line   = nextLine;
+                offset = nextOffset;
+            }
             pos = next;
             break;
 
