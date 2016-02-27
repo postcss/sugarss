@@ -210,13 +210,12 @@ export default function tokenize(input) {
                 escape = !escape;
             }
             code = css.charCodeAt(next + 1);
-            if ( escape && (code !== SLASH   &&
-                            code !== SPACE   &&
-                            code !== NEWLINE &&
-                            code !== TAB     &&
-                            code !== CR      &&
-                            code !== FEED ) ) {
-                next += 1;
+            if ( escape ) {
+                if ( code === CR && css.charCodeAt(next + 2) === NEWLINE ) {
+                    next += 2;
+                } else {
+                    next += 1;
+                }
             }
             tokens.push(['word', css.slice(pos, next + 1),
                 line, pos  - offset,
