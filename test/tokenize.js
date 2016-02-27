@@ -21,7 +21,7 @@ test('tokenizes Windows new lines', t => {
 });
 
 test('tokenizes single carriage return', t => {
-    run(t, '\ra', [ ['newline', '\r'], ['word', 'a', 1, 2, 1, 2] ]);
+    run(t, '\ra', [ ['newline', '\r'], ['word', 'a', 2, 1, 2, 1] ]);
 });
 
 test('tokenizes last carriage return', t => {
