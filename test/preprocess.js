@@ -1,9 +1,14 @@
 import preprocess from '../preprocess';
 
-import test from 'ava';
+import Input from 'postcss/lib/input';
+import test  from 'ava';
+
+function run(t, lines, result) {
+    t.same(preprocess(new Input(''), lines), result);
+}
 
 test('separates indent from other tokens', t => {
-    t.same(preprocess([[['space', '  '], ['word', 'ab']]]), [
+    run(t, [[['space', '  '], ['word', 'ab']]], [
         {
             indent:    '  ',
             tokens:    [['word', 'ab']],
@@ -15,7 +20,7 @@ test('separates indent from other tokens', t => {
 });
 
 test('works with indentless strings', t => {
-    t.same(preprocess([[['word', 'ab']]]), [
+    run(t, [[['word', 'ab']]], [
         {
             indent:    '',
             tokens:    [['word', 'ab']],
@@ -27,7 +32,7 @@ test('works with indentless strings', t => {
 });
 
 test('detects at-rules', t => {
-    t.same(preprocess([[['at-word', '@ab'], ['space', ' ']]]), [
+    run(t, [[['at-word', '@ab'], ['space', ' ']]], [
         {
             indent:    '',
             tokens:    [['at-word', '@ab'], ['space', ' ']],
@@ -39,7 +44,7 @@ test('detects at-rules', t => {
 });
 
 test('detects last comma', t => {
-    t.same(preprocess([[['word', 'ab'], [',', ',']]]), [
+    run(t, [[['word', 'ab'], [',', ',']]], [
         {
             indent:    '',
             tokens:    [['word', 'ab'], [',', ',']],
@@ -51,7 +56,7 @@ test('detects last comma', t => {
 });
 
 test('detects last comma with trailing spaces', t => {
-    t.same(preprocess([[['word', 'ab'], [',', ','], ['space', ' ']]]), [
+    run(t, [[['word', 'ab'], [',', ','], ['space', ' ']]], [
         {
             indent:    '',
             tokens:    [['word', 'ab'], [',', ','], ['space', ' ']],
@@ -63,7 +68,7 @@ test('detects last comma with trailing spaces', t => {
 });
 
 test('ignore comma inside', t => {
-    t.same(preprocess([[['word', 'ab'], [',', ','], ['word', 'ba']]]), [
+    run(t, [[['word', 'ab'], [',', ','], ['word', 'ba']]], [
         {
             indent:    '',
             tokens:    [['word', 'ab'], [',', ','], ['word', 'ba']],
@@ -75,7 +80,7 @@ test('ignore comma inside', t => {
 });
 
 test('detects colon', t => {
-    t.same(preprocess([[['word', 'ab'], [':', ':'], ['word', 'ba']]]), [
+    run(t, [[['word', 'ab'], [':', ':'], ['word', 'ba']]], [
         {
             indent:    '',
             tokens:    [['word', 'ab'], [':', ':'], ['word', 'ba']],
@@ -84,4 +89,19 @@ test('detects colon', t => {
             lastComma: false
         }
     ]);
+});
+
+test('detects mixed tabs and spaces in indent', t => {
+    t.throws( () => {
+        preprocess(new Input(''), [[['space', '\t '], ['word', 'ab']]]);
+    }, '<css input>:1:2: Mixed tabs and spaces are not allowed');
+});
+
+test('detects mixed tabs and spaces in indents', t => {
+    t.throws( () => {
+        preprocess(new Input(''), [
+            [['space', ' '],  ['newline', '\n']],
+            [['space', '\t'], ['word', 'ab']]
+        ]);
+    }, '<css input>:2:1: Mixed tabs and spaces are not allowed');
 });

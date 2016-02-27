@@ -1,5 +1,10 @@
-export default function preprocess(lines) {
-    return lines.map(line => {
+function indentError(input, l, p) {
+    throw input.error('Mixed tabs and spaces are not allowed', l + 1, p + 1);
+}
+
+export default function preprocess(input, lines) {
+    let indentType;
+    return lines.map( (line, number) => {
         let indent, tokens;
         if ( line[0][0] === 'space' ) {
             indent = line[0][1];
@@ -9,20 +14,33 @@ export default function preprocess(lines) {
             tokens = line;
         }
 
+        if ( !indentType && indent.length ) {
+            indentType = indent[0] === ' ' ? 'space' : 'tab';
+        }
+        if ( indentType === 'space' ) {
+            if ( indent.indexOf('\t') !== -1 ) {
+                indentError(input, number, indent.indexOf('\t'));
+            }
+        } else if ( indentType === 'tab' ) {
+            if ( indent.indexOf(' ') !== -1 ) {
+                indentError(input, number, indent.indexOf(' '));
+            }
+        }
+
         let lastComma = false;
         let atrule    = false;
         let colon     = false;
         if ( tokens.length ) {
-            for ( let j = tokens.length - 1; j >= 0; j-- )  {
-                if ( tokens[j][0] === ',' ) {
+            for ( let i = tokens.length - 1; i >= 0; i-- )  {
+                if ( tokens[i][0] === ',' ) {
                     lastComma = true;
                     break;
-                } else if ( tokens[j][0] !== 'space' ) {
+                } else if ( tokens[i][0] !== 'space' ) {
                     break;
                 }
             }
             atrule = tokens[0][0] === 'at-word';
-            colon  = tokens.some( i => i[0] === ':' );
+            colon  = tokens.some( j => j[0] === ':' );
         }
 
         return { indent, tokens, atrule, colon, lastComma };
