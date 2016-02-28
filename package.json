@@ -28,7 +28,7 @@
   },
   "scripts": {
     "clean": "rm *.js || echo 'Already cleaned'",
-    "build": "npm run clean && babel -d ./ *.es6",
+    "build": "npm run clean && babel -s inline -d ./ *.es6",
     "test":  "npm run build && ava && eslint *.es6 test/*.js"
   }
 }
