@@ -13,23 +13,23 @@ test('tokenizes inine comments', t => {
 
 test('tokenizes inine comments and new lines', t => {
     run(t, '// a\n', [ ['comment', '// a', 1, 1, 1, 4, 'inline'],
-                       ['newline', '\n'] ]);
+                       ['newline', '\n', 1] ]);
 });
 
 test('tokenizes Windows new lines', t => {
-    run(t, '\r\n', [ ['newline', '\r\n'] ]);
+    run(t, '\r\n', [ ['newline', '\r\n', 1] ]);
 });
 
 test('tokenizes single carriage return', t => {
-    run(t, '\ra', [ ['newline', '\r'], ['word', 'a', 2, 1, 2, 1] ]);
+    run(t, '\ra', [ ['newline', '\r', 1], ['word', 'a', 2, 1, 2, 1] ]);
 });
 
 test('tokenizes last carriage return', t => {
-    run(t, '\r', [ ['newline', '\r'] ]);
+    run(t, '\r', [ ['newline', '\r', 1] ]);
 });
 
 test('tokenizes last carriage return', t => {
-    run(t, '\f', [ ['newline', '\f'] ]);
+    run(t, '\f', [ ['newline', '\f', 1] ]);
 });
 
 test('tokenizes comma', t => {
@@ -56,6 +56,6 @@ test('escapes new line', t => {
         ['word',    '\\\r\n', 3, 1, 3, 3],
         ['word',    '\\\f',   4, 1, 4, 2],
         ['word',    '\\\\',   5, 1, 5, 2],
-        ['newline', '\n']
+        ['newline', '\n', 5]
     ]);
 });

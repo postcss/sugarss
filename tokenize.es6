@@ -52,19 +52,17 @@ export default function tokenize(input) {
                 offset = pos;
                 line  += 1;
                 pos   += 1;
-                tokens.push(['newline', '\r\n']);
+                tokens.push(['newline', '\r\n', line - 1]);
             } else {
-                tokens.push(['newline', '\r']);
+                tokens.push(['newline', '\r', line - 1]);
             }
             break;
 
+        case FEED:
         case NEWLINE:
-            tokens.push(['newline', '\n']);
+            tokens.push(['newline', css.slice(pos, pos + 1), line - 1]);
             break;
 
-        case FEED:
-            tokens.push(['newline', '\f']);
-            break;
 
         case SPACE:
         case TAB:

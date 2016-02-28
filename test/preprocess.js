@@ -100,8 +100,18 @@ test('detects mixed tabs and spaces in indent', t => {
 test('detects mixed tabs and spaces in indents', t => {
     t.throws( () => {
         preprocess(new Input(''), [
-            [['space', ' '],  ['newline', '\n']],
+            [['space', ' '],  ['newline', '\n', 1]],
             [['space', '\t'], ['word', 'ab']]
         ]);
     }, '<css input>:2:1: Mixed tabs and spaces are not allowed');
+});
+
+test('shows correct error position', t => {
+    t.throws( () => {
+        preprocess(new Input(''), [
+            [['comment', '/*\n*/'],            ['newline', '\n', 2]],
+            [['space', '\t'],  ['word', 'ab'], ['newline', '\n', 3]],
+            [['space', '\t '], ['word', 'ab'], ['newline', '\n', 4]]
+        ]);
+    }, '<css input>:4:2: Mixed tabs and spaces are not allowed');
 });

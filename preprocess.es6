@@ -1,10 +1,11 @@
 function indentError(input, l, p) {
-    throw input.error('Mixed tabs and spaces are not allowed', l + 1, p + 1);
+    throw input.error('Mixed tabs and spaces are not allowed', l, p + 1);
 }
 
 export default function preprocess(input, lines) {
     let indentType;
-    return lines.map( (line, number) => {
+    let number = 1;
+    return lines.map(line => {
         let indent, tokens;
         if ( line[0][0] === 'space' ) {
             indent = line[0][1];
@@ -42,6 +43,9 @@ export default function preprocess(input, lines) {
             atrule = tokens[0][0] === 'at-word';
             colon  = tokens.some( j => j[0] === ':' );
         }
+
+        let last = tokens[tokens.length - 1];
+        if ( last && last[0] === 'newline' ) number = last[2] + 1;
 
         return { indent, tokens, atrule, colon, lastComma };
     });
