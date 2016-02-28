@@ -7,6 +7,7 @@ npm-debug.log
 .babelrc
 
 test/
+update-cases
 .travis.yml
 .editorconfig
 .eslintrc

@@ -20,6 +20,7 @@
     "babel-preset-es2015-loose":         "7.0.0",
     "eslint-config-postcss":             "2.0.0",
     "babel-preset-stage-0":              "6.5.0",
+    "postcss-parser-tests":              "5.0.5",
     "babel-eslint":                      "5.0.0",
     "babel-core":                        "6.5.2",
     "babel-cli":                         "6.5.1",

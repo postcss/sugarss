@@ -14,6 +14,7 @@ test('separates indent from other tokens', t => {
             tokens:    [['word', 'ab']],
             colon:     false,
             atrule:    false,
+            comment:   false,
             lastComma: false
         }
     ]);
@@ -26,6 +27,7 @@ test('works with indentless strings', t => {
             tokens:    [['word', 'ab']],
             colon:     false,
             atrule:    false,
+            comment:   false,
             lastComma: false
         }
     ]);
@@ -38,6 +40,7 @@ test('detects at-rules', t => {
             tokens:    [['at-word', '@ab'], ['space', ' ']],
             colon:     false,
             atrule:    true,
+            comment:   false,
             lastComma: false
         }
     ]);
@@ -50,6 +53,7 @@ test('detects last comma', t => {
             tokens:    [['word', 'ab'], [',', ',']],
             colon:     false,
             atrule:    false,
+            comment:   false,
             lastComma: true
         }
     ]);
@@ -62,6 +66,7 @@ test('detects last comma with trailing spaces', t => {
             tokens:    [['word', 'ab'], [',', ','], ['space', ' ']],
             colon:     false,
             atrule:    false,
+            comment:   false,
             lastComma: true
         }
     ]);
@@ -74,6 +79,7 @@ test('ignore comma inside', t => {
             tokens:    [['word', 'ab'], [',', ','], ['word', 'ba']],
             colon:     false,
             atrule:    false,
+            comment:   false,
             lastComma: false
         }
     ]);
@@ -86,6 +92,20 @@ test('detects colon', t => {
             tokens:    [['word', 'ab'], [':', ':'], ['word', 'ba']],
             colon:     true,
             atrule:    false,
+            comment:   false,
+            lastComma: false
+        }
+    ]);
+});
+
+test('detects comments', t => {
+    run(t, [[['comment', '// a']]], [
+        {
+            indent:    '',
+            tokens:    [['comment', '// a']],
+            colon:     false,
+            atrule:    false,
+            comment:   true,
             lastComma: false
         }
     ]);
