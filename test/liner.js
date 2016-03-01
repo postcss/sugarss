@@ -9,3 +9,10 @@ test('packs tokens by lines', t => {
         [['word', 'b']]
     ]);
 });
+
+test('ignores newline inside brackets', t => {
+    let tokens = [['(', '('], ['newline', '\n'], [')', ')']];
+    t.same(liner(tokens), [
+        [['(', '('], ['newline', '\n'], [')', ')']]
+    ]);
+});
