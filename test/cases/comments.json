@@ -53,5 +53,13 @@
       "line": 1,
       "column": 1
     }
-  }
+  },
+  "rawCache": {
+    "beforeRule": "\n",
+    "beforeDecl": "\n",
+    "beforeComment": "\n",
+    "indent": "    "
+  },
+  "lastEach": 4,
+  "indexes": {}
 }

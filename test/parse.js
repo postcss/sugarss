@@ -24,9 +24,11 @@ function read(file) {
 
 for ( let name of tests ) {
     test('parses ' + name, t => {
-        let sss  = read(name).trim();
+        let sss  = read(name);
+        let css  = read(name.replace(/\.sss/, '.css')).trim();
         let json = read(name.replace(/\.sss/, '.json')).trim();
         let root = parse(sss, { from: name });
+        t.same(root.toString(), css);
         t.same(jsonify(root), json);
     });
 }

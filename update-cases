@@ -11,8 +11,10 @@ fs.readdirSync(dir).filter(function (i) {
     return path.extname(i) === '.sss';
 }).forEach(function (name) {
     var sssFile  = path.join(dir, name);
+    var cssFile  = sssFile.replace(/\.sss/, '.css');
     var jsonFile = sssFile.replace(/\.sss/, '.json');
-    var sss      = fs.readFileSync(sssFile).toString().trim();
+    var sss      = fs.readFileSync(sssFile).toString();
     var root     = parse(sss, { from: name });
+    fs.writeFileSync(cssFile, root.toString());
     fs.writeFileSync(jsonFile, tests.jsonify(root) + '\n');
 });
