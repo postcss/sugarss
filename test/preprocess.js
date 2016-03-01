@@ -113,6 +113,17 @@ test('detects colon', t => {
     ]);
 });
 
+test('ignores colon inside brackets', t => {
+    run(t, [[['(', '('], [':', ':'], [')', ')']]], [
+        {
+            ...defaults,
+            tokens: [['(', '('], [':', ':'], [')', ')']],
+            colon:  false
+        }
+    ]);
+});
+
+
 test('detects comments', t => {
     run(t, [[['comment', '// a']]], [
         {

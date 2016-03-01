@@ -54,7 +54,16 @@ export default function preprocess(input, lines) {
                 }
                 comment = tokens[0][0] === 'comment';
                 atrule  = tokens[0][0] === 'at-word';
-                colon   = tokens.some( j => j[0] === ':' );
+
+                let brackets = 0;
+                colon = tokens.some(j => {
+                    if ( j[0] === '(' ) {
+                        brackets += 1;
+                    } else if ( j[0] === ')' ) {
+                        brackets += 1;
+                    }
+                    return j[0] === ':' && brackets === 0;
+                });
             }
 
             let last = tokens[tokens.length - 1];
