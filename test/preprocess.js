@@ -10,6 +10,7 @@ function run(t, lines, result) {
 test('separates indent from other tokens', t => {
     run(t, [[['space', '  '], ['word', 'ab']]], [
         {
+            number:    1,
             indent:    '  ',
             tokens:    [['word', 'ab']],
             colon:     false,
@@ -23,8 +24,34 @@ test('separates indent from other tokens', t => {
 test('works with indentless strings', t => {
     run(t, [[['word', 'ab']]], [
         {
+            number:    1,
             indent:    '',
             tokens:    [['word', 'ab']],
+            colon:     false,
+            atrule:    false,
+            comment:   false,
+            lastComma: false
+        }
+    ]);
+});
+
+test('collects line number', t => {
+    run(t, [
+        [['newline', '\n', 1]],
+        [['newline', '\n', 2]]
+    ], [
+        {
+            number:    1,
+            indent:    '',
+            tokens:    [['newline', '\n', 1]],
+            colon:     false,
+            atrule:    false,
+            comment:   false,
+            lastComma: false
+        }, {
+            number:    2,
+            indent:    '',
+            tokens:    [['newline', '\n', 2]],
             colon:     false,
             atrule:    false,
             comment:   false,
@@ -36,6 +63,7 @@ test('works with indentless strings', t => {
 test('detects at-rules', t => {
     run(t, [[['at-word', '@ab'], ['space', ' ']]], [
         {
+            number:    1,
             indent:    '',
             tokens:    [['at-word', '@ab'], ['space', ' ']],
             colon:     false,
@@ -49,6 +77,7 @@ test('detects at-rules', t => {
 test('detects last comma', t => {
     run(t, [[['word', 'ab'], [',', ',']]], [
         {
+            number:    1,
             indent:    '',
             tokens:    [['word', 'ab'], [',', ',']],
             colon:     false,
@@ -62,6 +91,7 @@ test('detects last comma', t => {
 test('detects last comma with trailing spaces', t => {
     run(t, [[['word', 'ab'], [',', ','], ['space', ' ']]], [
         {
+            number:    1,
             indent:    '',
             tokens:    [['word', 'ab'], [',', ','], ['space', ' ']],
             colon:     false,
@@ -75,6 +105,7 @@ test('detects last comma with trailing spaces', t => {
 test('ignore comma inside', t => {
     run(t, [[['word', 'ab'], [',', ','], ['word', 'ba']]], [
         {
+            number:    1,
             indent:    '',
             tokens:    [['word', 'ab'], [',', ','], ['word', 'ba']],
             colon:     false,
@@ -88,6 +119,7 @@ test('ignore comma inside', t => {
 test('detects colon', t => {
     run(t, [[['word', 'ab'], [':', ':'], ['word', 'ba']]], [
         {
+            number:    1,
             indent:    '',
             tokens:    [['word', 'ab'], [':', ':'], ['word', 'ba']],
             colon:     true,
@@ -101,6 +133,7 @@ test('detects colon', t => {
 test('detects comments', t => {
     run(t, [[['comment', '// a']]], [
         {
+            number:    1,
             indent:    '',
             tokens:    [['comment', '// a']],
             colon:     false,

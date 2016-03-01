@@ -4,10 +4,11 @@ function indentError(input, l, p) {
 
 export default function preprocess(input, lines) {
     let indentType;
-    let number = 1;
+    let prevNumber = 0;
     return lines.map(line => {
         let lastComma = false;
         let comment   = false;
+        let number    = prevNumber + 1;
         let atrule    = false;
         let indent    = '';
         let tokens    = [];
@@ -50,9 +51,9 @@ export default function preprocess(input, lines) {
             }
 
             let last = tokens[tokens.length - 1];
-            if ( last && last[0] === 'newline' ) number = last[2] + 1;
+            if ( last && last[0] === 'newline' ) prevNumber = last[2];
         }
 
-        return { indent, tokens, atrule, colon, comment, lastComma };
+        return { number, indent, tokens, atrule, colon, comment, lastComma };
     });
 }
