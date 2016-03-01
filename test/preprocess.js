@@ -83,6 +83,16 @@ test('detects last comma with trailing spaces', t => {
     ]);
 });
 
+test('detects last comma with trailing comment', t => {
+    run(t, [[['word', 'ab'], [',', ','], ['comment', '// a']]], [
+        {
+            ...defaults,
+            tokens:    [['word', 'ab'], [',', ','], ['comment', '// a']],
+            lastComma: true
+        }
+    ]);
+});
+
 test('ignore comma inside', t => {
     run(t, [[['word', 'ab'], [',', ','], ['word', 'ba']]], [
         {

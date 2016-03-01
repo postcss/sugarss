@@ -38,10 +38,11 @@ export default function preprocess(input, lines) {
 
             if ( tokens.length ) {
                 for ( let i = tokens.length - 1; i >= 0; i-- )  {
-                    if ( tokens[i][0] === ',' ) {
+                    let type = tokens[i][0];
+                    if ( type === ',' ) {
                         lastComma = true;
                         break;
-                    } else if ( tokens[i][0] !== 'space' ) {
+                    } else if ( type !== 'space' && type !== 'comment' ) {
                         break;
                     }
                 }
