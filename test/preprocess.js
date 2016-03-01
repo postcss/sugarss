@@ -14,7 +14,7 @@ let defaults = {
     atrule:    false,
     comment:   false,
     lastComma: false
-}
+};
 
 test('separates indent from other tokens', t => {
     run(t, [[['space', '  '], ['word', 'ab']]], [
@@ -31,7 +31,7 @@ test('works with indentless strings', t => {
         {
             ...defaults,
             indent: '',
-            tokens: [['word', 'ab']],
+            tokens: [['word', 'ab']]
         }
     ]);
 });
@@ -97,8 +97,8 @@ test('detects colon', t => {
     run(t, [[['word', 'ab'], [':', ':'], ['word', 'ba']]], [
         {
             ...defaults,
-            tokens:    [['word', 'ab'], [':', ':'], ['word', 'ba']],
-            colon:     true
+            tokens: [['word', 'ab'], [':', ':'], ['word', 'ba']],
+            colon:  true
         }
     ]);
 });
