@@ -3,10 +3,7 @@
   "type": "root",
   "nodes": [
     {
-      "raws": {
-        "left": " ",
-        "right": " "
-      },
+      "raws": {},
       "type": "comment",
       "source": {
         "start": {
@@ -24,10 +21,7 @@
       "text": "multi\n   line"
     },
     {
-      "raws": {
-        "left": " ",
-        "right": ""
-      },
+      "raws": {},
       "type": "comment",
       "source": {
         "start": {
@@ -55,11 +49,13 @@
     }
   },
   "rawCache": {
+    "commentLeft": " ",
+    "commentRight": " ",
     "beforeRule": "\n",
     "beforeDecl": "\n",
     "beforeComment": "\n",
     "indent": "    "
   },
-  "lastEach": 4,
+  "lastEach": 6,
   "indexes": {}
 }

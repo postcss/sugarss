@@ -15,6 +15,24 @@ test('ignores comments in indent detection', t => {
     t.same(root.raws.indent, '  ');
 });
 
+test('throws on first indent', t => {
+    t.throws(() => {
+        parse('  @charset "UTF-8"');
+    }, '<css input>:1:1: First line should not have indent');
+});
+
+test('throws on too big indent', t => {
+    t.throws(() => {
+        parse('@supports\n  @media\n      @media');
+    }, '<css input>:3:1: Expected 4 indent, but get 6');
+});
+
+test('throws on wrong indent step', t => {
+    t.throws(() => {
+        parse('@supports\n  @media\n @media');
+    }, '<css input>:3:1: Expected 0 or 2 indent, but get 1');
+});
+
 let tests = fs.readdirSync(path.join(__dirname, 'cases'))
               .filter(i => path.extname(i) === '.sss' );
 

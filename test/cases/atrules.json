@@ -1,0 +1,148 @@
+{
+  "raws": {
+    "indent": "  "
+  },
+  "type": "root",
+  "nodes": [
+    {
+      "raws": {
+        "afterName": ""
+      },
+      "type": "atrule",
+      "name": "test",
+      "source": {
+        "start": {
+          "line": 1,
+          "column": 1
+        },
+        "input": {
+          "file": "atrules.sss"
+        }
+      },
+      "params": "",
+      "lastEach": 10,
+      "indexes": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0
+      }
+    },
+    {
+      "raws": {},
+      "type": "atrule",
+      "name": "charset",
+      "source": {
+        "start": {
+          "line": 2,
+          "column": 1
+        },
+        "input": {
+          "file": "atrules.sss"
+        }
+      },
+      "params": "\"UTF-8\"",
+      "lastEach": 10,
+      "indexes": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0
+      }
+    },
+    {
+      "raws": {},
+      "type": "atrule",
+      "name": "supports",
+      "source": {
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "input": {
+          "file": "atrules.sss"
+        }
+      },
+      "params": "(color: black),\n          (background: black)",
+      "nodes": [
+        {
+          "raws": {
+            "params": {
+              "value": "(max-width:  400px) ",
+              "raw": "(max-width: /*<=*/ 400px) /* mobile */"
+            }
+          },
+          "type": "atrule",
+          "name": "media",
+          "source": {
+            "start": {
+              "line": 5,
+              "column": 3
+            },
+            "input": {
+              "file": "atrules.sss"
+            }
+          },
+          "params": "(max-width:  400px) ",
+          "nodes": [
+            {
+              "raws": {},
+              "type": "comment",
+              "source": {
+                "start": {
+                  "line": 6,
+                  "column": 5
+                },
+                "input": {
+                  "file": "atrules.sss"
+                },
+                "end": {
+                  "line": 6,
+                  "column": 22
+                }
+              },
+              "text": "write code here"
+            }
+          ],
+          "lastEach": 10,
+          "indexes": {}
+        }
+      ],
+      "lastEach": 10,
+      "indexes": {}
+    }
+  ],
+  "source": {
+    "input": {
+      "file": "atrules.sss"
+    },
+    "start": {
+      "line": 1,
+      "column": 1
+    }
+  },
+  "rawCache": {
+    "beforeRule": "\n",
+    "indent": "    ",
+    "beforeOpen": " ",
+    "beforeDecl": "\n",
+    "beforeComment": "\n",
+    "commentLeft": " ",
+    "commentRight": " ",
+    "beforeClose": "\n"
+  },
+  "lastEach": 10,
+  "indexes": {}
+}
