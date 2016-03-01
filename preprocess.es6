@@ -42,7 +42,13 @@ export default function preprocess(input, lines) {
                     if ( type === ',' ) {
                         lastComma = true;
                         break;
-                    } else if ( type !== 'space' && type !== 'comment' ) {
+                    } else if ( type === 'space' ) {
+                        continue;
+                    } else if ( type === 'comment' ) {
+                        continue;
+                    } else if ( type === 'newline' ) {
+                        continue;
+                    } else {
                         break;
                     }
                 }

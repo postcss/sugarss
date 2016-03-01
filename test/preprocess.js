@@ -64,10 +64,10 @@ test('detects at-rules', t => {
 });
 
 test('detects last comma', t => {
-    run(t, [[['word', 'ab'], [',', ',']]], [
+    run(t, [[['word', 'ab'], [',', ','], ['newline', '\n']]], [
         {
             ...defaults,
-            tokens:    [['word', 'ab'], [',', ',']],
+            tokens:    [['word', 'ab'], [',', ','], ['newline', '\n']],
             lastComma: true
         }
     ]);
