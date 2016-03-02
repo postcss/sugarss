@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": "postcss/sugarss",
   "dependencies": {
-    "postcss": "^5.0.18"
+    "postcss": "^5.0.19"
   },
   "devDependencies": {
     "babel-plugin-precompile-charcodes": "1.0.0",

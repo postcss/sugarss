@@ -2,7 +2,7 @@
 @charset "UTF-8";
 @supports (color: black),
           (background: black) {
-    @media (max-width: /*<=*/ 400px) /* mobile */ {
-        /* write code here */
-    }
+  @media (max-width: /*<=*/ 400px) /* mobile */ {
+    /* write code here */
+  }
 }
