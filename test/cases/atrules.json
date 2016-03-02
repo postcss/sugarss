@@ -19,20 +19,7 @@
           "file": "atrules.sss"
         }
       },
-      "params": "",
-      "lastEach": 10,
-      "indexes": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0,
-        "10": 0
-      }
+      "params": ""
     },
     {
       "raws": {},
@@ -47,20 +34,7 @@
           "file": "atrules.sss"
         }
       },
-      "params": "\"UTF-8\"",
-      "lastEach": 10,
-      "indexes": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0,
-        "10": 0
-      }
+      "params": "\"UTF-8\""
     },
     {
       "raws": {},
@@ -115,13 +89,9 @@
               },
               "text": "write code here"
             }
-          ],
-          "lastEach": 10,
-          "indexes": {}
+          ]
         }
-      ],
-      "lastEach": 10,
-      "indexes": {}
+      ]
     }
   ],
   "source": {
@@ -132,17 +102,5 @@
       "line": 1,
       "column": 1
     }
-  },
-  "rawCache": {
-    "beforeRule": "\n",
-    "indent": "    ",
-    "beforeOpen": " ",
-    "beforeDecl": "\n",
-    "beforeComment": "\n",
-    "commentLeft": " ",
-    "commentRight": " ",
-    "beforeClose": "\n"
-  },
-  "lastEach": 10,
-  "indexes": {}
+  }
 }

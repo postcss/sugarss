@@ -47,15 +47,5 @@
       "line": 1,
       "column": 1
     }
-  },
-  "rawCache": {
-    "commentLeft": " ",
-    "commentRight": " ",
-    "beforeRule": "\n",
-    "beforeDecl": "\n",
-    "beforeComment": "\n",
-    "indent": "    "
-  },
-  "lastEach": 6,
-  "indexes": {}
+  }
 }
