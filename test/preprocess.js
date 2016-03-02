@@ -16,6 +16,10 @@ let defaults = {
     lastComma: false
 };
 
+test('cleans from empty lines', t => {
+    run(t, [[], [['space', '  '], ['newline', '\n']]], []);
+});
+
 test('separates indent from other tokens', t => {
     run(t, [[['space', '  '], ['word', 'ab']]], [
         {
@@ -38,17 +42,17 @@ test('works with indentless strings', t => {
 
 test('collects line number', t => {
     run(t, [
-        [['newline', '\n', 1]],
-        [['newline', '\n', 2]]
+        [['word', 'a'], ['newline', '\n', 1]],
+        [['word', 'b'], ['newline', '\n', 2]]
     ], [
         {
             ...defaults,
             number: 1,
-            tokens: [['newline', '\n', 1]]
+            tokens: [['word', 'a'], ['newline', '\n', 1]]
         }, {
             ...defaults,
             number: 2,
-            tokens: [['newline', '\n', 2]]
+            tokens: [['word', 'b'], ['newline', '\n', 2]]
         }
     ]);
 });

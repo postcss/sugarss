@@ -71,5 +71,9 @@ export default function preprocess(input, lines) {
         }
 
         return { number, indent, tokens, atrule, colon, comment, lastComma };
+    }).filter(line => {
+        return line.tokens.length > 0 && line.tokens.some(i => {
+            return i[0] !== 'space' && i[0] !== 'newline';
+        });
     });
 }
