@@ -33,6 +33,12 @@ test('throws on wrong indent step', t => {
     }, '<css input>:3:1: Expected 0 or 2 indent, but get 1');
 });
 
+test('throws on decl without property', t => {
+    t.throws(() => {
+        parse(': black');
+    }, '<css input>:1:1: Declaration without name');
+});
+
 let tests = fs.readdirSync(path.join(__dirname, 'cases'))
               .filter(i => path.extname(i) === '.sss' );
 

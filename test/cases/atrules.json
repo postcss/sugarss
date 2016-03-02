@@ -5,9 +5,7 @@
   "type": "root",
   "nodes": [
     {
-      "raws": {
-        "afterName": ""
-      },
+      "raws": {},
       "type": "atrule",
       "name": "test",
       "source": {
@@ -17,6 +15,10 @@
         },
         "input": {
           "file": "atrules.sss"
+        },
+        "end": {
+          "line": 1,
+          "column": 5
         }
       },
       "params": ""
@@ -32,6 +34,10 @@
         },
         "input": {
           "file": "atrules.sss"
+        },
+        "end": {
+          "line": 2,
+          "column": 16
         }
       },
       "params": "\"UTF-8\""
@@ -47,6 +53,10 @@
         },
         "input": {
           "file": "atrules.sss"
+        },
+        "end": {
+          "line": 4,
+          "column": 29
         }
       },
       "params": "(color: black),\n          (background: black)",
@@ -67,6 +77,10 @@
             },
             "input": {
               "file": "atrules.sss"
+            },
+            "end": {
+              "line": 5,
+              "column": 44
             }
           },
           "params": "(max-width:  400px) ",

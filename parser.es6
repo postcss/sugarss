@@ -1,6 +1,8 @@
-import Comment from 'postcss/lib/comment';
-import AtRule  from 'postcss/lib/at-rule';
-import Root    from 'postcss/lib/root';
+import Declaration from 'postcss/lib/declaration';
+import Comment     from 'postcss/lib/comment';
+import AtRule      from 'postcss/lib/at-rule';
+import Rule        from 'postcss/lib/rule';
+import Root        from 'postcss/lib/root';
 
 export default class Parser {
 
@@ -27,6 +29,25 @@ export default class Parser {
                 this.comment(line);
             } else if ( line.atrule ) {
                 this.atrule(line);
+            } else if ( line.colon ) {
+                let next = this.lines[this.pos + 1];
+
+                if ( !next || next.atrule ) {
+                    this.decl(line);
+                } else {
+                    let sameIndent = next.indent.length === line.indent.length;
+                    if ( sameIndent && next.colon ) {
+                        this.decl(line);
+                    } else if ( sameIndent && !next.colon ) {
+                        this.rule(line);
+                    } else if ( !sameIndent && next.colon ) {
+                        this.rule(line);
+                    } else if ( !sameIndent && !next.colon ) {
+                        this.decl(line);
+                    }
+                }
+            } else {
+                this.rule(line);
             }
 
             this.pos += 1;
@@ -66,13 +87,60 @@ export default class Parser {
             params = params.concat(line.tokens);
         }
 
-        params = this.trim(params);
-        if ( params.length ) {
-            this.raw(node, 'params', params);
-        } else {
-            node.raws.afterName = '';
-            node.params         = '';
+        this.raw(node, 'params', params, atword);
+    }
+
+    decl(line) {
+        this.indent(line);
+        let node = new Declaration();
+        this.init(node, line.tokens[0][2], line.tokens[0][3]);
+
+        let colon = 0;
+        let value = [];
+        let prop  = '';
+        for ( let i = 0; i < line.tokens.length; i++ ) {
+            let token = line.tokens[i];
+            if ( token[0] === ':' ) {
+                colon = token;
+                value = line.tokens.slice(i + 1);
+                break;
+            } else {
+                prop += token[1];
+            }
         }
+
+        if ( prop === '' ) this.unnamedDecl(line.tokens[0]);
+        node.prop = prop;
+
+        let next = this.lines[this.pos + 1];
+
+        while ( next && !next.atrule && !next.colon &&
+                next.indent.length > line.indent.length ) {
+            value.push(['space', next.indent]);
+            value = value.concat(next.tokens);
+            this.pos += 1;
+            next = this.lines[this.pos + 1];
+        }
+
+        this.raw(node, 'value', value, colon);
+    }
+
+    rule(line) {
+        this.indent(line);
+        let node = new Rule();
+        this.init(node, line.tokens[0][2], line.tokens[0][3]);
+
+        let selector = line.tokens;
+        let next     = this.lines[this.pos + 1];
+
+        while ( next && next.indent.length === line.indent.length ) {
+            selector.push(['space', next.indent]);
+            selector = selector.concat(next.tokens);
+            this.pos += 1;
+            next = this.lines[this.pos + 1];
+        }
+
+        this.raw(node, 'selector', selector);
     }
 
     /* Helpers */
@@ -84,7 +152,7 @@ export default class Parser {
         if ( !isPrev && indent ) this.indentedFirstLine(line);
 
         if ( !this.step && indent ) {
-            this.step             = indent;
+            this.step = indent;
             this.root.raws.indent = line.indent;
         }
 
@@ -100,7 +168,7 @@ export default class Parser {
                 let m = indent + diff % this.step;
                 this.wrongIndent(`${ m } or ${ m + this.step }`, indent, line);
             } else {
-                for ( let i = 0; i < diff / this.step; i++ ) {
+                for ( let i = 0; i < -diff / this.step; i++ ) {
                     this.current = this.current.parent;
                 }
             }
@@ -126,7 +194,9 @@ export default class Parser {
         }
     }
 
-    raw(node, prop, tokens) {
+    raw(node, prop, tokens, altLast) {
+        tokens = this.trim(tokens);
+
         let token, type;
         let length = tokens.length;
         let value  = '';
@@ -151,6 +221,9 @@ export default class Parser {
             node.raws[prop] = { value, raw };
         }
         node[prop] = value;
+
+        let last = tokens[tokens.length - 1] || altLast;
+        node.source.end = { line: last[4], column: last[5] };
     }
 
     trim(tokens) {
@@ -179,6 +252,10 @@ export default class Parser {
 
     unnamedAtrule(token) {
         this.error('At-rule without name', token[2], token[3]);
+    }
+
+    unnamedDecl(token) {
+        this.error('Declaration without name', token[2], token[3]);
     }
 
     indentedFirstLine(line) {

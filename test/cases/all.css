@@ -1,0 +1,8 @@
+a {
+  color: blue
+}
+@media (max-width: 400px) {
+  .body {
+    padding: 0 10px
+  }
+}

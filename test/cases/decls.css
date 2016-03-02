@@ -1,0 +1,6 @@
+color: black;
+background: linear-gradient(white, black),
+            linear-gradient(black, white);
+box-shadow: 1px solid black,
+  10px solid red;
+$(var)-color: black

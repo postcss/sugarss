@@ -1,0 +1,116 @@
+{
+  "raws": {
+    "indent": "  "
+  },
+  "type": "root",
+  "nodes": [
+    {
+      "raws": {},
+      "type": "rule",
+      "nodes": [
+        {
+          "raws": {},
+          "type": "decl",
+          "source": {
+            "start": {
+              "line": 2,
+              "column": 3
+            },
+            "input": {
+              "file": "all.sss"
+            },
+            "end": {
+              "line": 2,
+              "column": 13
+            }
+          },
+          "prop": "color",
+          "value": "blue"
+        }
+      ],
+      "source": {
+        "start": {
+          "line": 1,
+          "column": 1
+        },
+        "input": {
+          "file": "all.sss"
+        },
+        "end": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      "selector": "a"
+    },
+    {
+      "raws": {},
+      "type": "atrule",
+      "name": "media",
+      "source": {
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "input": {
+          "file": "all.sss"
+        },
+        "end": {
+          "line": 3,
+          "column": 25
+        }
+      },
+      "params": "(max-width: 400px)",
+      "nodes": [
+        {
+          "raws": {},
+          "type": "rule",
+          "nodes": [
+            {
+              "raws": {},
+              "type": "decl",
+              "source": {
+                "start": {
+                  "line": 5,
+                  "column": 5
+                },
+                "input": {
+                  "file": "all.sss"
+                },
+                "end": {
+                  "line": 5,
+                  "column": 19
+                }
+              },
+              "prop": "padding",
+              "value": "0 10px"
+            }
+          ],
+          "source": {
+            "start": {
+              "line": 4,
+              "column": 3
+            },
+            "input": {
+              "file": "all.sss"
+            },
+            "end": {
+              "line": 4,
+              "column": 7
+            }
+          },
+          "selector": ".body"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "input": {
+      "file": "all.sss"
+    },
+    "start": {
+      "line": 1,
+      "column": 1
+    }
+  }
+}
