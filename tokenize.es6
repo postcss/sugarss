@@ -71,15 +71,7 @@ export default function tokenize(input) {
             do {
                 next += 1;
                 code = css.charCodeAt(next);
-                if ( code === NEWLINE ) {
-                    offset = next;
-                    line  += 1;
-                }
-            } while ( code === SPACE   ||
-                      code === NEWLINE ||
-                      code === TAB     ||
-                      code === CR      ||
-                      code === FEED );
+            } while ( code === SPACE || code === TAB );
 
             tokens.push(['space', css.slice(pos, next)]);
             pos = next - 1;
