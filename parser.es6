@@ -57,7 +57,7 @@ export default class Parser {
     comment(line) {
         let token = line.tokens[0];
         let node  = new Comment();
-        this.initComment(node, line, token[2], token[3]);
+        this.init(node, line);
         node.source.end = { line: token[4], column: token[5] };
 
         let text = token[1];
@@ -70,13 +70,12 @@ export default class Parser {
     }
 
     atrule(line) {
-        this.indent(line);
         let atword = line.tokens[0];
         let params = line.tokens.slice(1);
 
         let node  = new AtRule();
         node.name = atword[1].slice(1);
-        this.init(node, atword[2], atword[3]);
+        this.init(node, line);
 
         if ( node.name === '' ) this.unnamedAtrule(atword);
 
@@ -91,9 +90,8 @@ export default class Parser {
     }
 
     decl(line) {
-        this.indent(line);
         let node = new Declaration();
-        this.init(node, line.tokens[0][2], line.tokens[0][3]);
+        this.init(node, line);
 
         let colon = 0;
         let value = [];
@@ -126,9 +124,8 @@ export default class Parser {
     }
 
     rule(line) {
-        this.indent(line);
         let node = new Rule();
-        this.init(node, line.tokens[0][2], line.tokens[0][3]);
+        this.init(node, line);
 
         let selector = line.tokens;
         let next     = this.lines[this.pos + 1];
@@ -177,21 +174,14 @@ export default class Parser {
         this.prevIndent = indent;
     }
 
-    init(node, line, column) {
+    init(node, line) {
+        this.indent(line);
         if ( !this.current.nodes ) this.current.nodes = [];
         this.current.push(node);
-        node.source = { start: { line, column }, input: this.input };
-    }
-
-    initComment(node, line, lineNumber, column) {
-        let isPrev = typeof this.prevIndent !== 'undefined';
-        if ( isPrev && this.prevIndent < line.indent.length ) {
-            this.current = this.current.last;
-            this.init(node, lineNumber, column);
-            this.current = this.current.parent;
-        } else {
-            this.init(node, lineNumber, column);
-        }
+        node.source = {
+            start: { line: line.tokens[0][2], column: line.tokens[0][3] },
+            input: this.input
+        };
     }
 
     raw(node, prop, tokens, altLast) {

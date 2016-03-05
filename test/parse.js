@@ -10,11 +10,6 @@ test('detects indent', t => {
     t.same(root.raws.indent, '  ');
 });
 
-test('ignores comments in indent detection', t => {
-    let root = parse('@one\n    // comment\n  @two');
-    t.same(root.raws.indent, '  ');
-});
-
 test('throws on first indent', t => {
     t.throws(() => {
         parse('  @charset "UTF-8"');
@@ -23,7 +18,7 @@ test('throws on first indent', t => {
 
 test('throws on too big indent', t => {
     t.throws(() => {
-        parse('@supports\n  @media\n      @media');
+        parse('@supports\n  @media\n      // test');
     }, '<css input>:3:1: Expected 4 indent, but get 6');
 });
 
