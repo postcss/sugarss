@@ -12,8 +12,8 @@ test('tokenizes inine comments', t => {
 });
 
 test('tokenizes inine comments and new lines', t => {
-    run(t, '// a\n', [ ['comment', '// a', 1, 1, 1, 4, 'inline'],
-                       ['newline', '\n', 1] ]);
+    run(t, '// a\r\n', [ ['comment', '// a', 1, 1, 1, 4, 'inline'],
+                       ['newline', '\r\n', 1] ]);
 });
 
 test('tokenizes Windows new lines', t => {
