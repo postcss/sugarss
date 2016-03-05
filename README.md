@@ -4,7 +4,8 @@
      title="Philosopher’s stone, logo of PostCSS"
      src="http://postcss.github.io/postcss/logo.svg">
 
-Compact alternate syntax for CSS.
+Indent-based CSS syntax for [PostCSS].
 
-[ci-img]: https://img.shields.io/travis/postcss/sugarss.svg
-[ci]:     https://travis-ci.org/postcss/sugarss
+[PostCSS]: https://github.com/postcss/postcss
+[ci-img]:  https://img.shields.io/travis/postcss/sugarss.svg
+[ci]:      https://travis-ci.org/postcss/sugarss
