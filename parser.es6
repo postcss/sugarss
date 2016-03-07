@@ -96,15 +96,21 @@ export default class Parser {
         let node = new Declaration();
         this.init(node, line);
 
-        let colon = 0;
-        let value = [];
-        let prop  = '';
+        let between = '';
+        let colon   = 0;
+        let value   = [];
+        let prop    = '';
         for ( let i = 0; i < line.tokens.length; i++ ) {
             let token = line.tokens[i];
             if ( token[0] === ':' ) {
-                colon = token;
-                value = line.tokens.slice(i + 1);
+                between += token[1];
+                colon    = token;
+                value    = line.tokens.slice(i + 1);
                 break;
+            } else if ( token[0] === 'comment' || token[0] === 'space' ) {
+                between += token[1];
+            } else if ( between !== '' ) {
+                this.badProp(token);
             } else {
                 prop += token[1];
             }
@@ -141,7 +147,7 @@ export default class Parser {
         }
 
         this.cleanLastNewline(value);
-        node.raws.between = ':' + this.firstSpaces(value);
+        node.raws.between = between + this.firstSpaces(value);
         this.raw(node, 'value', value, colon);
     }
 
@@ -285,6 +291,10 @@ export default class Parser {
     wrongIndent(expected, real, line) {
         let msg = `Expected ${ expected } indent, but get ${ real }`;
         this.error(msg, line.number, 1);
+    }
+
+    badProp(token) {
+        this.error('Unexpected separator in property', token[2], token[3]);
     }
 
 }
