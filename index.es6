@@ -1,3 +1,4 @@
-import parse from './parse';
+import stringify from './stringify';
+import parse     from './parse';
 
-export default { parse };
+export default { stringify, parse };
