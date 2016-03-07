@@ -32,7 +32,7 @@ export default class Parser {
             } else if ( part.colon ) {
                 let next = this.parts[this.pos + 1];
 
-                if ( !next || next.atrule ) {
+                if ( next.end || next.atrule ) {
                     this.decl(part);
                 } else {
                     let sameIndent = next.indent.length === part.indent.length;
@@ -46,7 +46,7 @@ export default class Parser {
                         this.decl(part);
                     }
                 }
-            } else {
+            } else if ( !part.end ) {
                 this.rule(part);
             }
 
@@ -79,7 +79,7 @@ export default class Parser {
 
         if ( node.name === '' ) this.unnamedAtrule(atword);
 
-        while ( part && part.lastComma ) {
+        while ( !part.end && part.lastComma ) {
             this.pos += 1;
             part = this.parts[this.pos];
             params.push(['space', part.indent]);
@@ -121,7 +121,7 @@ export default class Parser {
 
         let next = this.parts[this.pos + 1];
 
-        while ( next && !next.atrule && !next.colon &&
+        while ( !next.end && !next.atrule && !next.colon &&
                 next.indent.length > part.indent.length ) {
             value.push(['space', next.indent]);
             value = value.concat(next.tokens);
@@ -158,7 +158,7 @@ export default class Parser {
         let selector = part.tokens;
         let next     = this.parts[this.pos + 1];
 
-        while ( next && next.indent.length === part.indent.length ) {
+        while ( !next.end && next.indent.length === part.indent.length ) {
             selector.push(['space', next.indent]);
             selector = selector.concat(next.tokens);
             this.pos += 1;

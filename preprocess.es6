@@ -75,5 +75,7 @@ export default function preprocess(input, lines) {
         return line.tokens.length > 0 && line.tokens.some(i => {
             return i[0] !== 'space' && i[0] !== 'newline';
         });
-    });
+    }).concat([{
+        end: true
+    }]);
 }
