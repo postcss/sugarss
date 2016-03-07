@@ -68,7 +68,11 @@ export default class Parser {
         } else {
             text = text.slice(2, -2);
         }
-        node.text = text.trim();
+
+        let match = text.match(/^(\s*)([^]*[^\s])(\s*)\n?$/);
+        node.text = match[2];
+        node.raws.left = match[1];
+        node.raws.inlineRight = match[3];
     }
 
     atrule(part) {

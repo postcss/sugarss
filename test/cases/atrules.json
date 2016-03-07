@@ -99,7 +99,9 @@
           "nodes": [
             {
               "raws": {
-                "before": "\n    "
+                "before": "\n    ",
+                "left": " ",
+                "inlineRight": ""
               },
               "type": "comment",
               "source": {

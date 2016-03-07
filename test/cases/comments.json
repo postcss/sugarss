@@ -6,7 +6,9 @@
   "nodes": [
     {
       "raws": {
-        "before": ""
+        "before": "",
+        "left": " ",
+        "inlineRight": " "
       },
       "type": "comment",
       "source": {
@@ -26,7 +28,9 @@
     },
     {
       "raws": {
-        "before": "\n"
+        "before": "\n",
+        "left": " ",
+        "inlineRight": ""
       },
       "type": "comment",
       "source": {

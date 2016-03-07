@@ -41,13 +41,15 @@ test('throws on space between property', t => {
 });
 
 test('keeps trailing spaces', t => {
-    let root = parse('@media  screen \n  a\n  b \n    a : \n      b \n\n \n');
-    t.same(root.raws.after, '\n \n');
+    let root = parse('@media  s \n  a\n  b \n    a : \n      b \n//  a \n \n');
+    t.same(root.raws.after, ' \n');
     t.same(root.first.raws.between, ' ');
     t.same(root.first.raws.afterName, '  ');
     t.same(root.first.first.raws.between, ' ');
     t.same(root.first.first.first.raws.between, ' : \n      ');
     t.same(root.first.first.first.raws.value.raw, 'b ');
+    t.same(root.last.raws.left, '  ');
+    t.same(root.last.raws.inlineRight, ' ');
 });
 
 let tests = fs.readdirSync(path.join(__dirname, 'cases'))
