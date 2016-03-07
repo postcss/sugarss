@@ -123,6 +123,23 @@ export default class Parser {
             next = this.lines[this.pos + 1];
         }
 
+        for ( let i = value.length - 1; i > 0; i-- ) {
+            let t = value[i][0];
+            if ( t === 'word' && value[i][1] === '!important' ) {
+                node.important = true;
+                if ( i > 0 && value[i - 1][0] === 'space' ) {
+                    node.raws.important = value[i - 1][1] + '!important';
+                    value.splice(i - 1, 2);
+                } else {
+                    node.raws.important = '!important';
+                    value.splice(i, 1);
+                }
+                break;
+            } else if ( t !== 'space' && t !== 'newline' && t !== 'comment' ) {
+                break;
+            }
+        }
+
         this.cleanLastNewline(value);
         node.raws.between = ':' + this.firstSpaces(value);
         this.raw(node, 'value', value, colon);
