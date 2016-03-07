@@ -5,7 +5,9 @@
   "type": "root",
   "nodes": [
     {
-      "raws": {},
+      "raws": {
+        "afterName": ""
+      },
       "type": "atrule",
       "name": "test",
       "source": {
@@ -24,7 +26,9 @@
       "params": ""
     },
     {
-      "raws": {},
+      "raws": {
+        "afterName": " "
+      },
       "type": "atrule",
       "name": "charset",
       "source": {
@@ -43,7 +47,9 @@
       "params": "\"UTF-8\""
     },
     {
-      "raws": {},
+      "raws": {
+        "afterName": " "
+      },
       "type": "atrule",
       "name": "supports",
       "source": {
@@ -63,6 +69,7 @@
       "nodes": [
         {
           "raws": {
+            "afterName": " ",
             "params": {
               "value": "(max-width:  400px) ",
               "raw": "(max-width: /*<=*/ 400px) /* mobile */"

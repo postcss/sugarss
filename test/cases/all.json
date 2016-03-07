@@ -9,7 +9,9 @@
       "type": "rule",
       "nodes": [
         {
-          "raws": {},
+          "raws": {
+            "between": ": "
+          },
           "type": "decl",
           "source": {
             "start": {
@@ -44,7 +46,9 @@
       "selector": "a"
     },
     {
-      "raws": {},
+      "raws": {
+        "afterName": " "
+      },
       "type": "atrule",
       "name": "media",
       "source": {
@@ -67,7 +71,9 @@
           "type": "rule",
           "nodes": [
             {
-              "raws": {},
+              "raws": {
+                "between": ": "
+              },
               "type": "decl",
               "source": {
                 "start": {

@@ -34,6 +34,15 @@ test('throws on decl without property', t => {
     }, '<css input>:1:1: Declaration without name');
 });
 
+test('keeps trailing spaces', t => {
+    let root = parse('@media  screen \n  a\n  b \n    color: \n      black ');
+    t.same(root.first.raws.between, ' ');
+    t.same(root.first.raws.afterName, '  ');
+    t.same(root.first.first.raws.between, ' ');
+    t.same(root.first.first.first.raws.between, ': \n      ');
+    t.same(root.first.first.first.raws.value.raw, 'black ');
+});
+
 let tests = fs.readdirSync(path.join(__dirname, 'cases'))
               .filter(i => path.extname(i) === '.sss' );
 

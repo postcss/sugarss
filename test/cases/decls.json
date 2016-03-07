@@ -3,7 +3,9 @@
   "type": "root",
   "nodes": [
     {
-      "raws": {},
+      "raws": {
+        "between": ": "
+      },
       "type": "decl",
       "source": {
         "start": {
@@ -22,7 +24,9 @@
       "value": "black"
     },
     {
-      "raws": {},
+      "raws": {
+        "between": ": "
+      },
       "type": "decl",
       "source": {
         "start": {
@@ -41,7 +45,9 @@
       "value": "linear-gradient(white, black),\n            linear-gradient(black, white)"
     },
     {
-      "raws": {},
+      "raws": {
+        "between": ":\n  "
+      },
       "type": "decl",
       "source": {
         "start": {
@@ -60,7 +66,9 @@
       "value": "1px solid black,\n  10px solid red"
     },
     {
-      "raws": {},
+      "raws": {
+        "between": ": "
+      },
       "type": "decl",
       "source": {
         "start": {

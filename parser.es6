@@ -86,6 +86,9 @@ export default class Parser {
             params = params.concat(line.tokens);
         }
 
+        this.cleanLastNewline(params);
+        node.raws.afterName = this.firstSpaces(params);
+        this.keepTrailingSpace(node, params);
         this.raw(node, 'params', params, atword);
     }
 
@@ -120,6 +123,8 @@ export default class Parser {
             next = this.lines[this.pos + 1];
         }
 
+        this.cleanLastNewline(value);
+        node.raws.between = ':' + this.firstSpaces(value);
         this.raw(node, 'value', value, colon);
     }
 
@@ -137,6 +142,8 @@ export default class Parser {
             next = this.lines[this.pos + 1];
         }
 
+        this.cleanLastNewline(selector);
+        this.keepTrailingSpace(node, selector);
         this.raw(node, 'selector', selector);
     }
 
@@ -184,9 +191,33 @@ export default class Parser {
         };
     }
 
-    raw(node, prop, tokens, altLast) {
-        tokens = this.trim(tokens);
+    keepTrailingSpace(node, tokens) {
+        let lastSpace = tokens[tokens.length - 1];
+        if ( lastSpace && lastSpace[0] === 'space' ) {
+            tokens.pop();
+            node.raws.between = lastSpace[1];
+        }
+    }
 
+    firstSpaces(tokens) {
+        let result = '';
+        for ( let i = 0; i < tokens.length; i++ ) {
+            if ( tokens[i][0] === 'space' || tokens[i][0] === 'newline' ) {
+                result += tokens.shift()[1];
+                i -= 1;
+            } else {
+                break;
+            }
+        }
+        return result;
+    }
+
+    cleanLastNewline(tokens) {
+        let last = tokens[tokens.length - 1];
+        if ( last && last[0] === 'newline' ) tokens.pop();
+    }
+
+    raw(node, prop, tokens, altLast) {
         let token, type;
         let length = tokens.length;
         let value  = '';
@@ -214,24 +245,6 @@ export default class Parser {
 
         let last = tokens[tokens.length - 1] || altLast;
         node.source.end = { line: last[4], column: last[5] };
-    }
-
-    trim(tokens) {
-        let start, end;
-        for ( let i = 0; i < tokens.length; i++ ) {
-            if ( tokens[i][0] !== 'newline' && tokens[i][0] !== 'space' ) {
-                start = i;
-                break;
-            }
-        }
-        if ( typeof start === 'undefined' ) return [];
-        for ( let i = tokens.length - 1; i >= 0; i-- ) {
-            if ( tokens[i][0] !== 'newline' && tokens[i][0] !== 'space' ) {
-                end = i;
-                break;
-            }
-        }
-        return tokens.slice(start, end + 1);
     }
 
     // Errors
