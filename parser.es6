@@ -21,43 +21,43 @@ export default class Parser {
     }
 
     loop() {
-        let line;
-        while ( this.pos < this.lines.length ) {
-            line = this.lines[this.pos];
+        let part;
+        while ( this.pos < this.parts.length ) {
+            part = this.parts[this.pos];
 
-            if ( line.comment ) {
-                this.comment(line);
-            } else if ( line.atrule ) {
-                this.atrule(line);
-            } else if ( line.colon ) {
-                let next = this.lines[this.pos + 1];
+            if ( part.comment ) {
+                this.comment(part);
+            } else if ( part.atrule ) {
+                this.atrule(part);
+            } else if ( part.colon ) {
+                let next = this.parts[this.pos + 1];
 
                 if ( !next || next.atrule ) {
-                    this.decl(line);
+                    this.decl(part);
                 } else {
-                    let sameIndent = next.indent.length === line.indent.length;
+                    let sameIndent = next.indent.length === part.indent.length;
                     if ( sameIndent && next.colon ) {
-                        this.decl(line);
+                        this.decl(part);
                     } else if ( sameIndent && !next.colon ) {
-                        this.rule(line);
+                        this.rule(part);
                     } else if ( !sameIndent && next.colon ) {
-                        this.rule(line);
+                        this.rule(part);
                     } else if ( !sameIndent && !next.colon ) {
-                        this.decl(line);
+                        this.decl(part);
                     }
                 }
             } else {
-                this.rule(line);
+                this.rule(part);
             }
 
             this.pos += 1;
         }
     }
 
-    comment(line) {
-        let token = line.tokens[0];
+    comment(part) {
+        let token = part.tokens[0];
         let node  = new Comment();
-        this.init(node, line);
+        this.init(node, part);
         node.source.end = { line: token[4], column: token[5] };
 
         let text = token[1];
@@ -69,21 +69,21 @@ export default class Parser {
         node.text = text.trim();
     }
 
-    atrule(line) {
-        let atword = line.tokens[0];
-        let params = line.tokens.slice(1);
+    atrule(part) {
+        let atword = part.tokens[0];
+        let params = part.tokens.slice(1);
 
         let node  = new AtRule();
         node.name = atword[1].slice(1);
-        this.init(node, line);
+        this.init(node, part);
 
         if ( node.name === '' ) this.unnamedAtrule(atword);
 
-        while ( line && line.lastComma ) {
+        while ( part && part.lastComma ) {
             this.pos += 1;
-            line = this.lines[this.pos];
-            params.push(['space', line.indent]);
-            params = params.concat(line.tokens);
+            part = this.parts[this.pos];
+            params.push(['space', part.indent]);
+            params = params.concat(part.tokens);
         }
 
         this.cleanLastNewline(params);
@@ -92,20 +92,20 @@ export default class Parser {
         this.raw(node, 'params', params, atword);
     }
 
-    decl(line) {
+    decl(part) {
         let node = new Declaration();
-        this.init(node, line);
+        this.init(node, part);
 
         let between = '';
         let colon   = 0;
         let value   = [];
         let prop    = '';
-        for ( let i = 0; i < line.tokens.length; i++ ) {
-            let token = line.tokens[i];
+        for ( let i = 0; i < part.tokens.length; i++ ) {
+            let token = part.tokens[i];
             if ( token[0] === ':' ) {
                 between += token[1];
                 colon    = token;
-                value    = line.tokens.slice(i + 1);
+                value    = part.tokens.slice(i + 1);
                 break;
             } else if ( token[0] === 'comment' || token[0] === 'space' ) {
                 between += token[1];
@@ -116,17 +116,17 @@ export default class Parser {
             }
         }
 
-        if ( prop === '' ) this.unnamedDecl(line.tokens[0]);
+        if ( prop === '' ) this.unnamedDecl(part.tokens[0]);
         node.prop = prop;
 
-        let next = this.lines[this.pos + 1];
+        let next = this.parts[this.pos + 1];
 
         while ( next && !next.atrule && !next.colon &&
-                next.indent.length > line.indent.length ) {
+                next.indent.length > part.indent.length ) {
             value.push(['space', next.indent]);
             value = value.concat(next.tokens);
             this.pos += 1;
-            next = this.lines[this.pos + 1];
+            next = this.parts[this.pos + 1];
         }
 
         for ( let i = value.length - 1; i > 0; i-- ) {
@@ -151,18 +151,18 @@ export default class Parser {
         this.raw(node, 'value', value, colon);
     }
 
-    rule(line) {
+    rule(part) {
         let node = new Rule();
-        this.init(node, line);
+        this.init(node, part);
 
-        let selector = line.tokens;
-        let next     = this.lines[this.pos + 1];
+        let selector = part.tokens;
+        let next     = this.parts[this.pos + 1];
 
-        while ( next && next.indent.length === line.indent.length ) {
+        while ( next && next.indent.length === part.indent.length ) {
             selector.push(['space', next.indent]);
             selector = selector.concat(next.tokens);
             this.pos += 1;
-            next = this.lines[this.pos + 1];
+            next = this.parts[this.pos + 1];
         }
 
         this.cleanLastNewline(selector);
@@ -172,28 +172,28 @@ export default class Parser {
 
     /* Helpers */
 
-    indent(line) {
-        let indent = line.indent.length;
+    indent(part) {
+        let indent = part.indent.length;
         let isPrev = typeof this.prevIndent !== 'undefined';
 
-        if ( !isPrev && indent ) this.indentedFirstLine(line);
+        if ( !isPrev && indent ) this.indentedFirstLine(part);
 
         if ( !this.step && indent ) {
             this.step = indent;
-            this.root.raws.indent = line.indent;
+            this.root.raws.indent = part.indent;
         }
 
         if ( isPrev && this.prevIndent !== indent ) {
             let diff = indent - this.prevIndent;
             if ( diff > 0 ) {
                 if ( diff !== this.step ) {
-                    this.wrongIndent(this.prevIndent + this.step, indent, line);
+                    this.wrongIndent(this.prevIndent + this.step, indent, part);
                 } else {
                     this.current = this.current.last;
                 }
             } else if ( diff % this.step !== 0 ) {
                 let m = indent + diff % this.step;
-                this.wrongIndent(`${ m } or ${ m + this.step }`, indent, line);
+                this.wrongIndent(`${ m } or ${ m + this.step }`, indent, part);
             } else {
                 for ( let i = 0; i < -diff / this.step; i++ ) {
                     this.current = this.current.parent;
@@ -204,12 +204,12 @@ export default class Parser {
         this.prevIndent = indent;
     }
 
-    init(node, line) {
-        this.indent(line);
+    init(node, part) {
+        this.indent(part);
         if ( !this.current.nodes ) this.current.nodes = [];
         this.current.push(node);
         node.source = {
-            start: { line: line.tokens[0][2], column: line.tokens[0][3] },
+            start: { line: part.tokens[0][2], column: part.tokens[0][3] },
             input: this.input
         };
     }
@@ -284,13 +284,13 @@ export default class Parser {
         this.error('Declaration without name', token[2], token[3]);
     }
 
-    indentedFirstLine(line) {
-        this.error('First line should not have indent', line.number, 1);
+    indentedFirstLine(part) {
+        this.error('First line should not have indent', part.number, 1);
     }
 
-    wrongIndent(expected, real, line) {
+    wrongIndent(expected, real, part) {
         let msg = `Expected ${ expected } indent, but get ${ real }`;
-        this.error(msg, line.number, 1);
+        this.error(msg, part.number, 1);
     }
 
     badProp(token) {
