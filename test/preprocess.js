@@ -9,6 +9,7 @@ function run(t, lines, result) {
 
 let defaults = {
     number:    1,
+    before:    '',
     indent:    '',
     colon:     false,
     atrule:    false,
@@ -16,8 +17,26 @@ let defaults = {
     lastComma: false
 };
 
+let end = { before: '', end: true };
+
 test('cleans from empty lines', t => {
-    run(t, [[], [['space', '  '], ['newline', '\n']]], [{ end: true }]);
+    run(t, [
+        [['newline', '\n', 1]],
+        [['space', ' '], ['newline', '\n', 2]],
+        [['word', 'a'], ['newline', '\n', 3]],
+        [['space', '  '], ['newline', '\n', 4]]
+    ], [
+        {
+            ...defaults,
+            number: 3,
+            before: '\n \n',
+            tokens: [['word', 'a'], ['newline', '\n', 3]]
+        },
+        {
+            ...end,
+            before: '  \n'
+        }
+    ]);
 });
 
 test('separates indent from other tokens', t => {
@@ -26,9 +45,8 @@ test('separates indent from other tokens', t => {
             ...defaults,
             indent: '  ',
             tokens: [['word', 'ab']]
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -38,9 +56,8 @@ test('works with indentless strings', t => {
             ...defaults,
             indent: '',
             tokens: [['word', 'ab']]
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -57,9 +74,8 @@ test('collects line number', t => {
             ...defaults,
             number: 2,
             tokens: [['word', 'b'], ['newline', '\n', 2]]
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -69,9 +85,8 @@ test('detects at-rules', t => {
             ...defaults,
             tokens: [['at-word', '@ab'], ['space', ' ']],
             atrule: true
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -81,9 +96,8 @@ test('detects last comma', t => {
             ...defaults,
             tokens:    [['word', 'ab'], [',', ','], ['newline', '\n']],
             lastComma: true
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -93,9 +107,8 @@ test('detects last comma with trailing spaces', t => {
             ...defaults,
             tokens:    [['word', 'ab'], [',', ','], ['space', ' ']],
             lastComma: true
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -105,9 +118,8 @@ test('detects last comma with trailing comment', t => {
             ...defaults,
             tokens:    [['word', 'ab'], [',', ','], ['comment', '// a']],
             lastComma: true
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -117,9 +129,8 @@ test('ignore comma inside', t => {
             ...defaults,
             tokens:    [['word', 'ab'], [',', ','], ['word', 'ba']],
             lastComma: false
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -129,9 +140,8 @@ test('detects colon', t => {
             ...defaults,
             tokens: [['word', 'ab'], [':', ':'], ['word', 'ba']],
             colon:  true
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -141,9 +151,8 @@ test('ignores colon inside brackets', t => {
             ...defaults,
             tokens: [['(', '('], [':', ':'], [')', ')']],
             colon:  false
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 
@@ -154,9 +163,8 @@ test('detects comments', t => {
             ...defaults,
             tokens:  [['comment', '// a']],
             comment: true
-        }, {
-            end: true
-        }
+        },
+        end
     ]);
 });
 

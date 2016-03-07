@@ -1,11 +1,13 @@
 {
   "raws": {
-    "indent": "  "
+    "indent": "  ",
+    "after": ""
   },
   "type": "root",
   "nodes": [
     {
       "raws": {
+        "before": "",
         "afterName": ""
       },
       "type": "atrule",
@@ -27,31 +29,11 @@
     },
     {
       "raws": {
+        "before": "\n\n",
         "afterName": " "
       },
       "type": "atrule",
       "name": "charset",
-      "source": {
-        "start": {
-          "line": 2,
-          "column": 1
-        },
-        "input": {
-          "file": "atrules.sss"
-        },
-        "end": {
-          "line": 2,
-          "column": 16
-        }
-      },
-      "params": "\"UTF-8\""
-    },
-    {
-      "raws": {
-        "afterName": " "
-      },
-      "type": "atrule",
-      "name": "supports",
       "source": {
         "start": {
           "line": 3,
@@ -61,7 +43,29 @@
           "file": "atrules.sss"
         },
         "end": {
-          "line": 4,
+          "line": 3,
+          "column": 16
+        }
+      },
+      "params": "\"UTF-8\""
+    },
+    {
+      "raws": {
+        "before": "\n\n",
+        "afterName": " "
+      },
+      "type": "atrule",
+      "name": "supports",
+      "source": {
+        "start": {
+          "line": 5,
+          "column": 1
+        },
+        "input": {
+          "file": "atrules.sss"
+        },
+        "end": {
+          "line": 6,
           "column": 29
         }
       },
@@ -69,6 +73,7 @@
       "nodes": [
         {
           "raws": {
+            "before": "\n  ",
             "afterName": " ",
             "params": {
               "value": "(max-width:  400px) ",
@@ -79,32 +84,34 @@
           "name": "media",
           "source": {
             "start": {
-              "line": 5,
+              "line": 7,
               "column": 3
             },
             "input": {
               "file": "atrules.sss"
             },
             "end": {
-              "line": 5,
+              "line": 7,
               "column": 44
             }
           },
           "params": "(max-width:  400px) ",
           "nodes": [
             {
-              "raws": {},
+              "raws": {
+                "before": "\n    "
+              },
               "type": "comment",
               "source": {
                 "start": {
-                  "line": 6,
+                  "line": 8,
                   "column": 5
                 },
                 "input": {
                   "file": "atrules.sss"
                 },
                 "end": {
-                  "line": 6,
+                  "line": 8,
                   "column": 22
                 }
               },

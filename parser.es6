@@ -46,7 +46,9 @@ export default class Parser {
                         this.decl(part);
                     }
                 }
-            } else if ( !part.end ) {
+            } else if ( part.end ) {
+                this.root.raws.after = part.before;
+            } else {
                 this.rule(part);
             }
 
@@ -206,8 +208,15 @@ export default class Parser {
 
     init(node, part) {
         this.indent(part);
+
         if ( !this.current.nodes ) this.current.nodes = [];
         this.current.push(node);
+
+        node.raws.before = part.before + part.indent;
+        if ( this.parts[0] !== part ) {
+            node.raws.before = '\n' + node.raws.before;
+        }
+
         node.source = {
             start: { line: part.tokens[0][2], column: part.tokens[0][3] },
             input: this.input

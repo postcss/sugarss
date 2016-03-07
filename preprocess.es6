@@ -70,12 +70,24 @@ export default function preprocess(input, lines) {
             if ( last && last[0] === 'newline' ) prevNumber = last[2];
         }
 
-        return { number, indent, tokens, atrule, colon, comment, lastComma };
-    }).filter(line => {
-        return line.tokens.length > 0 && line.tokens.some(i => {
-            return i[0] !== 'space' && i[0] !== 'newline';
-        });
-    }).concat([{
-        end: true
-    }]);
+        return {
+            number,
+            indent,
+            colon,
+            tokens,
+            atrule,
+            comment,
+            lastComma,
+            before: ''
+        };
+    }).reduceRight( (all, i) => {
+        if ( !i.tokens.length || i.tokens.every(j => j[0] === 'newline') ) {
+            let prev   = all[0];
+            let before = i.indent + i.tokens.map( j => j[1] ).join('');
+            prev.before = before + prev.before;
+        } else {
+            all.unshift(i);
+        }
+        return all;
+    }, [{ end: true, before: '' }]);
 }

@@ -3,14 +3,17 @@ a {
     color: black
   }
 }
+
 a,
 b {
   color: black
 }
+
 a /* -> */ b /* go down */
 em {
   color: black {}
 }
+
 font: {
   family: serif
 }

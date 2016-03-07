@@ -1,9 +1,13 @@
 {
-  "raws": {},
+  "raws": {
+    "after": ""
+  },
   "type": "root",
   "nodes": [
     {
-      "raws": {},
+      "raws": {
+        "before": ""
+      },
       "type": "comment",
       "source": {
         "start": {
@@ -21,7 +25,9 @@
       "text": "multi\n   line"
     },
     {
-      "raws": {},
+      "raws": {
+        "before": "\n"
+      },
       "type": "comment",
       "source": {
         "start": {

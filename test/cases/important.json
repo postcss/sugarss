@@ -1,9 +1,12 @@
 {
-  "raws": {},
+  "raws": {
+    "after": ""
+  },
   "type": "root",
   "nodes": [
     {
       "raws": {
+        "before": "",
         "important": " !important",
         "between": ": "
       },
@@ -27,6 +30,7 @@
     },
     {
       "raws": {
+        "before": "\n",
         "important": "!important",
         "between": ": "
       },

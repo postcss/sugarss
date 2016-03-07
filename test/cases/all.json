@@ -1,15 +1,19 @@
 {
   "raws": {
-    "indent": "  "
+    "indent": "  ",
+    "after": ""
   },
   "type": "root",
   "nodes": [
     {
-      "raws": {},
+      "raws": {
+        "before": ""
+      },
       "type": "rule",
       "nodes": [
         {
           "raws": {
+            "before": "\n  ",
             "between": ": "
           },
           "type": "decl",
@@ -47,6 +51,7 @@
     },
     {
       "raws": {
+        "before": "\n",
         "afterName": " "
       },
       "type": "atrule",
@@ -67,11 +72,14 @@
       "params": "(max-width: 400px)",
       "nodes": [
         {
-          "raws": {},
+          "raws": {
+            "before": "\n  "
+          },
           "type": "rule",
           "nodes": [
             {
               "raws": {
+                "before": "\n    ",
                 "between": ": "
               },
               "type": "decl",
