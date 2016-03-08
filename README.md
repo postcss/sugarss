@@ -27,6 +27,11 @@ and [postcss-sorting] support out-of-box.
 It was designed to be used with [PreCSS]. But you can use it with any PostCSS
 plugins or use it without any PostCSS plugins.
 
+<a href="https://evilmartians.com/?utm_source=sugarss">
+  <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
+       alt="Sponsored by Evil Martians" width="236" height="54">
+</a>
+
 [postcss-sorting]: https://github.com/hudochenkov/postcss-sorting
 [Stylelint]:       http://stylelint.io/
 [PostCSS]:         https://github.com/postcss/postcss
