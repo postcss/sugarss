@@ -1,8 +1,8 @@
 # SugarSS [![Build Status][ci-img]][ci]
 
-<img align="right" width="95" height="95"
+<img align="right" width="135" height="95"
      title="Philosopher’s stone, logo of PostCSS"
-     src="http://postcss.github.io/postcss/logo.svg">
+     src="http://postcss.github.io/postcss/logo-leftp.svg">
 
 Indent-based CSS syntax for [PostCSS].
 
