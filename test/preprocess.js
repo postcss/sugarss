@@ -30,11 +30,11 @@ test('cleans from empty lines', t => {
             ...defaults,
             number: 3,
             before: '\n \n',
-            tokens: [['word', 'a'], ['newline', '\n', 3]]
+            tokens: [['word', 'a']]
         },
         {
             ...end,
-            before: '  \n'
+            before: '\n  \n'
         }
     ]);
 });
@@ -69,13 +69,16 @@ test('collects line number', t => {
         {
             ...defaults,
             number: 1,
-            tokens: [['word', 'a'], ['newline', '\n', 1]]
+            tokens: [['word', 'a']]
         }, {
             ...defaults,
             number: 2,
-            tokens: [['word', 'b'], ['newline', '\n', 2]]
-        },
-        end
+            tokens: [['word', 'b']],
+            before: '\n'
+        }, {
+            ...end,
+            before: '\n'
+        }
     ]);
 });
 
@@ -94,10 +97,12 @@ test('detects last comma', t => {
     run(t, [[['word', 'ab'], [',', ','], ['newline', '\n']]], [
         {
             ...defaults,
-            tokens:    [['word', 'ab'], [',', ','], ['newline', '\n']],
+            tokens:    [['word', 'ab'], [',', ',']],
             lastComma: true
-        },
-        end
+        }, {
+            ...end,
+            before: '\n'
+        }
     ]);
 });
 

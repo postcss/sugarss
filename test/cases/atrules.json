@@ -1,7 +1,7 @@
 {
   "raws": {
     "indent": "  ",
-    "after": ""
+    "after": "\n"
   },
   "type": "root",
   "nodes": [
@@ -77,7 +77,8 @@
             "afterName": " ",
             "params": {
               "value": "(max-width:  400px) ",
-              "raw": "(max-width: /*<=*/ 400px) /* mobile */"
+              "raw": "(max-width: /*<=*/ 400px) /* mobile */",
+              "sss": "(max-width: /*<=*/ 400px) // mobile"
             }
           },
           "type": "atrule",
@@ -100,6 +101,7 @@
             {
               "raws": {
                 "before": "\n    ",
+                "inline": true,
                 "left": " ",
                 "inlineRight": ""
               },

@@ -5,7 +5,7 @@ function indentError(input, l, p) {
 export default function preprocess(input, lines) {
     let indentType;
     let prevNumber = 0;
-    return lines.map(line => {
+    let parts = lines.map(line => {
         let lastComma = false;
         let comment   = false;
         let number    = prevNumber + 1;
@@ -80,14 +80,29 @@ export default function preprocess(input, lines) {
             lastComma,
             before: ''
         };
-    }).reduceRight( (all, i) => {
+    });
+
+    parts = parts.reduceRight( (all, i) => {
         if ( !i.tokens.length || i.tokens.every(j => j[0] === 'newline') ) {
-            let prev   = all[0];
-            let before = i.indent + i.tokens.map( j => j[1] ).join('');
+            let prev    = all[0];
+            let before  = i.indent + i.tokens.map( j => j[1] ).join('');
             prev.before = before + prev.before;
         } else {
             all.unshift(i);
         }
         return all;
     }, [{ end: true, before: '' }]);
+
+    parts.forEach( (part, i) => {
+        if ( i === 0 ) return;
+
+        let prev = parts[i - 1];
+        let last = prev.tokens[prev.tokens.length - 1];
+        if ( last && last[0] === 'newline' ) {
+            part.before = last[1] + part.before;
+            prev.tokens.pop();
+        }
+    });
+
+    return parts;
 }

@@ -42,14 +42,22 @@ test('throws on space between property', t => {
 
 test('keeps trailing spaces', t => {
     let root = parse('@media  s \n  a\n  b \n    a : \n      b \n//  a \n \n');
-    t.same(root.raws.after, ' \n');
-    t.same(root.first.raws.between, ' ');
+    t.same(root.raws.after, '\n \n');
+    t.same(root.first.raws.sssBetween, ' ');
     t.same(root.first.raws.afterName, '  ');
-    t.same(root.first.first.raws.between, ' ');
+    t.same(root.first.first.raws.sssBetween, ' ');
     t.same(root.first.first.first.raws.between, ' : \n      ');
     t.same(root.first.first.first.raws.value.raw, 'b ');
     t.same(root.last.raws.left, '  ');
     t.same(root.last.raws.inlineRight, ' ');
+});
+
+test('supports files without last new line', t => {
+    t.same(parse('color: black').raws.after, '');
+});
+
+test('keeps last new line', t => {
+    t.same(parse('color: black\n').raws.after, '\n');
 });
 
 let tests = fs.readdirSync(path.join(__dirname, 'cases'))
@@ -62,10 +70,10 @@ function read(file) {
 for ( let name of tests ) {
     test('parses ' + name, t => {
         let sss  = read(name);
-        let css  = read(name.replace(/\.sss/, '.css')).trim();
-        let json = read(name.replace(/\.sss/, '.json')).trim();
+        let css  = read(name.replace(/\.sss/, '.css'));
+        let json = read(name.replace(/\.sss/, '.json'));
         let root = parse(sss, { from: name });
         t.same(root.toString(), css);
-        t.same(jsonify(root), json);
+        t.same(jsonify(root), json.trim());
     });
 }

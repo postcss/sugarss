@@ -1,6 +1,6 @@
 {
   "raws": {
-    "after": ""
+    "after": "\n"
   },
   "type": "root",
   "nodes": [
@@ -29,6 +29,7 @@
     {
       "raws": {
         "before": "\n",
+        "inline": true,
         "left": " ",
         "inlineRight": ""
       },

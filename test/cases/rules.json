@@ -1,7 +1,7 @@
 {
   "raws": {
     "indent": "  ",
-    "after": ""
+    "after": "\n"
   },
   "type": "root",
   "nodes": [
@@ -120,7 +120,8 @@
         "before": "\n\n",
         "selector": {
           "value": "a  b \nem",
-          "raw": "a /* -> */ b /* go down */\nem"
+          "raw": "a /* -> */ b /* go down */\nem",
+          "sss": "a /* -> */ b // go down\nem"
         }
       },
       "type": "rule",

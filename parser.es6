@@ -64,6 +64,7 @@ export default class Parser {
 
         let text = token[1];
         if ( token[6] === 'inline' ) {
+            node.raws.inline = true;
             text = text.slice(2);
         } else {
             text = text.slice(2, -2);
@@ -88,11 +89,10 @@ export default class Parser {
         while ( !part.end && part.lastComma ) {
             this.pos += 1;
             part = this.parts[this.pos];
-            params.push(['space', part.indent]);
+            params.push(['space', part.before + part.indent]);
             params = params.concat(part.tokens);
         }
 
-        this.cleanLastNewline(params);
         node.raws.afterName = this.firstSpaces(params);
         this.keepTrailingSpace(node, params);
         this.raw(node, 'params', params, atword);
@@ -129,7 +129,7 @@ export default class Parser {
 
         while ( !next.end && !next.atrule && !next.colon &&
                 next.indent.length > part.indent.length ) {
-            value.push(['space', next.indent]);
+            value.push(['space', next.before + next.indent]);
             value = value.concat(next.tokens);
             this.pos += 1;
             next = this.parts[this.pos + 1];
@@ -152,7 +152,6 @@ export default class Parser {
             }
         }
 
-        this.cleanLastNewline(value);
         node.raws.between = between + this.firstSpaces(value);
         this.raw(node, 'value', value, colon);
     }
@@ -165,13 +164,12 @@ export default class Parser {
         let next     = this.parts[this.pos + 1];
 
         while ( !next.end && next.indent.length === part.indent.length ) {
-            selector.push(['space', next.indent]);
+            selector.push(['space', next.before + next.indent]);
             selector = selector.concat(next.tokens);
             this.pos += 1;
             next = this.parts[this.pos + 1];
         }
 
-        this.cleanLastNewline(selector);
         this.keepTrailingSpace(node, selector);
         this.raw(node, 'selector', selector);
     }
@@ -217,10 +215,6 @@ export default class Parser {
         this.current.push(node);
 
         node.raws.before = part.before + part.indent;
-        if ( this.parts[0] !== part ) {
-            node.raws.before = '\n' + node.raws.before;
-        }
-
         node.source = {
             start: { line: part.tokens[0][2], column: part.tokens[0][3] },
             input: this.input
@@ -231,7 +225,7 @@ export default class Parser {
         let lastSpace = tokens[tokens.length - 1];
         if ( lastSpace && lastSpace[0] === 'space' ) {
             tokens.pop();
-            node.raws.between = lastSpace[1];
+            node.raws.sssBetween = lastSpace[1];
         }
     }
 
@@ -246,11 +240,6 @@ export default class Parser {
             }
         }
         return result;
-    }
-
-    cleanLastNewline(tokens) {
-        let last = tokens[tokens.length - 1];
-        if ( last && last[0] === 'newline' ) tokens.pop();
     }
 
     raw(node, prop, tokens, altLast) {
@@ -268,6 +257,7 @@ export default class Parser {
             }
         }
         if ( !clean ) {
+            let sss = tokens.reduce( (all, i) => all + i[1], '');
             let raw = tokens.reduce( (all, i) => {
                 if ( i[0] === 'comment' && i[6] === 'inline' ) {
                     return all + '/* ' + i[1].slice(2).trim() + ' */';
@@ -276,6 +266,7 @@ export default class Parser {
                 }
             }, '');
             node.raws[prop] = { value, raw };
+            if ( sss !== raw ) node.raws[prop].sss = sss;
         }
         node[prop] = value;
 
