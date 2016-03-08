@@ -102,14 +102,15 @@ SugarSS supports two types of comments:
 ```
 
 There is no “silent” comments in SugarSS. Output CSS will contain all comments
-from `.sss` source. You can use [postcss-discard-comments] to make
-Sass’s silent/loud comments behaviour.
+from `.sss` source. But you can use [postcss-discard-comments]
+for Sass’s silent/loud comments behaviour.
 
 [postcss-discard-comments]: https://www.npmjs.com/package/postcss-discard-comments
 
 ## Text Editors
 
 We are working on syntax highlight support in text editors.
+
 Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 
 ## Usage
