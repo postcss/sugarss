@@ -24,8 +24,8 @@ a
 As any PostCSS custom syntax, SugarSS has source map, [Stylelint]
 and [postcss-sorting] support out-of-box.
 
-It was designed to be used with [PreCSS] syntax-sugar. But you can use
-it with any PostCSS plugin or use it without any PostCSS plugins.
+It was designed to be used with [PreCSS]. But you can use it with any PostCSS
+plugins or use it without any PostCSS plugins.
 
 [postcss-sorting]: https://github.com/hudochenkov/postcss-sorting
 [Stylelint]:       http://stylelint.io/
@@ -40,8 +40,8 @@ SugarSS MIME-type is `text/x-sugarss` with `.sss` file extension.
 
 ### Indent
 
-We are recommend to use 2 spaces indent for SugarSS sources. However, SugarSS
-autodetects indent and can be used with tabs or spaces.
+We recommend 2 spaces indent. However, SugarSS autodetects indent
+and can be used with tabs or spaces.
 
 But it is prohibited to mix spaces and tabs in SugarSS sources.
 
@@ -50,7 +50,7 @@ But it is prohibited to mix spaces and tabs in SugarSS sources.
 SugarSS was designed to have intuitively multiline selectors and declaration
 values.
 
-There are 3 universal rules for any types of nodes:
+There are 3 rules for any types of nodes:
 
 ```sass
 // 1. New line inside brackets will be ignored
@@ -61,7 +61,7 @@ There are 3 universal rules for any types of nodes:
 @media (max-width: 400px),
        (max-height: 800px)
 
-// 3. Backslash before newline
+// 3. Backslash before new line
 @media screen and \
        (min-width: 600px)
 ```
@@ -101,17 +101,22 @@ SugarSS supports two types of comments:
 // Inline comments
 ```
 
+There is no “silent” comments in SugarSS. Output CSS will contain all comments
+from `.sss` source. You can use [postcss-discard-comments] to make
+Sass’s silent/loud comments behaviour.
+
+[postcss-discard-comments]: https://www.npmjs.com/package/postcss-discard-comments
+
 ## Text Editors
 
-We are working to add syntax highlight support to main text editors.
-Until this work will finished, you can set `Sass` or `Stylus` syntax highlight
-for `.sss` files.
+We are working on syntax highlight support in text editors.
+Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 
 ## Usage
 
 ### SugarSS to CSS
 
-Just set SugarSS to PostCSS’s `parser` option and PostCSS will compile
+Just set SugarSS to PostCSS `parser` option and PostCSS will compile
 SugarSS to CSS.
 
 Gulp:
@@ -146,8 +151,8 @@ Webpack:
 
 ### SugarSS to SugarSS
 
-Sometimes we use PostCSS not to build CSS, but to fix something in origin
-sources. For example, to sort properties by [postcss-sorting].
+Sometimes we use PostCSS not to build CSS, but to fix source file.
+For example, to sort properties by [postcss-sorting].
 
 For this cases, use `syntax` option, instead of `parser`:
 
