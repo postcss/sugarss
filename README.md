@@ -95,7 +95,7 @@ SugarSS supports two types of comments:
 
 ```sass
 /*
- * Multiline comments
+ Multiline comments
  */
 
 // Inline comments
