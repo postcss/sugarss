@@ -38,7 +38,7 @@ it with any PostCSS plugin or use it without any PostCSS plugins.
 
 SugarSS MIME-type is `text/x-sugarss` with `.sss` file extension.
 
-### Intent
+### Indent
 
 We are recommend to use 2 spaces indent for SugarSS sources. However, SugarSS
 autodetects indent and can be used with tabs or spaces.
