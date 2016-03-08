@@ -114,9 +114,13 @@ for Sass’s silent/loud comments behaviour.
 
 ## Text Editors
 
+* Atom: [language-postcss-sugarss]
+
 We are working on syntax highlight support in text editors.
 
 Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
+
+[language-postcss-sugarss]: https://atom.io/packages/language-postcss-sugarss
 
 ## Usage
 
