@@ -30,9 +30,10 @@
     "ava":                               "0.12.0"
   },
   "scripts": {
-    "lint":  "eslint *.es6 test/*.js",
-    "clean": "rm *.js || echo 'Already cleaned'",
-    "build": "npm run clean && babel -s inline -d ./ *.es6",
-    "test":  "npm run build && ava && npm run lint"
+    "prepublish": "npm run build",
+    "clean":      "rm *.js || echo 'Already cleaned'",
+    "build":      "npm run clean && babel -s inline -d ./ *.es6",
+    "lint":       "eslint *.es6 test/*.js",
+    "test":       "npm run build && ava && npm run lint"
   }
 }
