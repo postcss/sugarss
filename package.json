@@ -1,6 +1,6 @@
 {
   "name": "sugarss",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Indent-based CSS syntax for PostCSS",
   "keywords": [
     "css",
