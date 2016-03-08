@@ -143,15 +143,13 @@ gulp.task('style', function () {
 Webpack:
 
 ```
-{
-  module: {
-      loaders: [
-          {
-              test:   /\.sss/,
-              loader: "style-loader!css-loader!postcss-loader?parser=sugarss"
-          }
-      ]
-  }
+module: {
+    loaders: [
+        {
+            test:   /\.sss/,
+            loader: "style-loader!css-loader!postcss-loader?parser=sugarss"
+        }
+    ]
 }
 ```
 
