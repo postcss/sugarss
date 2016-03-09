@@ -140,7 +140,7 @@ Gulp:
 
 ```js
 var postcss = require('gulp-postcss');
-var sugarss = require('postcss-scss');
+var sugarss = require('sugarss');
 var rename  = require('gulp-rename');
 
 gulp.task('style', function () {
