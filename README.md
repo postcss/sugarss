@@ -112,6 +112,13 @@ for Sass’s silent/loud comments behaviour.
 
 [postcss-discard-comments]: https://www.npmjs.com/package/postcss-discard-comments
 
+### Rule and Declarations
+
+SugarSS separates selectors and declarations by `:\s` or `:\n` token.
+
+So you must write a space after property name: `color: black` is good,
+`color:black` is prohibited.
+
 ## Text Editors
 
 * Atom: [language-postcss-sugarss]
