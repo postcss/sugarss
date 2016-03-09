@@ -139,28 +139,63 @@ test('ignore comma inside', t => {
     ]);
 });
 
-test('detects colon', t => {
-    run(t, [[['word', 'ab'], [':', ':'], ['word', 'ba']]], [
+test('detects colon with space', t => {
+    run(t, [[['word', 'ab'], [':', ':'], ['space', ' ']]], [
         {
             ...defaults,
-            tokens: [['word', 'ab'], [':', ':'], ['word', 'ba']],
+            tokens: [['word', 'ab'], [':', ':'], ['space', ' ']],
             colon:  true
         },
         end
     ]);
 });
 
-test('ignores colon inside brackets', t => {
-    run(t, [[['(', '('], [':', ':'], [')', ')']]], [
+test('detects colon with newline', t => {
+    run(t, [[['word', 'ab'], [':', ':'], ['newline', '\n']]], [
         {
             ...defaults,
-            tokens: [['(', '('], [':', ':'], [')', ')']],
+            tokens: [['word', 'ab'], [':', ':']],
+            colon:  true
+        },
+        {
+            ...end,
+            before: '\n'
+        }
+    ]);
+});
+
+test('ignores colon without space', t => {
+    run(t, [[['word', 'ab'], [':', ':'], ['word', 'ba']]], [
+        {
+            ...defaults,
+            tokens: [['word', 'ab'], [':', ':'], ['word', 'ba']],
             colon:  false
         },
         end
     ]);
 });
 
+test('ignores colon inside brackets', t => {
+    run(t, [[['(', '('], [':', ':'], ['space', ' '], [')', ')']]], [
+        {
+            ...defaults,
+            tokens: [['(', '('], [':', ':'], ['space', ' '], [')', ')']],
+            colon:  false
+        },
+        end
+    ]);
+});
+
+test('closes brackets', t => {
+    run(t, [[['(', '('], [')', ')'], [':', ':'], ['space', ' ']]], [
+        {
+            ...defaults,
+            tokens: [['(', '('], [')', ')'], [':', ':'], ['space', ' ']],
+            colon:  true
+        },
+        end
+    ]);
+});
 
 test('detects comments', t => {
     run(t, [[['comment', '// a']]], [

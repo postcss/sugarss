@@ -1,0 +1,19 @@
+@custom-selector :--heading h1, h2
+
+font:
+  size: 16px
+
+a:--any-link
+  color: blue
+a:--any-link
+  &.is-disabled
+    color: gray
+
+article :--heading
+  color: #000
+
+:root
+  --red: #F00
+
+body
+  color: var(--red)

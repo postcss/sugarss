@@ -56,14 +56,18 @@ export default function preprocess(input, lines) {
                 atrule  = tokens[0][0] === 'at-word';
 
                 let brackets = 0;
-                colon = tokens.some(j => {
-                    if ( j[0] === '(' ) {
+                for ( let i = 0; i < tokens.length - 1; i++ ) {
+                    let type = tokens[i][0];
+                    let next = tokens[i + 1][0];
+                    if ( type === '(' ) {
                         brackets += 1;
-                    } else if ( j[0] === ')' ) {
-                        brackets += 1;
+                    } else if ( type === ')' ) {
+                        brackets -= 1;
+                    } else if ( type === ':' && brackets === 0 &&
+                               (next === 'space' || next === 'newline') ) {
+                        colon = true;
                     }
-                    return j[0] === ':' && brackets === 0;
-                });
+                }
             }
 
             let last = tokens[tokens.length - 1];
