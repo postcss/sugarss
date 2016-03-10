@@ -121,13 +121,14 @@ So you must write a space after property name: `color: black` is good,
 
 ## Text Editors
 
-* Atom: [language-postcss-sugarss]
+* Atom: [language-postcss] or [language-postcss-sugarss]
 
 We are working on syntax highlight support in text editors.
 
 Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 
 [language-postcss-sugarss]: https://atom.io/packages/language-postcss-sugarss
+[language-postcss]:         https://atom.io/packages/language-postcss
 
 ## Usage
 
@@ -139,8 +140,8 @@ SugarSS to CSS.
 Gulp:
 
 ```js
-var postcss = require('gulp-postcss');
 var sugarss = require('sugarss');
+var postcss = require('gulp-postcss');
 var rename  = require('gulp-rename');
 
 gulp.task('style', function () {
