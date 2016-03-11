@@ -145,7 +145,7 @@ var postcss = require('gulp-postcss');
 var rename  = require('gulp-rename');
 
 gulp.task('style', function () {
-    return gulp.src('scr/**/*.sss')
+    return gulp.src('src/**/*.sss')
         .pipe(postcss(plugins, { parser: sugarss }))
         .pipe(rename({ extname: '.css' }))
         .pipe(gulp.dest('build'));
@@ -174,7 +174,7 @@ For this cases, use `syntax` option, instead of `parser`:
 
 ```js
 gulp.task('sort', function () {
-    return gulp.src('scr/**/*.sss')
+    return gulp.src('src/**/*.sss')
         .pipe(postcss([sorting], { syntax: sugarss }))
         .pipe(gulp.dest('src'));
 });
