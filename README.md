@@ -1,4 +1,6 @@
-# SugarSS [![Build Status][ci-img]][ci]
+<img height="200" src="http://corysimmons.github.io/sugarss/sugarcss-logo.svg">
+
+[![Build Status][ci-img]][ci]
 
 <img align="right" width="135" height="95"
      title="Philosopher’s stone, logo of PostCSS"
