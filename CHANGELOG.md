@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.1
+* Fix comment between declaration case.
+* Add logo (by Maria Keller).
+
 ## 0.1
 * Add selector pseudo-classes support.
 
