@@ -30,7 +30,7 @@ export default class Parser {
             } else if ( part.atrule ) {
                 this.atrule(part);
             } else if ( part.colon ) {
-                let next = this.parts[this.pos + 1];
+                let next = this.nextNonComment(this.pos);
 
                 if ( next.end || next.atrule ) {
                     this.decl(part);
@@ -272,6 +272,17 @@ export default class Parser {
 
         let last = tokens[tokens.length - 1] || altLast;
         node.source.end = { line: last[4], column: last[5] };
+    }
+
+    nextNonComment(pos) {
+        let next = pos;
+        let part;
+        while ( next < this.parts.length ) {
+            next += 1;
+            part = this.parts[next];
+            if ( part.end || !part.comment ) break;
+        }
+        return part;
     }
 
     // Errors

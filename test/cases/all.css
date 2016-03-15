@@ -1,8 +1,15 @@
 a {
   color: blue
 }
+
 @media (max-width: 400px) {
   .body {
     padding: 0 10px
   }
+}
+
+.page {
+  font-family: 'Open Sans', Arial, serif;
+  /* transform: rotate(90deg) */
+  background: black
 }
