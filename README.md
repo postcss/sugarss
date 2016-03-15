@@ -1,8 +1,8 @@
 # SugarSS [![Build Status][ci-img]][ci]
 
-<img align="right" width="135" height="95"
-     title="Philosopher’s stone, logo of PostCSS"
-     src="http://postcss.github.io/postcss/logo-leftp.svg">
+<img align="right" width="120" height="150"
+     title="SugarSS logo by Maria Keller"
+     src="http://postcss.github.io/sugarss/logo.svg">
 
 Indent-based CSS syntax for [PostCSS].
 
@@ -192,3 +192,7 @@ postcss().process(css, { stringifier: sugarss }).then(function (result) {
     result.content // Converted SugarSS content
 });
 ```
+
+## Thanks
+
+Cute project logo was made by [Maria Keller](http://www.mariakellerac.com/).
