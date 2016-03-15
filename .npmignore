@@ -11,3 +11,5 @@ update-cases
 .travis.yml
 .editorconfig
 .eslintrc
+
+logo.svg
