@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.2
+* Fix rule/declaration selection in nested rules.
+
 ## 0.1.1
 * Fix comment between declaration case.
 * Add logo (by Maria Keller).
