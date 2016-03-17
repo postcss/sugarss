@@ -36,10 +36,8 @@ export default class Parser {
                     this.decl(part);
                 } else {
                     let sameIndent = next.indent.length === part.indent.length;
-                    if ( sameIndent && next.colon ) {
+                    if ( sameIndent ) {
                         this.decl(part);
-                    } else if ( sameIndent && !next.colon ) {
-                        this.rule(part);
                     } else if ( !sameIndent && next.colon ) {
                         this.rule(part);
                     } else if ( !sameIndent && !next.colon ) {

@@ -204,6 +204,94 @@
         }
       },
       "selector": ".page"
+    },
+    {
+      "raws": {
+        "before": "\n\n"
+      },
+      "type": "rule",
+      "nodes": [
+        {
+          "raws": {
+            "before": "\n  ",
+            "between": ": "
+          },
+          "type": "decl",
+          "source": {
+            "start": {
+              "line": 14,
+              "column": 3
+            },
+            "input": {
+              "file": "all.sss"
+            },
+            "end": {
+              "line": 14,
+              "column": 14
+            }
+          },
+          "prop": "width",
+          "value": "100px"
+        },
+        {
+          "raws": {
+            "before": "\n  "
+          },
+          "type": "rule",
+          "nodes": [
+            {
+              "raws": {
+                "before": "\n    ",
+                "between": ": "
+              },
+              "type": "decl",
+              "source": {
+                "start": {
+                  "line": 16,
+                  "column": 5
+                },
+                "input": {
+                  "file": "all.sss"
+                },
+                "end": {
+                  "line": 16,
+                  "column": 16
+                }
+              },
+              "prop": "width",
+              "value": "500px"
+            }
+          ],
+          "source": {
+            "start": {
+              "line": 15,
+              "column": 3
+            },
+            "input": {
+              "file": "all.sss"
+            },
+            "end": {
+              "line": 15,
+              "column": 9
+            }
+          },
+          "selector": "&_title"
+        }
+      ],
+      "source": {
+        "start": {
+          "line": 13,
+          "column": 1
+        },
+        "input": {
+          "file": "all.sss"
+        },
+        "end": {
+          "line": 13,
+          "column": 6
+        }
+      },
+      "selector": ".phone"
     }
   ],
   "source": {
