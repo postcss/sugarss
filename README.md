@@ -1,8 +1,8 @@
 # SugarSS [![Build Status][ci-img]][ci]
 
-<img align="right" width="120" height="150"
+<img align="right" width="120" height="155"
      title="SugarSS logo by Maria Keller"
-     src="http://postcss.github.io/sugarss/logo.svg">
+     src="logo.svg">
 
 Indent-based CSS syntax for [PostCSS].
 
