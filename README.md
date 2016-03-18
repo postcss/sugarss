@@ -2,7 +2,7 @@
 
 <img align="right" width="120" height="155"
      title="SugarSS logo by Maria Keller"
-     src="logo.svg">
+     src="http://postcss.github.io/sugarss/logo.svg">
 
 Indent-based CSS syntax for [PostCSS].
 
