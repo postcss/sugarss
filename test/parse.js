@@ -69,11 +69,17 @@ function read(file) {
 
 for ( let name of tests ) {
     test('parses ' + name, t => {
-        let sss  = read(name);
-        let css  = read(name.replace(/\.sss/, '.css'));
-        let json = read(name.replace(/\.sss/, '.json'));
-        let root = parse(sss, { from: name });
-        t.deepEqual(root.toString(), css);
+        let sss    = read(name);
+        let css    = read(name.replace(/\.sss/, '.css'));
+        let json   = read(name.replace(/\.sss/, '.json'));
+        let root   = parse(sss, { from: name });
+        let result = root.toResult({
+            map: {
+                inline:     false,
+                annotation: false
+            }
+        });
+        t.deepEqual(result.css, css);
         t.deepEqual(jsonify(root), json.trim());
     });
 }

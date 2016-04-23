@@ -200,7 +200,10 @@
         "input": {
           "file": "rules.sss"
         },
-        "end": {}
+        "end": {
+          "line": 13,
+          "column": 5
+        }
       },
       "selector": "font:"
     }

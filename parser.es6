@@ -269,7 +269,10 @@ export default class Parser {
         node[prop] = value;
 
         let last = tokens[tokens.length - 1] || altLast;
-        node.source.end = { line: last[4], column: last[5] };
+        node.source.end = {
+            line:   last[4] || last[2],
+            column: last[5] || last[3]
+        };
     }
 
     nextNonComment(pos) {

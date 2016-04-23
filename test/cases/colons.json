@@ -64,7 +64,10 @@
         "input": {
           "file": "colons.sss"
         },
-        "end": {}
+        "end": {
+          "line": 3,
+          "column": 5
+        }
       },
       "selector": "font:"
     },
