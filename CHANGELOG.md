@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.3
+* Fix source map generation.
+
 ## 0.1.2
 * Fix rule/declaration selection in nested rules.
 
