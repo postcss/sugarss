@@ -7,7 +7,7 @@ import   fs        from 'fs';
 
 test('detects indent', t => {
     let root = parse('@one\n  @two\n    @three');
-    t.same(root.raws.indent, '  ');
+    t.deepEqual(root.raws.indent, '  ');
 });
 
 test('throws on first indent', t => {
@@ -42,22 +42,22 @@ test('throws on space between property', t => {
 
 test('keeps trailing spaces', t => {
     let root = parse('@media  s \n  a\n  b \n    a : \n      b \n//  a \n \n');
-    t.same(root.raws.after, '\n \n');
-    t.same(root.first.raws.sssBetween, ' ');
-    t.same(root.first.raws.afterName, '  ');
-    t.same(root.first.first.raws.sssBetween, ' ');
-    t.same(root.first.first.first.raws.between, ' : \n      ');
-    t.same(root.first.first.first.raws.value.raw, 'b ');
-    t.same(root.last.raws.left, '  ');
-    t.same(root.last.raws.inlineRight, ' ');
+    t.deepEqual(root.raws.after, '\n \n');
+    t.deepEqual(root.first.raws.sssBetween, ' ');
+    t.deepEqual(root.first.raws.afterName, '  ');
+    t.deepEqual(root.first.first.raws.sssBetween, ' ');
+    t.deepEqual(root.first.first.first.raws.between, ' : \n      ');
+    t.deepEqual(root.first.first.first.raws.value.raw, 'b ');
+    t.deepEqual(root.last.raws.left, '  ');
+    t.deepEqual(root.last.raws.inlineRight, ' ');
 });
 
 test('supports files without last new line', t => {
-    t.same(parse('color: black').raws.after, '');
+    t.deepEqual(parse('color: black').raws.after, '');
 });
 
 test('keeps last new line', t => {
-    t.same(parse('color: black\n').raws.after, '\n');
+    t.deepEqual(parse('color: black\n').raws.after, '\n');
 });
 
 let tests = fs.readdirSync(path.join(__dirname, 'cases'))
@@ -73,7 +73,7 @@ for ( let name of tests ) {
         let css  = read(name.replace(/\.sss/, '.css'));
         let json = read(name.replace(/\.sss/, '.json'));
         let root = parse(sss, { from: name });
-        t.same(root.toString(), css);
-        t.same(jsonify(root), json.trim());
+        t.deepEqual(root.toString(), css);
+        t.deepEqual(jsonify(root), json.trim());
     });
 }

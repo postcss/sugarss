@@ -4,7 +4,7 @@ import Input from 'postcss/lib/input';
 import test  from 'ava';
 
 function run(t, css, tokens) {
-    t.same(tokenize(new Input(css)), tokens);
+    t.deepEqual(tokenize(new Input(css)), tokens);
 }
 
 test('tokenizes inine comments', t => {

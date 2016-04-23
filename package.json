@@ -23,11 +23,11 @@
     "eslint-config-postcss":             "2.0.2",
     "babel-preset-stage-0":              "6.5.0",
     "postcss-parser-tests":              "5.0.6",
-    "babel-eslint":                      "6.0.0",
-    "babel-core":                        "6.7.4",
-    "babel-cli":                         "6.6.5",
-    "eslint":                            "2.5.1",
-    "ava":                               "0.13.0"
+    "babel-eslint":                      "6.0.3",
+    "babel-core":                        "6.7.7",
+    "babel-cli":                         "6.7.7",
+    "eslint":                            "2.8.0",
+    "ava":                               "0.14.0"
   },
   "scripts": {
     "prepublish": "npm run build",

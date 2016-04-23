@@ -18,7 +18,7 @@ function run(t, sss) {
     stringify(root, i => {
         output += i;
     });
-    t.same(sss, output);
+    t.deepEqual(sss, output);
 }
 
 test('saves newlines', t => {

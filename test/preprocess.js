@@ -4,7 +4,7 @@ import Input from 'postcss/lib/input';
 import test  from 'ava';
 
 function run(t, lines, result) {
-    t.same(preprocess(new Input(''), lines), result);
+    t.deepEqual(preprocess(new Input(''), lines), result);
 }
 
 let defaults = {
