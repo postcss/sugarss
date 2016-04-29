@@ -121,7 +121,7 @@ So you must write a space after property name: `color: black` is good,
 
 ## Text Editors
 
-* Atom: [language-postcss] or [language-postcss-sugarss]
+* Atom: [language-postcss] or [language-postcss-sugarss] and [source-preview-postcss]
 
 We are working on syntax highlight support in text editors.
 
@@ -129,6 +129,7 @@ Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 
 [language-postcss-sugarss]: https://atom.io/packages/language-postcss-sugarss
 [language-postcss]:         https://atom.io/packages/language-postcss
+[source-preview-postcss]:   https://atom.io/packages/source-preview-postcss
 
 ## Usage
 
