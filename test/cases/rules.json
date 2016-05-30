@@ -128,10 +128,10 @@
       "nodes": [
         {
           "raws": {
-            "before": "\n  "
+            "before": "\n  ",
+            "between": ": "
           },
-          "type": "rule",
-          "nodes": [],
+          "type": "decl",
           "source": {
             "start": {
               "line": 11,
@@ -145,7 +145,8 @@
               "column": 14
             }
           },
-          "selector": "color: black"
+          "prop": "color",
+          "value": "black"
         }
       ],
       "source": {

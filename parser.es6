@@ -35,12 +35,12 @@ export default class Parser {
                 if ( next.end || next.atrule ) {
                     this.decl(part);
                 } else {
-                    let sameIndent = next.indent.length === part.indent.length;
-                    if ( sameIndent ) {
+                    let moreIndent = next.indent.length > part.indent.length;
+                    if ( !moreIndent ) {
                         this.decl(part);
-                    } else if ( !sameIndent && next.colon ) {
+                    } else if ( moreIndent && next.colon ) {
                         this.rule(part);
-                    } else if ( !sameIndent && !next.colon ) {
+                    } else if ( moreIndent && !next.colon ) {
                         this.decl(part);
                     }
                 }
