@@ -24,20 +24,22 @@ a
 As any PostCSS custom syntax, SugarSS has source map, [Stylelint]
 and [postcss-sorting] support out-of-box.
 
-It was designed to be used with [PreCSS]. But you can use it with any PostCSS
-plugins or use it without any PostCSS plugins.
+It was designed to be used with [PreCSS] and [postcss-nested-props].
+But you can use it with any PostCSS plugins
+or use it without any PostCSS plugins.
 
 <a href="https://evilmartians.com/?utm_source=sugarss">
   <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
        alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
 
-[postcss-sorting]: https://github.com/hudochenkov/postcss-sorting
-[Stylelint]:       http://stylelint.io/
-[PostCSS]:         https://github.com/postcss/postcss
-[PreCSS]:          https://github.com/jonathantneal/precss
-[ci-img]:          https://img.shields.io/travis/postcss/sugarss.svg
-[ci]:              https://travis-ci.org/postcss/sugarss
+[postcss-nested-props]: https://github.com/jedmao/postcss-nested-props
+[postcss-sorting]:      https://github.com/hudochenkov/postcss-sorting
+[Stylelint]:            http://stylelint.io/
+[PostCSS]:              https://github.com/postcss/postcss
+[PreCSS]:               https://github.com/jonathantneal/precss
+[ci-img]:               https://img.shields.io/travis/postcss/sugarss.svg
+[ci]:                   https://travis-ci.org/postcss/sugarss
 
 ## Syntax
 
