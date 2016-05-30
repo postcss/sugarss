@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.4
+* Fix parsing nested properties.
+
 ## 0.1.3
 * Fix source map generation.
 
