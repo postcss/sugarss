@@ -22,12 +22,12 @@
     "babel-preset-es2015-loose":         "7.0.0",
     "eslint-config-postcss":             "2.0.2",
     "babel-preset-stage-0":              "6.5.0",
-    "postcss-parser-tests":              "5.0.7",
-    "babel-eslint":                      "6.0.4",
-    "babel-core":                        "6.9.1",
-    "babel-cli":                         "6.9.0",
-    "eslint":                            "2.11.0",
-    "ava":                               "0.15.1"
+    "postcss-parser-tests":              "5.0.8",
+    "babel-eslint":                      "6.1.0",
+    "babel-core":                        "6.10.4",
+    "babel-cli":                         "6.10.1",
+    "eslint":                            "2.13.1",
+    "ava":                               "0.15.2"
   },
   "scripts": {
     "prepublish": "npm run build",
