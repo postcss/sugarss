@@ -197,6 +197,21 @@ postcss().process(css, { stringifier: sugarss }).then(function (result) {
 });
 ```
 
+### Imports
+
+[postcss-import] doesn’t support `.sss` file extension, because this plugin
+implements W3C specification. If you want smarter `@import`, you should
+use [postcss-easy-import] with `extensions` option.
+
+```js
+postcss([
+  easyImport({ extensions: ['.sss'] })
+]).process(sss, { parser: sugarss })
+```
+
+[postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
+[postcss-import]:      https://github.com/postcss/postcss-import
+
 ## Thanks
 
 Cute project logo was made by [Maria Keller](http://www.mariakellerac.com/).
