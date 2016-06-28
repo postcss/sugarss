@@ -21,7 +21,7 @@ a
     padding: 0 10px
 ```
 
-As any PostCSS custom syntax, SugarSS has source map, [Stylelint]
+As any PostCSS custom syntax, SugarSS has source map, [stylelint]
 and [postcss-sorting] support out-of-box.
 
 It was designed to be used with [PreCSS] and [postcss-nested-props].
@@ -35,7 +35,7 @@ or use it without any PostCSS plugins.
 
 [postcss-nested-props]: https://github.com/jedmao/postcss-nested-props
 [postcss-sorting]:      https://github.com/hudochenkov/postcss-sorting
-[Stylelint]:            http://stylelint.io/
+[stylelint]:            http://stylelint.io/
 [PostCSS]:              https://github.com/postcss/postcss
 [PreCSS]:               https://github.com/jonathantneal/precss
 [ci-img]:               https://img.shields.io/travis/postcss/sugarss.svg
