@@ -20,3 +20,10 @@ a {
     width: 500px
   }
 }
+
+:root {
+  --black: {
+    color: black;
+    background: white
+  }
+}
