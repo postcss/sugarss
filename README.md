@@ -123,7 +123,7 @@ So you must write a space after property name: `color: black` is good,
 
 ## Text Editors
 
-* Atom: [language-postcss] and [source-preview-postcss]
+* Atom: [language-postcss], [source-preview-postcss] and [build-sugarss]
 * Vim: [vim-sugarss]
 
 We are working on syntax highlight support in text editors.
@@ -132,6 +132,7 @@ Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 
 [language-postcss]:         https://atom.io/packages/language-postcss
 [source-preview-postcss]:   https://atom.io/packages/source-preview-postcss
+[build-sugarss]:            https://atom.io/packages/build-sugarss
 [vim-sugarss]:              https://github.com/hhsnopek/vim-sugarss
 
 ## Usage
