@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.5
+* Put comments after declaration semicolon.
+* Use PostCSS 5.1.
+
 ## 0.1.4
 * Fix parsing nested properties.
 
