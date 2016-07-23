@@ -73,6 +73,10 @@ export default class Stringifier {
             let child  = node.nodes[i];
             let before = child.raws.before.replace(/[^\n]*$/, '') +
                          this.indent(node, indent);
+            if ( child.type === 'comment' &&
+                 child.raws.before.indexOf('\n') === -1 ) {
+                before = child.raws.before;
+            }
             if ( before ) this.builder(before);
             this.stringify(child);
         }

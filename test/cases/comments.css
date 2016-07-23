@@ -1,3 +1,7 @@
 /* multi
    line */
 /* inline */
+a {
+  color: black; /* last */
+  z-index: 1
+}

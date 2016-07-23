@@ -59,19 +59,7 @@ export default class Parser {
         let node  = new Comment();
         this.init(node, part);
         node.source.end = { line: token[4], column: token[5] };
-
-        let text = token[1];
-        if ( token[6] === 'inline' ) {
-            node.raws.inline = true;
-            text = text.slice(2);
-        } else {
-            text = text.slice(2, -2);
-        }
-
-        let match = text.match(/^(\s*)([^]*[^\s])(\s*)\n?$/);
-        node.text = match[2];
-        node.raws.left = match[1];
-        node.raws.inlineRight = match[3];
+        this.commentText(node, token);
     }
 
     atrule(part) {
@@ -131,6 +119,24 @@ export default class Parser {
             value = value.concat(next.tokens);
             this.pos += 1;
             next = this.parts[this.pos + 1];
+        }
+
+        let last = value[value.length - 1];
+        if ( last && last[0] === 'comment' ) {
+            value.pop();
+            let comment = new Comment();
+            this.current.push(comment);
+            comment.source = {
+                input: this.input,
+                start: { line: last[2], column: last[3] },
+                end:   { line: last[4], column: last[5] }
+            };
+            let prev = value[value.length - 1];
+            if ( prev && prev[0] === 'space' ) {
+                value.pop();
+                comment.raws.before = prev[1];
+            }
+            this.commentText(comment, last);
         }
 
         for ( let i = value.length - 1; i > 0; i-- ) {
@@ -284,6 +290,21 @@ export default class Parser {
             if ( part.end || !part.comment ) break;
         }
         return part;
+    }
+
+    commentText(node, token) {
+        let text = token[1];
+        if ( token[6] === 'inline' ) {
+            node.raws.inline = true;
+            text = text.slice(2);
+        } else {
+            text = text.slice(2, -2);
+        }
+
+        let match = text.match(/^(\s*)([^]*[^\s])(\s*)\n?$/);
+        node.text = match[2];
+        node.raws.left = match[1];
+        node.raws.inlineRight = match[3];
     }
 
     // Errors

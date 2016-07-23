@@ -1,5 +1,6 @@
 {
   "raws": {
+    "indent": "  ",
     "after": "\n"
   },
   "type": "root",
@@ -48,6 +49,95 @@
         }
       },
       "text": "inline"
+    },
+    {
+      "raws": {
+        "before": "\n"
+      },
+      "type": "rule",
+      "nodes": [
+        {
+          "raws": {
+            "before": "\n  ",
+            "between": ": "
+          },
+          "type": "decl",
+          "source": {
+            "start": {
+              "line": 5,
+              "column": 3
+            },
+            "input": {
+              "file": "comments.sss"
+            },
+            "end": {
+              "line": 5,
+              "column": 14
+            }
+          },
+          "prop": "color",
+          "value": "black"
+        },
+        {
+          "raws": {
+            "before": " ",
+            "inline": true,
+            "left": " ",
+            "inlineRight": ""
+          },
+          "type": "comment",
+          "source": {
+            "input": {
+              "file": "comments.sss"
+            },
+            "start": {
+              "line": 5,
+              "column": 16
+            },
+            "end": {
+              "line": 5,
+              "column": 22
+            }
+          },
+          "text": "last"
+        },
+        {
+          "raws": {
+            "before": "\n  ",
+            "between": ": "
+          },
+          "type": "decl",
+          "source": {
+            "start": {
+              "line": 6,
+              "column": 3
+            },
+            "input": {
+              "file": "comments.sss"
+            },
+            "end": {
+              "line": 6,
+              "column": 12
+            }
+          },
+          "prop": "z-index",
+          "value": "1"
+        }
+      ],
+      "source": {
+        "start": {
+          "line": 4,
+          "column": 1
+        },
+        "input": {
+          "file": "comments.sss"
+        },
+        "end": {
+          "line": 4,
+          "column": 1
+        }
+      },
+      "selector": "a"
     }
   ],
   "source": {
