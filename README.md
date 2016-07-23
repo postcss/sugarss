@@ -141,7 +141,7 @@ Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 Just set SugarSS to PostCSS `parser` option and PostCSS will compile
 SugarSS to CSS.
 
-Gulp:
+[Gulp](https://github.com/postcss/gulp-postcss):
 
 ```js
 var sugarss = require('sugarss');
@@ -156,9 +156,9 @@ gulp.task('style', function () {
 });
 ```
 
-Webpack:
+[Webpack](https://github.com/postcss/postcss-loader):
 
-```
+```js
 module: {
     loaders: [
         {
@@ -167,6 +167,12 @@ module: {
         }
     ]
 }
+```
+
+[CLI](https://github.com/postcss/postcss-cli):
+
+```
+postcss -u autoprefixer -p sugarss test.sss -o test.css
 ```
 
 ### SugarSS to SugarSS
