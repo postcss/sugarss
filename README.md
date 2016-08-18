@@ -41,6 +41,12 @@ or use it without any PostCSS plugins.
 [ci-img]:               https://img.shields.io/travis/postcss/sugarss.svg
 [ci]:                   https://travis-ci.org/postcss/sugarss
 
+## Installation
+
+```bash
+npm install sugarss --save-dev
+```
+
 ## Syntax
 
 SugarSS MIME-type is `text/x-sugarss` with `.sss` file extension.
