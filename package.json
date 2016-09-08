@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": "postcss/sugarss",
   "dependencies": {
-    "postcss": "^5.1.0"
+    "postcss": "^5.2.0"
   },
   "devDependencies": {
     "babel-plugin-precompile-charcodes": "1.0.0",
@@ -22,12 +22,12 @@
     "babel-preset-es2015-loose":         "7.0.0",
     "eslint-config-postcss":             "2.0.2",
     "babel-preset-stage-0":              "6.5.0",
-    "postcss-parser-tests":              "5.0.9",
+    "postcss-parser-tests":              "5.0.10",
     "babel-eslint":                      "6.1.2",
-    "babel-core":                        "6.11.4",
-    "babel-cli":                         "6.11.4",
-    "eslint":                            "3.1.1",
-    "ava":                               "0.15.2"
+    "babel-core":                        "6.14.0",
+    "babel-cli":                         "6.14.0",
+    "eslint":                            "3.4.0",
+    "ava":                               "0.16.0"
   },
   "scripts": {
     "prepublish": "npm run build",
