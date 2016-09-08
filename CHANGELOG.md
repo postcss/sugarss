@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.6
+* Fix empty comments parsing.
+
 ## 0.1.5
 * Put comments after declaration semicolon.
 * Use PostCSS 5.1.
