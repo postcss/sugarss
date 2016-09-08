@@ -207,6 +207,50 @@
         }
       },
       "selector": "font:"
+    },
+    {
+      "raws": {
+        "before": "\n\n"
+      },
+      "type": "rule",
+      "nodes": [
+        {
+          "raws": {
+            "before": "\n  ",
+            "between": ": "
+          },
+          "type": "decl",
+          "source": {
+            "start": {
+              "line": 17,
+              "column": 3
+            },
+            "input": {
+              "file": "rules.sss"
+            },
+            "end": {
+              "line": 17,
+              "column": 14
+            }
+          },
+          "prop": "color",
+          "value": "black"
+        }
+      ],
+      "source": {
+        "start": {
+          "line": 16,
+          "column": 1
+        },
+        "input": {
+          "file": "rules.sss"
+        },
+        "end": {
+          "line": 16,
+          "column": 8
+        }
+      },
+      "selector": "[attr=;]"
     }
   ],
   "source": {
