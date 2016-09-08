@@ -302,9 +302,15 @@ export default class Parser {
         }
 
         let match = text.match(/^(\s*)([^]*[^\s])(\s*)\n?$/);
-        node.text = match[2];
-        node.raws.left = match[1];
-        node.raws.inlineRight = match[3];
+        if ( match ) {
+            node.text = match[2];
+            node.raws.left = match[1];
+            node.raws.inlineRight = match[3];
+        } else {
+            node.text = '';
+            node.raws.left = '';
+            node.raws.inlineRight = '';
+        }
     }
 
     // Errors
