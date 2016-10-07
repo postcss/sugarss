@@ -40,6 +40,18 @@ test('throws on space between property', t => {
     }, '<css input>:1:5: Unexpected separator in property');
 });
 
+test('throws on semicolon in rule', t => {
+    t.throws(() => {
+        parse('a\n  color: black;');
+    }, '<css input>:2:15: Unnecessary semicolon');
+});
+
+test('throws on semicolon in at-rule', t => {
+    t.throws(() => {
+        parse('@charset "UTF-8";');
+    }, '<css input>:1:17: Unnecessary semicolon');
+});
+
 test('keeps trailing spaces', t => {
     let root = parse('@media  s \n  a\n  b \n    a : \n      b \n//  a \n \n');
     t.deepEqual(root.raws.after, '\n \n');

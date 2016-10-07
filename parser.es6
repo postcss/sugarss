@@ -81,6 +81,7 @@ export default class Parser {
 
         node.raws.afterName = this.firstSpaces(params);
         this.keepTrailingSpace(node, params);
+        this.checkSemicolon(params);
         this.raw(node, 'params', params, atword);
     }
 
@@ -157,6 +158,7 @@ export default class Parser {
         }
 
         node.raws.between = between + this.firstSpaces(value);
+        this.checkSemicolon(value);
         this.raw(node, 'value', value, colon);
     }
 
@@ -223,6 +225,14 @@ export default class Parser {
             start: { line: part.tokens[0][2], column: part.tokens[0][3] },
             input: this.input
         };
+    }
+
+    checkSemicolon(tokens) {
+        for ( let token of tokens ) {
+            if ( token[0] === ';' ) {
+                this.error('Unnecessary semicolon', token[2], token[3]);
+            }
+        }
     }
 
     keepTrailingSpace(node, tokens) {
