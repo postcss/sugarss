@@ -52,6 +52,17 @@ export default class Parser {
 
             this.pos += 1;
         }
+
+        for ( let i = this.tokens.length - 1; i >= 0; i-- ) {
+            if ( this.tokens[i].length > 3 ) {
+                let last = this.tokens[i];
+                this.root.source.end = {
+                    line:   last[4] || last[2],
+                    column: last[5] || last[3]
+                };
+                break;
+            }
+        }
     }
 
     comment(part) {
@@ -294,7 +305,15 @@ export default class Parser {
         }
         node[prop] = value;
 
-        let last = tokens[tokens.length - 1] || altLast;
+        let last;
+        for ( let i = tokens.length - 1; i >= 0; i-- ) {
+            if ( tokens[i].length > 2 ) {
+                last = tokens[i];
+                break;
+            }
+        }
+        if ( !last ) last = altLast;
+
         node.source.end = {
             line:   last[4] || last[2],
             column: last[5] || last[3]

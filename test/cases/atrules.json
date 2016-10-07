@@ -133,6 +133,10 @@
     "start": {
       "line": 1,
       "column": 1
+    },
+    "end": {
+      "line": 8,
+      "column": 22
     }
   }
 }

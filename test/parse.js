@@ -84,6 +84,14 @@ test('keeps last new line', t => {
     t.deepEqual(parse('color: black\n').raws.after, '\n');
 });
 
+test('generates correct source maps on trailing spaces', t => {
+    t.deepEqual(parse('a: 1 ').first.source.end.line, 1);
+});
+
+test('sets end position for root', t => {
+    t.deepEqual(parse('a\n  b: 1\n').source.end, { line: 2, column: 6 });
+});
+
 let tests = fs.readdirSync(path.join(__dirname, 'cases'))
               .filter(i => path.extname(i) === '.sss' );
 
