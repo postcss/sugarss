@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2
+* Show error on semicolons and curly brackets.
+* Fix source map mappings.
+
 ## 0.1.6
 * Fix empty comments parsing.
 
