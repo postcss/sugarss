@@ -82,6 +82,7 @@ export default class Parser {
         node.raws.afterName = this.firstSpaces(params);
         this.keepTrailingSpace(node, params);
         this.checkSemicolon(params);
+        this.checkCurly(params);
         this.raw(node, 'params', params, atword);
     }
 
@@ -177,6 +178,7 @@ export default class Parser {
         }
 
         this.keepTrailingSpace(node, selector);
+        this.checkCurly(selector);
         this.raw(node, 'selector', selector);
     }
 
@@ -225,6 +227,14 @@ export default class Parser {
             start: { line: part.tokens[0][2], column: part.tokens[0][3] },
             input: this.input
         };
+    }
+
+    checkCurly(tokens) {
+        for ( let token of tokens ) {
+            if ( token[0] === '{' ) {
+                this.error('Unnecessary curly bracket', token[2], token[3]);
+            }
+        }
     }
 
     checkSemicolon(tokens) {

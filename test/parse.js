@@ -40,7 +40,7 @@ test('throws on space between property', t => {
     }, '<css input>:1:5: Unexpected separator in property');
 });
 
-test('throws on semicolon in rule', t => {
+test('throws on semicolon in declaration', t => {
     t.throws(() => {
         parse('a\n  color: black;');
     }, '<css input>:2:15: Unnecessary semicolon');
@@ -50,6 +50,18 @@ test('throws on semicolon in at-rule', t => {
     t.throws(() => {
         parse('@charset "UTF-8";');
     }, '<css input>:1:17: Unnecessary semicolon');
+});
+
+test('throws on curly in rule', t => {
+    t.throws(() => {
+        parse('a {\n  color: black');
+    }, '<css input>:1:3: Unnecessary curly bracket');
+});
+
+test('throws on curly in at-rule', t => {
+    t.throws(() => {
+        parse('@media (screen) {\n  color: black');
+    }, '<css input>:1:17: Unnecessary curly bracket');
 });
 
 test('keeps trailing spaces', t => {
