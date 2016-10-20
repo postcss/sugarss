@@ -219,9 +219,9 @@ implements W3C specification. If you want smarter `@import`, you should
 use [postcss-easy-import] with `extensions` option.
 
 ```js
-postcss([
+var postcssPlugin = [
   easyImport({ extensions: ['.sss'] })
-]).process(sss, { parser: sugarss })
+]
 ```
 
 [postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
