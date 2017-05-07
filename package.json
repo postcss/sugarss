@@ -14,22 +14,22 @@
   "license": "MIT",
   "repository": "postcss/sugarss",
   "dependencies": {
-    "postcss": "^5.2.4"
+    "jest": "^20.0.0",
+    "postcss": "^6.0.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
-    "babel-cli": "^6.16.0",
-    "babel-core": "^6.17.0",
-    "babel-eslint": "^7.0.0",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-precompile-charcodes": "^1.0.0",
-    "babel-preset-es2015": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0",
-    "eslint": "^3.8.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^3.19.0",
     "eslint-config-postcss": "^2.0.2",
-    "lint-staged": "^3.2.0",
-    "postcss-parser-tests": "^5.0.10",
-    "pre-commit": "^1.1.3"
+    "lint-staged": "^3.4.1",
+    "postcss-parser-tests": "^6.0.0",
+    "pre-commit": "^1.2.2"
   },
   "scripts": {
     "lint-staged": "lint-staged",
@@ -37,7 +37,7 @@
     "clean": "rm *.js || echo 'Already cleaned'",
     "build": "npm run clean && babel -s inline -d ./ *.es6",
     "lint": "eslint *.es6 test/*.js",
-    "test": "npm run build && ava && npm run lint"
+    "test": "npm run build && jest && npm run lint"
   },
   "babel": {
     "presets": [
@@ -67,6 +67,9 @@
       "complexity": [
         0
       ]
+    },
+    "env": {
+      "jest": true
     }
   },
   "lint-staged": {

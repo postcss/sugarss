@@ -1,10 +1,9 @@
-import preprocess from '../preprocess';
+const Input = require('postcss/lib/input');
 
-import Input from 'postcss/lib/input';
-import test  from 'ava';
+const preprocess = require('../preprocess');
 
-function run(t, lines, result) {
-    t.deepEqual(preprocess(new Input(''), lines), result);
+function run(lines, result) {
+    expect(preprocess(new Input(''), lines)).toEqual(result);
 }
 
 let defaults = {
@@ -19,8 +18,8 @@ let defaults = {
 
 let end = { before: '', end: true };
 
-test('cleans from empty lines', t => {
-    run(t, [
+it('cleans from lines', () => {
+    run([
         [['newline', '\n', 1]],
         [['space', ' '], ['newline', '\n', 2]],
         [['word', 'a'], ['newline', '\n', 3]],
@@ -39,8 +38,8 @@ test('cleans from empty lines', t => {
     ]);
 });
 
-test('separates indent from other tokens', t => {
-    run(t, [[['space', '  '], ['word', 'ab']]], [
+it('separates indent = require(other tokens', () => {
+    run([[['space', '  '], ['word', 'ab']]], [
         {
             ...defaults,
             indent: '  ',
@@ -50,8 +49,8 @@ test('separates indent from other tokens', t => {
     ]);
 });
 
-test('works with indentless strings', t => {
-    run(t, [[['word', 'ab']]], [
+it('works with indentless strings', () => {
+    run([[['word', 'ab']]], [
         {
             ...defaults,
             indent: '',
@@ -61,8 +60,8 @@ test('works with indentless strings', t => {
     ]);
 });
 
-test('collects line number', t => {
-    run(t, [
+it('collects line number', () => {
+    run([
         [['word', 'a'], ['newline', '\n', 1]],
         [['word', 'b'], ['newline', '\n', 2]]
     ], [
@@ -82,8 +81,8 @@ test('collects line number', t => {
     ]);
 });
 
-test('detects at-rules', t => {
-    run(t, [[['at-word', '@ab'], ['space', ' ']]], [
+it('detects at-rules', () => {
+    run([[['at-word', '@ab'], ['space', ' ']]], [
         {
             ...defaults,
             tokens: [['at-word', '@ab'], ['space', ' ']],
@@ -93,8 +92,8 @@ test('detects at-rules', t => {
     ]);
 });
 
-test('detects last comma', t => {
-    run(t, [[['word', 'ab'], [',', ','], ['newline', '\n']]], [
+it('detects last comma', () => {
+    run([[['word', 'ab'], [',', ','], ['newline', '\n']]], [
         {
             ...defaults,
             tokens:    [['word', 'ab'], [',', ',']],
@@ -106,8 +105,8 @@ test('detects last comma', t => {
     ]);
 });
 
-test('detects last comma with trailing spaces', t => {
-    run(t, [[['word', 'ab'], [',', ','], ['space', ' ']]], [
+it('detects last comma with trailing spaces', () => {
+    run([[['word', 'ab'], [',', ','], ['space', ' ']]], [
         {
             ...defaults,
             tokens:    [['word', 'ab'], [',', ','], ['space', ' ']],
@@ -117,8 +116,8 @@ test('detects last comma with trailing spaces', t => {
     ]);
 });
 
-test('detects last comma with trailing comment', t => {
-    run(t, [[['word', 'ab'], [',', ','], ['comment', '// a']]], [
+it('detects last comma with trailing comment', () => {
+    run([[['word', 'ab'], [',', ','], ['comment', '// a']]], [
         {
             ...defaults,
             tokens:    [['word', 'ab'], [',', ','], ['comment', '// a']],
@@ -128,8 +127,8 @@ test('detects last comma with trailing comment', t => {
     ]);
 });
 
-test('ignore comma inside', t => {
-    run(t, [[['word', 'ab'], [',', ','], ['word', 'ba']]], [
+it('ignore comma inside', () => {
+    run([[['word', 'ab'], [',', ','], ['word', 'ba']]], [
         {
             ...defaults,
             tokens:    [['word', 'ab'], [',', ','], ['word', 'ba']],
@@ -139,8 +138,8 @@ test('ignore comma inside', t => {
     ]);
 });
 
-test('detects colon with space', t => {
-    run(t, [[['word', 'ab'], [':', ':'], ['space', ' ']]], [
+it('detects colon with space', () => {
+    run([[['word', 'ab'], [':', ':'], ['space', ' ']]], [
         {
             ...defaults,
             tokens: [['word', 'ab'], [':', ':'], ['space', ' ']],
@@ -150,8 +149,8 @@ test('detects colon with space', t => {
     ]);
 });
 
-test('detects colon with newline', t => {
-    run(t, [[['word', 'ab'], [':', ':'], ['newline', '\n']]], [
+it('detects colon with newline', () => {
+    run([[['word', 'ab'], [':', ':'], ['newline', '\n']]], [
         {
             ...defaults,
             tokens: [['word', 'ab'], [':', ':']],
@@ -164,8 +163,8 @@ test('detects colon with newline', t => {
     ]);
 });
 
-test('ignores colon without space', t => {
-    run(t, [[['word', 'ab'], [':', ':'], ['word', 'ba']]], [
+it('ignores colon without space', () => {
+    run([[['word', 'ab'], [':', ':'], ['word', 'ba']]], [
         {
             ...defaults,
             tokens: [['word', 'ab'], [':', ':'], ['word', 'ba']],
@@ -175,8 +174,8 @@ test('ignores colon without space', t => {
     ]);
 });
 
-test('ignores colon inside brackets', t => {
-    run(t, [[['(', '('], [':', ':'], ['space', ' '], [')', ')']]], [
+it('ignores colon inside brackets', () => {
+    run([[['(', '('], [':', ':'], ['space', ' '], [')', ')']]], [
         {
             ...defaults,
             tokens: [['(', '('], [':', ':'], ['space', ' '], [')', ')']],
@@ -186,8 +185,8 @@ test('ignores colon inside brackets', t => {
     ]);
 });
 
-test('closes brackets', t => {
-    run(t, [[['(', '('], [')', ')'], [':', ':'], ['space', ' ']]], [
+it('closes brackets', () => {
+    run([[['(', '('], [')', ')'], [':', ':'], ['space', ' ']]], [
         {
             ...defaults,
             tokens: [['(', '('], [')', ')'], [':', ':'], ['space', ' ']],
@@ -197,8 +196,8 @@ test('closes brackets', t => {
     ]);
 });
 
-test('detects comments', t => {
-    run(t, [[['comment', '// a']]], [
+it('detects comments', () => {
+    run([[['comment', '// a']]], [
         {
             ...defaults,
             tokens:  [['comment', '// a']],
@@ -208,27 +207,27 @@ test('detects comments', t => {
     ]);
 });
 
-test('detects mixed tabs and spaces in indent', t => {
-    t.throws( () => {
+it('detects mixed tabs and spaces in indent', () => {
+    expect( () => {
         preprocess(new Input(''), [[['space', '\t '], ['word', 'ab']]]);
-    }, '<css input>:1:2: Mixed tabs and spaces are not allowed');
+    }).toThrowError('<css input>:1:2: Mixed tabs and spaces are not allowed');
 });
 
-test('detects mixed tabs and spaces in indents', t => {
-    t.throws( () => {
+it('detects mixed tabs and spaces in indents', () => {
+    expect( () => {
         preprocess(new Input(''), [
             [['space', ' '],  ['newline', '\n', 1]],
             [['space', '\t'], ['word', 'ab']]
         ]);
-    }, '<css input>:2:1: Mixed tabs and spaces are not allowed');
+    }).toThrowError('<css input>:2:1: Mixed tabs and spaces are not allowed');
 });
 
-test('shows correct error position', t => {
-    t.throws( () => {
+it('shows correct error position', () => {
+    expect( () => {
         preprocess(new Input(''), [
             [['comment', '/*\n*/'],            ['newline', '\n', 2]],
             [['space', '\t'],  ['word', 'ab'], ['newline', '\n', 3]],
             [['space', '\t '], ['word', 'ab'], ['newline', '\n', 4]]
         ]);
-    }, '<css input>:4:2: Mixed tabs and spaces are not allowed');
+    }).toThrowError('<css input>:4:2: Mixed tabs and spaces are not allowed');
 });

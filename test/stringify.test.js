@@ -1,9 +1,8 @@
-import stringify from '../stringify';
-import parse     from '../parse';
+const path = require('path');
+const fs   = require('fs');
 
-import path from 'path';
-import test from 'ava';
-import fs   from 'fs';
+const stringify = require('../stringify');
+const parse     = require('../parse');
 
 let tests = fs.readdirSync(path.join(__dirname, 'cases'))
               .filter(i => path.extname(i) === '.sss' );
@@ -12,21 +11,21 @@ function read(file) {
     return fs.readFileSync(path.join(__dirname, 'cases', file)).toString();
 }
 
-function run(t, sss) {
+function run(sss) {
     let root = parse(sss);
     let output = '';
     stringify(root, i => {
         output += i;
     });
-    t.deepEqual(sss, output);
+    expect(sss).toEqual(output);
 }
 
-test('saves newlines', t => {
-    run(t, 'a\r\n  color: black');
+it('saves newlines', () => {
+    run('a\r\n  color: black');
 });
 
 for ( let name of tests ) {
-    test('stringifies ' + name, t => {
-        run(t, read(name));
+    it('stringifies ' + name, () => {
+        run(read(name));
     });
 }

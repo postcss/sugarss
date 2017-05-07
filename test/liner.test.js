@@ -1,18 +1,16 @@
-import liner from '../liner';
+const liner = require('../liner');
 
-import test from 'ava';
-
-test('packs tokens by lines', t => {
+it('packs tokens by lines', () => {
     let tokens = [['word', 'a'], ['newline', '\n'], ['word', 'b']];
-    t.deepEqual(liner(tokens), [
+    expect(liner(tokens)).toEqual([
         [['word', 'a'], ['newline', '\n']],
         [['word', 'b']]
     ]);
 });
 
-test('ignores newline inside brackets', t => {
+it('ignores newline inside brackets', () => {
     let tokens = [['(', '('], ['newline', '\n'], [')', ')']];
-    t.deepEqual(liner(tokens), [
+    expect(liner(tokens)).toEqual([
         [['(', '('], ['newline', '\n'], [')', ')']]
     ]);
 });
