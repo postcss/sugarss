@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0
+* Use PostCSS 6.0.
+* Use `babel-preset-env`.
+
 ## 0.2
 * Show error on semicolons and curly brackets.
 * Fix source map mappings.
