@@ -63,14 +63,12 @@
     "extends": "eslint-config-postcss",
     "rules": {
       "key-spacing": [
-        2,
+        "error",
         {
           "align": "value"
         }
       ],
-      "complexity": [
-        0
-      ]
+      "complexity": "off"
     },
     "env": {
       "jest": true
