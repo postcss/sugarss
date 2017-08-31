@@ -125,8 +125,7 @@ So you must write a space after property name: `color: black` is good,
 
 ## Text Editors
 
-* SublimeText/PackageControl: [Syntax Highlighting for .SSS SugarSS]
-* Sublime: [Syntax Highlighting for PostCSS]
+* SublimeText: [Syntax Highlighting for .SSS SugarSS]
 * Atom: [language-postcss], [source-preview-postcss] and [build-sugarss]
 * Vim: [vim-sugarss]
 
@@ -135,7 +134,6 @@ We are working on syntax highlight support in text editors.
 Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 
 [Syntax Highlighting for .SSS SugarSS]: https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20SSS%20SugarSS
-[Syntax Highlighting for PostCSS]: https://github.com/hudochenkov/Syntax-highlighting-for-PostCSS
 [source-preview-postcss]:          https://atom.io/packages/source-preview-postcss
 [language-postcss]:                https://atom.io/packages/language-postcss
 [build-sugarss]:                   https://atom.io/packages/build-sugarss
