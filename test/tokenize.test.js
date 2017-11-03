@@ -11,8 +11,10 @@ it('tokenizes inine comments', () => {
 });
 
 it('tokenizes inine comments and new lines', () => {
-    run('// a\r\n', [ ['comment', '// a', 1, 1, 1, 4, 'inline'],
-                      ['newline', '\r\n', 1] ]);
+    run('// a\r\n', [
+        ['comment', '// a', 1, 1, 1, 4, 'inline'],
+        ['newline', '\r\n', 1]
+    ]);
 });
 
 it('tokenizes new lines arround spaces', () => {
@@ -36,9 +38,11 @@ it('tokenizes last carriage return', () => {
 });
 
 it('tokenizes comma', () => {
-    run('a,b', [ ['word', 'a', 1, 1, 1, 1],
-                 [',',    ',', 1, 2],
-                 ['word', 'b', 1, 3, 1, 3] ]);
+    run('a,b', [
+        ['word', 'a', 1, 1, 1, 1],
+        [',',    ',', 1, 2],
+        ['word', 'b', 1, 3, 1, 3]
+    ]);
 });
 
 it('escapes control symbols', () => {

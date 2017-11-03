@@ -14,21 +14,21 @@
   "license": "MIT",
   "repository": "postcss/sugarss",
   "dependencies": {
-    "postcss": "^6.0.0"
+    "postcss": "^6.0.14"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^7.2.3",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-precompile-charcodes": "^1.0.0",
-    "babel-preset-env": "^1.4.0",
+    "babel-plugin-precompile-charcodes": "^1.1.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^3.19.0",
+    "eslint": "^4.10.0",
     "eslint-config-postcss": "^2.0.2",
-    "jest": "^20.0.0",
-    "lint-staged": "^3.4.1",
-    "postcss-parser-tests": "^6.0.0",
+    "jest": "^21.2.1",
+    "lint-staged": "^4.3.0",
+    "postcss-parser-tests": "^6.1.0",
     "pre-commit": "^1.2.2"
   },
   "scripts": {
