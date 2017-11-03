@@ -33,7 +33,7 @@
   },
   "scripts": {
     "lint-staged": "lint-staged",
-    "prepublish": "npm run build",
+    "prepack": "npm run build",
     "clean": "rm *.js || echo 'Already cleaned'",
     "build": "npm run clean && babel -s inline -d ./ *.es6",
     "lint": "eslint *.es6 test/*.js",
