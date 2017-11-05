@@ -138,6 +138,53 @@
         }
       },
       "selector": "a"
+    },
+    {
+      "raws": {
+        "before": "\n\n",
+        "inline": true,
+        "left": " ",
+        "inlineRight": ""
+      },
+      "type": "comment",
+      "source": {
+        "start": {
+          "line": 8,
+          "column": 1
+        },
+        "input": {
+          "file": "comments.sss"
+        },
+        "end": {
+          "line": 8,
+          "column": 4
+        }
+      },
+      "text": "a"
+    },
+    {
+      "raws": {
+        "before": "\n  ",
+        "extraIndent": "  ",
+        "inline": true,
+        "left": " ",
+        "inlineRight": ""
+      },
+      "type": "comment",
+      "source": {
+        "start": {
+          "line": 9,
+          "column": 3
+        },
+        "input": {
+          "file": "comments.sss"
+        },
+        "end": {
+          "line": 9,
+          "column": 17
+        }
+      },
+      "text": "color: black"
     }
   ],
   "source": {
@@ -149,8 +196,8 @@
       "column": 1
     },
     "end": {
-      "line": 6,
-      "column": 12
+      "line": 9,
+      "column": 17
     }
   }
 }

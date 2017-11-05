@@ -14,8 +14,9 @@ export default class Parser {
         this.current = this.root;
         this.spaces  = '';
 
-        this.prevIndent = undefined;
-        this.step       = undefined;
+        this.extraIndent = false;
+        this.prevIndent  = undefined;
+        this.step        = undefined;
 
         this.root.source = { input, start: { line: 1, column: 1 } };
     }
@@ -211,8 +212,13 @@ export default class Parser {
             if ( diff > 0 ) {
                 if ( diff !== this.step ) {
                     this.wrongIndent(this.prevIndent + this.step, indent, part);
-                } else {
+                } else if ( this.current.last.push ) {
                     this.current = this.current.last;
+                } else {
+                    this.extraIndent = '';
+                    for ( let i = 0; i < diff; i++ ) {
+                        this.extraIndent += ' ';
+                    }
                 }
             } else if ( diff % this.step !== 0 ) {
                 let m = indent + diff % this.step;
@@ -234,6 +240,10 @@ export default class Parser {
         this.current.push(node);
 
         node.raws.before = part.before + part.indent;
+        if ( this.extraIndent ) {
+            node.raws.extraIndent = this.extraIndent;
+            this.extraIndent = false;
+        }
         node.source = {
             start: { line: part.tokens[0][2], column: part.tokens[0][3] },
             input: this.input

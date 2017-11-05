@@ -31,6 +31,9 @@ export default class Stringifier {
             } else {
                 right = '';
             }
+            if ( node.raws.extraIndent ) {
+                this.builder(node.raws.extraIndent);
+            }
             this.builder('//' + left + node.text + right, node);
         } else {
             if ( this.has(node.raws.right) ) right = node.raws.right;
