@@ -26,8 +26,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.10.0",
     "eslint-config-postcss": "^2.0.2",
-    "jest": "^21.2.1",
-    "lint-staged": "^4.3.0",
+    "jest": "^23.4.2",
+    "lint-staged": "^7.2.0",
     "postcss-parser-tests": "^6.3.0",
     "pre-commit": "^1.2.2"
   },
@@ -73,6 +73,9 @@
     "env": {
       "jest": true
     }
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "lint-staged": {
     "test/*.js": "eslint",
