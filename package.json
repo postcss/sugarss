@@ -14,21 +14,21 @@
   "license": "MIT",
   "repository": "postcss/sugarss",
   "dependencies": {
-    "postcss": "^6.0.14"
+    "postcss": "^7.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-precompile-charcodes": "^1.1.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.10.0",
     "eslint-config-postcss": "^2.0.2",
-    "jest": "^21.2.1",
-    "lint-staged": "^4.3.0",
-    "postcss-parser-tests": "^6.1.0",
+    "jest": "^23.4.2",
+    "lint-staged": "^7.2.0",
+    "postcss-parser-tests": "^6.3.0",
     "pre-commit": "^1.2.2"
   },
   "scripts": {
@@ -46,7 +46,7 @@
         {
           "targets": {
             "browsers": "last 1 version",
-            "node": 4
+            "node": 6
           },
           "loose": true
         }
@@ -73,6 +73,9 @@
     "env": {
       "jest": true
     }
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "lint-staged": {
     "test/*.js": "eslint",
