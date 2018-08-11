@@ -55,7 +55,12 @@
         "env",
         {
           "targets": {
-            "browsers": "last 1 version",
+            "browsers": [
+              "last 2 version",
+              "not dead",
+              "not Explorer 11",
+              "not ExplorerMobile 11"
+            ],
             "node": 6
           },
           "loose": true
