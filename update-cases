@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 
-var parse = require('./parse');
+let parse = require('./parse')
 
-var tests = require('postcss-parser-tests');
-var path  = require('path');
-var fs    = require('fs');
+let tests = require('postcss-parser-tests')
+let path = require('path')
+let fs = require('fs')
 
-var dir = path.join(__dirname, 'test', 'cases');
-fs.readdirSync(dir).filter(function (i) {
-    return path.extname(i) === '.sss';
-}).forEach(function (name) {
-    var sssFile  = path.join(dir, name);
-    var cssFile  = sssFile.replace(/\.sss/, '.css');
-    var jsonFile = sssFile.replace(/\.sss/, '.json');
-    var sss      = fs.readFileSync(sssFile).toString();
-    var root     = parse(sss, { from: name });
-    fs.writeFileSync(cssFile, root.toString());
-    fs.writeFileSync(jsonFile, tests.jsonify(root) + '\n');
-});
+let dir = path.join(__dirname, 'test', 'cases')
+fs.readdirSync(dir).filter(i => {
+  return path.extname(i) === '.sss'
+}).forEach(name => {
+  let sssFile = path.join(dir, name)
+  let cssFile = sssFile.replace(/\.sss/, '.css')
+  let jsonFile = sssFile.replace(/\.sss/, '.json')
+  let sss = fs.readFileSync(sssFile).toString()
+  let root = parse(sss, { from: name })
+  fs.writeFileSync(cssFile, root.toString())
+  fs.writeFileSync(jsonFile, tests.jsonify(root) + '\n')
+})

@@ -25,9 +25,18 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "clean-publish": "^1.0.9",
-    "eslint": "^4.10.0",
-    "eslint-config-postcss": "^2.0.2",
-    "jest": "^23.4.2",
+    "eslint": "^5.3.0",
+    "eslint-config-logux": "^24.0.0",
+    "eslint-config-postcss": "^3.0.3",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.20.2",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prefer-let": "^1.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "jest": "^23.5.0",
     "lint-staged": "^7.2.0",
     "postcss-parser-tests": "^6.3.0",
     "pre-commit": "^1.2.2"
@@ -61,15 +70,19 @@
   },
   "eslintConfig": {
     "parser": "babel-eslint",
+    "parserOptions": {
+      "sourceType": "module"
+    },
     "extends": "eslint-config-postcss",
     "rules": {
-      "key-spacing": [
+      "node/no-unsupported-features/es-syntax": [
         "error",
         {
-          "align": "value"
+          "ignores": [
+            "modules"
+          ]
         }
-      ],
-      "complexity": "off"
+      ]
     },
     "env": {
       "jest": true
