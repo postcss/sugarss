@@ -4,3 +4,5 @@ node_js:
   - stable
   - "8"
   - "6"
+git:
+  depth: 5
