@@ -1,6 +1,11 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0
+* Remove Node.js 9 and Node.js 4 support (by Aleks Hudochenkov).
+* Remove IE and “dead” browsers from Babel.
+* Use PostCSS 7.0 (by Aleks Hudochenkov).
+
 ## 1.0.1
 * Fix nested inline comments parsing.
 
