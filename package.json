@@ -24,6 +24,7 @@
     "babel-plugin-precompile-charcodes": "^1.1.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
+    "clean-publish": "^1.0.9",
     "eslint": "^4.10.0",
     "eslint-config-postcss": "^2.0.2",
     "jest": "^23.4.2",
