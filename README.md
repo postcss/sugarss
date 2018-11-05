@@ -75,7 +75,7 @@ There are 3 rules for any types of nodes:
        (min-width: 600px)
 ```
 
-In selector you can put a new line anywhere. Just keep same indent
+In a selector you can put a new line anywhere. Just keep same indent
 for every line of selector:
 
 ```sass
@@ -84,8 +84,8 @@ for every line of selector:
   color: black
 ```
 
-In declaration value you can put new line anywhere. Just keep bigger indent
-for value:
+In a declaration value you can put a new line anywhere. Just keep a bigger indent
+for the value:
 
 ```sass
 .one
@@ -110,7 +110,7 @@ SugarSS supports two types of comments:
 // Inline comments
 ```
 
-There is no “silent” comments in SugarSS. Output CSS will contain all comments
+There is no “silent” comment in SugarSS. Output CSS will contain all comments
 from `.sss` source. But you can use [postcss-discard-comments]
 for Sass’s silent/loud comments behaviour.
 
@@ -120,7 +120,7 @@ for Sass’s silent/loud comments behaviour.
 
 SugarSS separates selectors and declarations by `:\s` or `:\n` token.
 
-So you must write a space after property name: `color: black` is good,
+So you must write a space after the property name: `color: black` is good,
 `color:black` is prohibited.
 
 ## Text Editors
@@ -188,10 +188,10 @@ postcss -u autoprefixer -p sugarss test.sss -o test.css
 
 ### SugarSS to SugarSS
 
-Sometimes we use PostCSS not to build CSS, but to fix source file.
+Sometimes we use PostCSS not to build CSS, but to fix source files.
 For example, to sort properties by [postcss-sorting].
 
-For this cases, use `syntax` option, instead of `parser`:
+For this cases use the `syntax` option, instead of `parser`:
 
 ```js
 gulp.task('sort', function () {
@@ -205,7 +205,7 @@ gulp.task('sort', function () {
 
 ### CSS to SugarSS
 
-You can even compile existed CSS sources to SugarSS syntax.
+You can even compile existing CSS sources to SugarSS syntax.
 Just use `stringifier` option instead of `parser`:
 
 ```js
@@ -218,7 +218,7 @@ postcss().process(css, { stringifier: sugarss }).then(function (result) {
 
 [postcss-import] doesn’t support `.sss` file extension, because this plugin
 implements W3C specification. If you want smarter `@import`, you should
-use [postcss-easy-import] with `extensions` option.
+use [postcss-easy-import] with the `extensions` option.
 
 ```js
 var postcssPlugin = [
