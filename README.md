@@ -141,50 +141,58 @@ Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 
 ## Usage
 
-Install SugarSS via npm:
+SugarSS needs PostCSS compiler. Install [`postcss-loader`] for webpack,
+[`gulp-postcss`] for Gulp, [`postcss-cli`] for npm scripts.
+[Parcel] has build-in support for PostCSS.
 
-```sh
-npm install sugarss --save-dev
-```
+Then install SugarSS: `npm install --save-dev sugarss` if you use npm
+and `yarn add --dev sugarss` if you use Yarn.
 
-### SugarSS to CSS
+You may also install `precss` to have nested rules, variables
+and other CSS syntax extensions: `npm install --save-dev precss`
+or `yarn add --dev precss` if you use Yarn.
 
-Just set SugarSS to PostCSS `parser` option and PostCSS will compile
-SugarSS to CSS.
+Then create `.postcssrc` file:
 
-[Gulp](https://github.com/postcss/gulp-postcss):
-
-```js
-var sugarss = require('sugarss');
-var postcss = require('gulp-postcss');
-var rename  = require('gulp-rename');
-
-gulp.task('style', function () {
-    return gulp.src('src/**/*.sss')
-        .pipe(postcss(plugins, { parser: sugarss }))
-        .pipe(rename({ extname: '.css' }))
-        .pipe(gulp.dest('build'));
-});
-```
-
-[Webpack](https://github.com/postcss/postcss-loader):
-
-```js
-module: {
-    loaders: [
-        {
-            test:   /\.sss/,
-            loader: "style-loader!css-loader!postcss-loader?parser=sugarss"
-        }
-    ]
+```json
+{
+  "parser": "sugarss",
+  "plugins": {
+    "precss": {}
+  }
 }
 ```
 
-[CLI](https://github.com/postcss/postcss-cli):
+[`postcss-loader`]: https://github.com/postcss/postcss-loader
+[`gulp-postcss`]: https://github.com/postcss/gulp-postcss
+[`postcss-cli`]: https://github.com/postcss/postcss-cli
+[Parcel]: https://parceljs.org/transforms.html
 
+### Imports
+
+If you doesn’t use Webpack or Parcel, you need some PostCSS plugin
+to process `@import` directives.
+
+[postcss-import] doesn’t support `.sss` file extension, because this plugin
+implements W3C specification. If you want smarter `@import`, you should
+use [postcss-easy-import] with the `extensions` option.
+
+```js
+{
+  "parser": "sugarss",
+  "plugins": {
+    "postcss-easy-import": {
+      "extensions": [
+        ".sss"
+      ]
+    },
+    "precss": {},
+  }
+}
 ```
-postcss -u autoprefixer -p sugarss test.sss -o test.css
-```
+
+[postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
+[postcss-import]:      https://github.com/postcss/postcss-import
 
 ### SugarSS to SugarSS
 
@@ -213,21 +221,6 @@ postcss().process(css, { stringifier: sugarss }).then(function (result) {
     result.content // Converted SugarSS content
 });
 ```
-
-### Imports
-
-[postcss-import] doesn’t support `.sss` file extension, because this plugin
-implements W3C specification. If you want smarter `@import`, you should
-use [postcss-easy-import] with the `extensions` option.
-
-```js
-var postcssPlugin = [
-  easyImport({ extensions: ['.sss'] })
-]
-```
-
-[postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
-[postcss-import]:      https://github.com/postcss/postcss-import
 
 ## Thanks
 
