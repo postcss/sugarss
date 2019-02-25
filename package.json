@@ -14,32 +14,30 @@
   "license": "MIT",
   "repository": "postcss/sugarss",
   "dependencies": {
-    "postcss": "^7.0.2"
+    "postcss": "^7.0.14"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.6",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-precompile-charcodes": "^1.1.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "clean-publish": "^1.0.9",
-    "eslint": "^5.3.0",
-    "eslint-config-logux": "^24.0.0",
-    "eslint-config-postcss": "^3.0.3",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.20.2",
-    "eslint-plugin-node": "^7.0.1",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "@logux/eslint-config": "^27.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "clean-publish": "^1.1.0",
+    "eslint": "^5.14.1",
+    "eslint-config-postcss": "^3.0.7",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-prefer-let": "^1.0.1",
-    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "jest": "^23.5.0",
-    "lint-staged": "^7.2.0",
-    "postcss-parser-tests": "^6.3.0",
-    "pre-commit": "^1.2.2"
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.3.1",
+    "jest": "^24.1.0",
+    "lint-staged": "^8.1.4",
+    "postcss-parser-tests": "^6.3.1"
   },
   "scripts": {
     "lint-staged": "lint-staged",
@@ -49,28 +47,24 @@
     "lint": "eslint *.es6 test/*.js",
     "test": "npm run build && jest && npm run lint"
   },
+  "browserslist": [
+    "last 2 version",
+    "not dead",
+    "not Explorer 11",
+    "not ExplorerMobile 11",
+    "node 6"
+  ],
   "babel": {
     "presets": [
       [
-        "env",
+        "@babel/env",
         {
-          "targets": {
-            "browsers": [
-              "last 2 version",
-              "not dead",
-              "not Explorer 11",
-              "not ExplorerMobile 11"
-            ],
-            "node": 6
-          },
           "loose": true
         }
-      ],
-      "stage-0"
+      ]
     ],
     "plugins": [
-      "add-module-exports",
-      "precompile-charcodes"
+      "add-module-exports"
     ]
   },
   "eslintConfig": {
@@ -100,7 +94,9 @@
     "test/*.js": "eslint",
     "*.es6": "eslint"
   },
-  "pre-commit": [
-    "lint-staged"
-  ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
