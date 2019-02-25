@@ -123,6 +123,24 @@ SugarSS separates selectors and declarations by `:\s` or `:\n` token.
 So you must write a space after the property name: `color: black` is good,
 `color:black` is prohibited.
 
+### Other
+
+SugarSS is just a syntax, it change the way how you write CSS,
+but do not add preprocessor features build-in.
+
+Here are PostCSS plugins which could add you preprocessor features:
+
+* **[PreCSS]** adds variables, nested rules, extend rules, property lookup
+  and CSS polyfills.
+* **[postcss-easy-import]** adds `@import` directive support with globbing.
+* **[postcss-mixins]** add `@mixin` support.
+* **[postcss-functions]** allows you to define own CSS functions in JS.
+
+[postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
+[postcss-functions]: https://github.com/andyjansson/postcss-functions
+[postcss-mixins]: https://github.com/postcss/postcss-mixins
+[PreCSS]: https://github.com/jonathantneal/precss
+
 ## Text Editors
 
 * SublimeText: [Syntax Highlighting for .SSS SugarSS]
@@ -177,15 +195,15 @@ to process `@import` directives.
 implements W3C specification. If you want smarter `@import`, you should
 use [postcss-easy-import] with the `extensions` option.
 
-```js
+```diff js
 {
   "parser": "sugarss",
   "plugins": {
-    "postcss-easy-import": {
-      "extensions": [
-        ".sss"
-      ]
-    },
++   "postcss-easy-import": {
++     "extensions": [
++       ".sss"
++     ]
++   },
     "precss": {},
   }
 }
@@ -193,6 +211,58 @@ use [postcss-easy-import] with the `extensions` option.
 
 [postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
 [postcss-import]:      https://github.com/postcss/postcss-import
+
+### Mixins
+
+For mixins support, install [postcss-mixins] and add it to `.postcssrc` file:
+
+```diff js
+{
+  "parser": "sugarss",
+  "plugins": {
++   "postcss-mixins": {
++     "mixinsDir": "./mixins"
++   },
+    "precss": {},
+  }
+}
+```
+
+Now you can define your mixins in `mixins/` dir.
+For example create `mixins/circle.sss` with:
+
+```sss
+@define-mixin circle $size
+  border-radius: 50%
+  width: $size
+  height: $size
+```
+
+### Functions
+
+To define custom functions you need to install [postcss-functions]
+and add it to `.postcssrc` file:
+
+```diff js
+{
+  "parser": "sugarss",
+  "plugins": {
++   "postcss-functions": {
++     "glob": "./functions"
++   },
+    "precss": {},
+  }
+}
+```
+
+Then you can define functions in `functions/` dir. For example,
+`functions/foo.js` will define `foo()` function in CSS:
+
+```js
+module.exports = function (args) {
+  return 'foo'
+}
+```
 
 ### SugarSS to SugarSS
 
