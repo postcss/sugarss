@@ -186,6 +186,8 @@ Then create `.postcssrc` file:
 [`postcss-cli`]: https://github.com/postcss/postcss-cli
 [Parcel]: https://parceljs.org/transforms.html
 
+**Note**: you should include postcss@7 into devDependencies of your project manually. postcss tooling packages require it as a peer and does not install it to avoid swallowing the typical node_modules directory.
+
 ### Imports
 
 If you doesn’t use Webpack or Parcel, you need some PostCSS plugin
