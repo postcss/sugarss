@@ -1,4 +1,4 @@
-# SugarSS [![Build Status][ci-img]][ci]
+# SugarSS
 
 <img align="right" width="120" height="155"
      title="SugarSS logo by Maria Keller"
@@ -40,12 +40,12 @@ With [gulp-sass-to-postcss-mixins] you can use `+mixin` syntax as in Sass.
 [stylelint]:                   http://stylelint.io/
 [PostCSS]:                     https://github.com/postcss/postcss
 [PreCSS]:                      https://github.com/jonathantneal/precss
-[ci-img]:                      https://img.shields.io/travis/postcss/sugarss.svg
-[ci]:                          https://travis-ci.org/postcss/sugarss
+
 
 ## Syntax
 
 SugarSS MIME-type is `text/x-sugarss` with `.sss` file extension.
+
 
 ### Indent
 
@@ -53,6 +53,7 @@ We recommend 2 spaces indent. However, SugarSS autodetects indent
 and can be used with tabs or spaces.
 
 But it is prohibited to mix spaces and tabs in SugarSS sources.
+
 
 ### Multiline
 
@@ -98,6 +99,7 @@ for the value:
     linear-gradient(red, rgba(255, 0, 0, 0))
 ```
 
+
 ### Comments
 
 SugarSS supports two types of comments:
@@ -116,12 +118,14 @@ for Sass’s silent/loud comments behaviour.
 
 [postcss-discard-comments]: https://www.npmjs.com/package/postcss-discard-comments
 
+
 ### Rule and Declarations
 
 SugarSS separates selectors and declarations by `:\s` or `:\n` token.
 
 So you must write a space after the property name: `color: black` is good,
 `color:black` is prohibited.
+
 
 ### Other
 
@@ -141,6 +145,7 @@ Here are PostCSS plugins which could add you preprocessor features:
 [postcss-mixins]: https://github.com/postcss/postcss-mixins
 [PreCSS]: https://github.com/jonathantneal/precss
 
+
 ## Text Editors
 
 * SublimeText: [Syntax Highlighting for .SSS SugarSS]
@@ -156,6 +161,7 @@ Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 [language-postcss]:                https://atom.io/packages/language-postcss
 [build-sugarss]:                   https://atom.io/packages/build-sugarss
 [vim-sugarss]:                     https://github.com/hhsnopek/vim-sugarss
+
 
 ## Usage
 
@@ -186,6 +192,7 @@ Then create `.postcssrc` file:
 [`postcss-cli`]: https://github.com/postcss/postcss-cli
 [Parcel]: https://parceljs.org/transforms.html
 
+
 ### Imports
 
 If you doesn’t use Webpack or Parcel, you need some PostCSS plugin
@@ -211,6 +218,7 @@ use [postcss-easy-import] with the `extensions` option.
 
 [postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
 [postcss-import]:      https://github.com/postcss/postcss-import
+
 
 ### Mixins
 
@@ -238,6 +246,7 @@ For example create `mixins/circle.sss` with:
   height: $size
 ```
 
+
 ### Functions
 
 To define custom functions you need to install [postcss-functions]
@@ -264,6 +273,7 @@ module.exports = function (args) {
 }
 ```
 
+
 ### SugarSS to SugarSS
 
 Sometimes we use PostCSS not to build CSS, but to fix source files.
@@ -281,6 +291,7 @@ gulp.task('sort', function () {
 
 [postcss-sorting]: https://github.com/hudochenkov/postcss-sorting
 
+
 ### CSS to SugarSS
 
 You can even compile existing CSS sources to SugarSS syntax.
@@ -291,6 +302,7 @@ postcss().process(css, { stringifier: sugarss }).then(function (result) {
     result.content // Converted SugarSS content
 });
 ```
+
 
 ## Thanks
 

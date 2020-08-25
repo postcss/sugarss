@@ -1,15 +1,15 @@
-const path = require('path')
-const fs = require('fs')
+let { readdirSync, readFileSync } = require('fs')
+let { join, extname } = require('path')
 
-const stringify = require('../stringify')
-const parse = require('../parse')
+let stringify = require('../stringify')
+let parse = require('../parse')
 
-let tests = fs
-  .readdirSync(path.join(__dirname, 'cases'))
-  .filter(i => path.extname(i) === '.sss')
+let tests = readdirSync(join(__dirname, 'cases')).filter(
+  i => extname(i) === '.sss'
+)
 
 function read (file) {
-  return fs.readFileSync(path.join(__dirname, 'cases', file)).toString()
+  return readFileSync(join(__dirname, 'cases', file)).toString()
 }
 
 function run (sss) {

@@ -1,4 +1,4 @@
-export default function liner (tokens) {
+module.exports = function liner (tokens) {
   let line = []
   let result = [line]
   let brackets = 0

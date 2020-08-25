@@ -1,11 +1,11 @@
-const defaultRaw = {
+const DEFAULT_RAWS = {
   colon: ': ',
   indent: '  ',
   commentLeft: ' ',
   commentRight: ' '
 }
 
-export default class Stringifier {
+module.exports = class Stringifier {
   constructor (builder) {
     this.builder = builder
   }
@@ -20,8 +20,8 @@ export default class Stringifier {
   }
 
   comment (node) {
-    let left = defaultRaw.commentLeft
-    let right = defaultRaw.commentRight
+    let left = DEFAULT_RAWS.commentLeft
+    let right = DEFAULT_RAWS.commentRight
     if (this.has(node.raws.left)) left = node.raws.left
 
     if (node.raws.inline) {
@@ -41,7 +41,7 @@ export default class Stringifier {
   }
 
   decl (node) {
-    let between = node.raws.between || defaultRaw.colon
+    let between = node.raws.between || DEFAULT_RAWS.colon
     let string = node.prop + between + this.rawValue(node, 'value')
 
     if (node.important) {
@@ -69,14 +69,13 @@ export default class Stringifier {
   }
 
   body (node) {
-    let indent = node.root().raws.indent || defaultRaw.indent
+    let indent = node.root().raws.indent || DEFAULT_RAWS.indent
 
     for (let i = 0; i < node.nodes.length; i++) {
       let child = node.nodes[i]
-      let before = child.raws.before.replace(/[^\n]*$/, '') +
-                         this.indent(node, indent)
-      if (child.type === 'comment' &&
-                 child.raws.before.indexOf('\n') === -1) {
+      let before =
+        child.raws.before.replace(/[^\n]*$/, '') + this.indent(node, indent)
+      if (child.type === 'comment' && !child.raws.before.includes('\n')) {
         before = child.raws.before
       }
       if (before) this.builder(before)

@@ -1,17 +1,7 @@
-.editorconfig
-
-node_modules/
-npm-debug.log
 yarn-error.log
 yarn.lock
 
-*.es6
-.babelrc
-
 test/
-update-cases
-.travis.yml
-.editorconfig
-.eslintrc
+coverage/
 
 logo.svg

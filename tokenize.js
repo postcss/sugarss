@@ -1,4 +1,4 @@
-const SINGLE_QUOTE = '\''.charCodeAt(0)
+const SINGLE_QUOTE = "'".charCodeAt(0)
 const DOUBLE_QUOTE = '"'.charCodeAt(0)
 const BACKSLASH = '\\'.charCodeAt(0)
 const SLASH = '/'.charCodeAt(0)
@@ -17,17 +17,28 @@ const COLON = ':'.charCodeAt(0)
 const AT = '@'.charCodeAt(0)
 const COMMA = ','.charCodeAt(0)
 
-const RE_AT_END = /[ \n\t\r\f{()'"\\;/]/g
-const RE_NEW_LINE = /[\r\f\n]/g
-const RE_WORD_END = /[ \n\t\r\f(){}:;@!'"\\,]|\/(?=\*)/g
-const RE_BAD_BRACKET = /.[\\/("'\n]/
+const RE_AT_END = /[\t\n\f\r "'()/;\\{]/g
+const RE_NEW_LINE = /[\n\f\r]/g
+const RE_WORD_END = /[\t\n\f\r !"'(),:;@\\{}]|\/(?=\*)/g
+const RE_BAD_BRACKET = /.[\n"'(/\\]/
 
-export default function tokenize (input) {
+module.exports = function tokenize (input) {
   let tokens = []
   let css = input.css.valueOf()
 
-  let code, next, quote, lines, last, content, escape,
-    nextLine, nextOffset, escaped, escapePos, prev, n
+  let code,
+    next,
+    quote,
+    lines,
+    last,
+    content,
+    escape,
+    nextLine,
+    nextOffset,
+    escaped,
+    escapePos,
+    prev,
+    n
 
   let length = css.length
   let offset = -1
@@ -102,9 +113,16 @@ export default function tokenize (input) {
       case OPEN_PARENTHESES:
         prev = tokens.length ? tokens[tokens.length - 1][1] : ''
         n = css.charCodeAt(pos + 1)
-        if (prev === 'url' && n !== SINGLE_QUOTE && n !== DOUBLE_QUOTE &&
-                                   n !== SPACE && n !== NEWLINE && n !== TAB &&
-                                   n !== FEED && n !== CR) {
+        if (
+          prev === 'url' &&
+          n !== SINGLE_QUOTE &&
+          n !== DOUBLE_QUOTE &&
+          n !== SPACE &&
+          n !== NEWLINE &&
+          n !== TAB &&
+          n !== FEED &&
+          n !== CR
+        ) {
           next = pos
           do {
             escaped = false
@@ -117,9 +135,13 @@ export default function tokenize (input) {
             }
           } while (escaped)
 
-          tokens.push(['brackets', css.slice(pos, next + 1),
-            line, pos - offset,
-            line, next - offset
+          tokens.push([
+            'brackets',
+            css.slice(pos, next + 1),
+            line,
+            pos - offset,
+            line,
+            next - offset
           ])
           pos = next
         } else {
@@ -129,9 +151,13 @@ export default function tokenize (input) {
           if (next === -1 || RE_BAD_BRACKET.test(content)) {
             tokens.push(['(', '(', line, pos - offset])
           } else {
-            tokens.push(['brackets', content,
-              line, pos - offset,
-              line, next - offset
+            tokens.push([
+              'brackets',
+              content,
+              line,
+              pos - offset,
+              line,
+              next - offset
             ])
             pos = next
           }
@@ -145,7 +171,7 @@ export default function tokenize (input) {
 
       case SINGLE_QUOTE:
       case DOUBLE_QUOTE:
-        quote = code === SINGLE_QUOTE ? '\'' : '"'
+        quote = code === SINGLE_QUOTE ? "'" : '"'
         next = pos
         do {
           escaped = false
@@ -170,9 +196,13 @@ export default function tokenize (input) {
           nextOffset = offset
         }
 
-        tokens.push(['string', css.slice(pos, next + 1),
-          line, pos - offset,
-          nextLine, next - nextOffset
+        tokens.push([
+          'string',
+          css.slice(pos, next + 1),
+          line,
+          pos - offset,
+          nextLine,
+          next - nextOffset
         ])
 
         offset = nextOffset
@@ -188,9 +218,13 @@ export default function tokenize (input) {
         } else {
           next = RE_AT_END.lastIndex - 2
         }
-        tokens.push(['at-word', css.slice(pos, next + 1),
-          line, pos - offset,
-          line, next - offset
+        tokens.push([
+          'at-word',
+          css.slice(pos, next + 1),
+          line,
+          pos - offset,
+          line,
+          next - offset
         ])
         pos = next
         break
@@ -219,9 +253,13 @@ export default function tokenize (input) {
             next += 1
           }
         }
-        tokens.push(['word', css.slice(pos, next + 1),
-          line, pos - offset,
-          line, next - offset
+        tokens.push([
+          'word',
+          css.slice(pos, next + 1),
+          line,
+          pos - offset,
+          line,
+          next - offset
         ])
         if (nextLine !== line) {
           line = nextLine
@@ -249,9 +287,13 @@ export default function tokenize (input) {
             nextOffset = offset
           }
 
-          tokens.push(['comment', content,
-            line, pos - offset,
-            nextLine, next - nextOffset
+          tokens.push([
+            'comment',
+            content,
+            line,
+            pos - offset,
+            nextLine,
+            next - nextOffset
           ])
 
           offset = nextOffset
@@ -268,9 +310,13 @@ export default function tokenize (input) {
 
           content = css.slice(pos, next + 1)
 
-          tokens.push(['comment', content,
-            line, pos - offset,
-            line, next - offset,
+          tokens.push([
+            'comment',
+            content,
+            line,
+            pos - offset,
+            line,
+            next - offset,
             'inline'
           ])
 
@@ -284,9 +330,13 @@ export default function tokenize (input) {
             next = RE_WORD_END.lastIndex - 2
           }
 
-          tokens.push(['word', css.slice(pos, next + 1),
-            line, pos - offset,
-            line, next - offset
+          tokens.push([
+            'word',
+            css.slice(pos, next + 1),
+            line,
+            pos - offset,
+            line,
+            next - offset
           ])
           pos = next
         }

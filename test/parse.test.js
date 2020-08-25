@@ -1,8 +1,8 @@
-const jsonify = require('postcss-parser-tests').jsonify
-const path = require('path')
-const fs = require('fs')
+let { readdirSync, readFileSync } = require('fs')
+let { join, extname } = require('path')
+let { jsonify } = require('postcss-parser-tests')
 
-const parse = require('../parse')
+let parse = require('../parse')
 
 it('detects indent', () => {
   let root = parse('@one\n  @two\n    @three')
@@ -12,55 +12,55 @@ it('detects indent', () => {
 it('throws on first indent', () => {
   expect(() => {
     parse('  @charset "UTF-8"')
-  }).toThrowError('<css input>:1:1: First line should not have indent')
+  }).toThrow('<css input>:1:1: First line should not have indent')
 })
 
 it('throws on too big indent', () => {
   expect(() => {
     parse('@supports\n  @media\n      // test')
-  }).toThrowError('<css input>:3:1: Expected 4 indent, but get 6')
+  }).toThrow('<css input>:3:1: Expected 4 indent, but get 6')
 })
 
 it('throws on wrong indent step', () => {
   expect(() => {
     parse('@supports\n  @media\n @media')
-  }).toThrowError('<css input>:3:1: Expected 0 or 2 indent, but get 1')
+  }).toThrow('<css input>:3:1: Expected 0 or 2 indent, but get 1')
 })
 
 it('throws on decl without property', () => {
   expect(() => {
     parse(': black')
-  }).toThrowError('<css input>:1:1: Declaration without name')
+  }).toThrow('<css input>:1:1: Declaration without name')
 })
 
 it('throws on space between property', () => {
   expect(() => {
     parse('one two: black')
-  }).toThrowError('<css input>:1:5: Unexpected separator in property')
+  }).toThrow('<css input>:1:5: Unexpected separator in property')
 })
 
 it('throws on semicolon in declaration', () => {
   expect(() => {
     parse('a\n  color: black;')
-  }).toThrowError('<css input>:2:15: Unnecessary semicolon')
+  }).toThrow('<css input>:2:15: Unnecessary semicolon')
 })
 
 it('throws on semicolon in at-rule', () => {
   expect(() => {
     parse('@charset "UTF-8";')
-  }).toThrowError('<css input>:1:17: Unnecessary semicolon')
+  }).toThrow('<css input>:1:17: Unnecessary semicolon')
 })
 
 it('throws on curly in rule', () => {
   expect(() => {
     parse('a {\n  color: black')
-  }).toThrowError('<css input>:1:3: Unnecessary curly bracket')
+  }).toThrow('<css input>:1:3: Unnecessary curly bracket')
 })
 
 it('throws on curly in at-rule', () => {
   expect(() => {
     parse('@media (screen) {\n  color: black')
-  }).toThrowError('<css input>:1:17: Unnecessary curly bracket')
+  }).toThrow('<css input>:1:17: Unnecessary curly bracket')
 })
 
 it('keeps trailing spaces', () => {
@@ -91,12 +91,12 @@ it('sets end position for root', () => {
   expect(parse('a\n  b: 1\n').source.end).toEqual({ line: 2, column: 6 })
 })
 
-let tests = fs
-  .readdirSync(path.join(__dirname, 'cases'))
-  .filter(i => path.extname(i) === '.sss')
+let tests = readdirSync(join(__dirname, 'cases')).filter(
+  i => extname(i) === '.sss'
+)
 
 function read (file) {
-  return fs.readFileSync(path.join(__dirname, 'cases', file)).toString()
+  return readFileSync(join(__dirname, 'cases', file)).toString()
 }
 
 for (let name of tests) {

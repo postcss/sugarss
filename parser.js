@@ -1,10 +1,6 @@
-import Declaration from 'postcss/lib/declaration'
-import Comment from 'postcss/lib/comment'
-import AtRule from 'postcss/lib/at-rule'
-import Rule from 'postcss/lib/rule'
-import Root from 'postcss/lib/root'
+let { Declaration, Comment, AtRule, Rule, Root } = require('postcss')
 
-export default class Parser {
+module.exports = class Parser {
   constructor (input) {
     this.input = input
 
@@ -126,8 +122,12 @@ export default class Parser {
 
     let next = this.parts[this.pos + 1]
 
-    while (!next.end && !next.atrule && !next.colon &&
-                next.indent.length > part.indent.length) {
+    while (
+      !next.end &&
+      !next.atrule &&
+      !next.colon &&
+      next.indent.length > part.indent.length
+    ) {
       value.push(['space', next.before + next.indent])
       value = value.concat(next.tokens)
       this.pos += 1
@@ -220,8 +220,8 @@ export default class Parser {
           }
         }
       } else if (diff % this.step !== 0) {
-        let m = indent + diff % this.step
-        this.wrongIndent(`${ m } or ${ m + this.step }`, indent, part)
+        let m = indent + (diff % this.step)
+        this.wrongIndent(`${m} or ${m + this.step}`, indent, part)
       } else {
         for (let i = 0; i < -diff / this.step; i++) {
           this.current = this.current.parent
@@ -349,7 +349,7 @@ export default class Parser {
       text = text.slice(2, -2)
     }
 
-    let match = text.match(/^(\s*)([^]*[^\s])(\s*)\n?$/)
+    let match = text.match(/^(\s*)([^]*\S)(\s*)\n?$/)
     if (match) {
       node.text = match[2]
       node.raws.left = match[1]
@@ -380,7 +380,7 @@ export default class Parser {
   }
 
   wrongIndent (expected, real, part) {
-    let msg = `Expected ${ expected } indent, but get ${ real }`
+    let msg = `Expected ${expected} indent, but get ${real}`
     this.error(msg, part.number, 1)
   }
 

@@ -2,7 +2,7 @@ function indentError (input, l, p) {
   throw input.error('Mixed tabs and spaces are not allowed', l, p + 1)
 }
 
-export default function preprocess (input, lines) {
+module.exports = function preprocess (input, lines) {
   let indentType
   let prevNumber = 0
   let parts = lines.map(line => {
@@ -27,11 +27,11 @@ export default function preprocess (input, lines) {
         indentType = indent[0] === ' ' ? 'space' : 'tab'
       }
       if (indentType === 'space') {
-        if (indent.indexOf('\t') !== -1) {
+        if (indent.includes('\t')) {
           indentError(input, number, indent.indexOf('\t'))
         }
       } else if (indentType === 'tab') {
-        if (indent.indexOf(' ') !== -1) {
+        if (indent.includes(' ')) {
           indentError(input, number, indent.indexOf(' '))
         }
       }
@@ -63,8 +63,11 @@ export default function preprocess (input, lines) {
             brackets += 1
           } else if (type === ')') {
             brackets -= 1
-          } else if (type === ':' && brackets === 0 &&
-                               (next === 'space' || next === 'newline')) {
+          } else if (
+            type === ':' &&
+            brackets === 0 &&
+            (next === 'space' || next === 'newline')
+          ) {
             colon = true
           }
         }
@@ -86,16 +89,19 @@ export default function preprocess (input, lines) {
     }
   })
 
-  parts = parts.reduceRight((all, i) => {
-    if (!i.tokens.length || i.tokens.every(j => j[0] === 'newline')) {
-      let prev = all[0]
-      let before = i.indent + i.tokens.map(j => j[1]).join('')
-      prev.before = before + prev.before
-    } else {
-      all.unshift(i)
-    }
-    return all
-  }, [{ end: true, before: '' }])
+  parts = parts.reduceRight(
+    (all, i) => {
+      if (!i.tokens.length || i.tokens.every(j => j[0] === 'newline')) {
+        let prev = all[0]
+        let before = i.indent + i.tokens.map(j => j[1]).join('')
+        prev.before = before + prev.before
+      } else {
+        all.unshift(i)
+      }
+      return all
+    },
+    [{ end: true, before: '' }]
+  )
 
   parts.forEach((part, i) => {
     if (i === 0) return

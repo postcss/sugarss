@@ -1,4 +1,4 @@
-const sugarss = require('../')
+let sugarss = require('../')
 
 it('has parse()', () => {
   expect(typeof sugarss.parse).toEqual('function')

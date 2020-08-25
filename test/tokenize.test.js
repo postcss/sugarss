@@ -1,6 +1,6 @@
-const Input = require('postcss/lib/input')
+let { Input } = require('postcss')
 
-const tokenize = require('../tokenize')
+let tokenize = require('../tokenize')
 
 function run (css, tokens) {
   expect(tokenize(new Input(css))).toEqual(tokens)
@@ -18,7 +18,11 @@ it('tokenizes inine comments and new lines', () => {
 })
 
 it('tokenizes new lines arround spaces', () => {
-  run(' \n ', [['space', ' '], ['newline', '\n', 1], ['space', ' ']])
+  run(' \n ', [
+    ['space', ' '],
+    ['newline', '\n', 1],
+    ['space', ' ']
+  ])
 })
 
 it('tokenizes Windows new lines', () => {
@@ -26,7 +30,10 @@ it('tokenizes Windows new lines', () => {
 })
 
 it('tokenizes single carriage return', () => {
-  run('\ra', [['newline', '\r', 1], ['word', 'a', 2, 1, 2, 1]])
+  run('\ra', [
+    ['newline', '\r', 1],
+    ['word', 'a', 2, 1, 2, 1]
+  ])
 })
 
 it('tokenizes last carriage return', () => {
