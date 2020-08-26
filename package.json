@@ -59,10 +59,7 @@
     "*.js": "eslint --fix"
   },
   "eslintConfig": {
-    "extends": "@logux/eslint-config",
-    "rules": {
-      "security/detect-unsafe-regex": "off"
-    }
+    "extends": "@logux/eslint-config"
   },
   "jest": {
     "testEnvironment": "node",
