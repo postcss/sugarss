@@ -2,6 +2,5 @@ yarn-error.log
 yarn.lock
 
 test/
-coverage/
 
 logo.svg
