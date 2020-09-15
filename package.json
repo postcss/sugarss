@@ -17,7 +17,7 @@
     "test": "jest && eslint-ci ."
   },
   "dependencies": {
-    "postcss": "postcss/postcss#ose"
+    "postcss": "^8.0.2"
   },
   "engines": {
     "node": ">=10.0"
@@ -32,13 +32,13 @@
   "devDependencies": {
     "@logux/eslint-config": "^40.0.4",
     "clean-publish": "^1.1.8",
-    "eslint": "^7.8.1",
+    "eslint": "^7.9.0",
     "eslint-ci": "^1.0.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-jest": "^24.0.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prefer-let": "^1.0.2",
+    "eslint-plugin-prefer-let": "^1.1.0",
     "eslint-plugin-prettierx": "^0.14.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-security": "^1.4.0",
@@ -48,7 +48,7 @@
     "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
     "postcss-parser-tests": "^8.3.0",
-    "postcss-sharec-config": "^0.1.5"
+    "postcss-sharec-config": "^0.1.6"
   },
   "husky": {
     "hooks": {
@@ -71,6 +71,6 @@
   },
   "sharec": {
     "config": "postcss-sharec-config",
-    "version": "0.1.5"
+    "version": "0.1.6"
   }
 }
