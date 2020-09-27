@@ -2,5 +2,6 @@ yarn-error.log
 yarn.lock
 
 test/
+.github/
 
 logo.svg
