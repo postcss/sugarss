@@ -16,6 +16,10 @@
   "scripts": {
     "test": "jest && eslint-ci ."
   },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/postcss/"
+  },
   "dependencies": {
     "postcss": "^8.1.0"
   },
