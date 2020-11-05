@@ -4401,10 +4401,10 @@ postcss-media-query-parser@0.2.3:
   resolved "https://registry.yarnpkg.com/postcss-media-query-parser/-/postcss-media-query-parser-0.2.3.tgz#27b39c6f4d94f81b1a73b8f76351c609e5cef244"
   integrity sha1-J7Ocb02U+Bsac7j3Y1HGCeXO8kQ=
 
-postcss-parser-tests@^8.3.2:
-  version "8.3.2"
-  resolved "https://registry.yarnpkg.com/postcss-parser-tests/-/postcss-parser-tests-8.3.2.tgz#e51b23882db6951c9a4a60ed6df9d7a7608ce658"
-  integrity sha512-EXL/M4dVkboUryQ6gMFJh7duY6etrXQisZiDQuFdJtaDnYliYbZzD8CK4l3/K/0E/HHNkbJxe0PH5CJQUNdLOA==
+postcss-parser-tests@^8.3.3:
+  version "8.3.3"
+  resolved "https://registry.yarnpkg.com/postcss-parser-tests/-/postcss-parser-tests-8.3.3.tgz#e37b1d620b4bb1daf783ae19afeda4afe021a9fa"
+  integrity sha512-5TpW5FO5Vyrt+UfN56f2DfDU/4mFa3Jsv67FBWoHnWNiHi6T3teqfz2+3jm9uzmhLsj7Tt1eVZnwkHgtFk1E5g==
   dependencies:
     ci-job-number "^1.2.2"
     colorette "^1.2.1"
@@ -4451,10 +4451,10 @@ postcss@^7.0.14, postcss@^7.0.6:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.1.5:
-  version "8.1.5"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.1.5.tgz#09ef688ee97fae9b0914bff01ffe5a3dba48bd68"
-  integrity sha512-sRcAWfjft1LGYx086un0I7XRnkhtKsNuau08mvrCC2ntuahZrLXe4iQ4PiAtQ+lhFWnTt+0gtA7omE4InCobMg==
+postcss@^8.1.6:
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.1.6.tgz#b022ba2cfb8701da234d073ed3128c5a384c35ff"
+  integrity sha512-JuifSl4h8dJ70SiMXKjzCxhalE6p2TnMHuq9G8ftyXj2jg6SXzqCsEuxMj9RkmJoO5D+Z9YrWunNkxqpRT02qg==
   dependencies:
     colorette "^1.2.1"
     line-column "^1.0.2"
