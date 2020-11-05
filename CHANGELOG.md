@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.3
+* Reverted `package.exports` Node.js 15 fix.
+
 ## 3.0.2
 * Fixed Node.js 15 warning.
 
