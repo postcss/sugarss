@@ -1,8 +1,8 @@
-function indentError (input, l, p) {
+function indentError(input, l, p) {
   throw input.error('Mixed tabs and spaces are not allowed', l, p + 1)
 }
 
-module.exports = function preprocess (input, lines) {
+module.exports = function preprocess(input, lines) {
   let indentType
   let prevNumber = 0
   let parts = lines.map(line => {

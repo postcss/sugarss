@@ -17,9 +17,6 @@
           "line": 1,
           "column": 1
         },
-        "input": {
-          "file": "atrules.sss"
-        },
         "end": {
           "line": 1,
           "column": 5
@@ -39,9 +36,6 @@
           "line": 3,
           "column": 1
         },
-        "input": {
-          "file": "atrules.sss"
-        },
         "end": {
           "line": 3,
           "column": 16
@@ -60,9 +54,6 @@
         "start": {
           "line": 5,
           "column": 1
-        },
-        "input": {
-          "file": "atrules.sss"
         },
         "end": {
           "line": 6,
@@ -88,9 +79,6 @@
               "line": 7,
               "column": 3
             },
-            "input": {
-              "file": "atrules.sss"
-            },
             "end": {
               "line": 7,
               "column": 44
@@ -111,9 +99,6 @@
                   "line": 8,
                   "column": 5
                 },
-                "input": {
-                  "file": "atrules.sss"
-                },
                 "end": {
                   "line": 8,
                   "column": 22
@@ -127,9 +112,6 @@
     }
   ],
   "source": {
-    "input": {
-      "file": "atrules.sss"
-    },
     "start": {
       "line": 1,
       "column": 1

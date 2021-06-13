@@ -17,9 +17,6 @@
           "line": 1,
           "column": 1
         },
-        "input": {
-          "file": "comments.sss"
-        },
         "end": {
           "line": 2,
           "column": 10
@@ -39,9 +36,6 @@
         "start": {
           "line": 3,
           "column": 1
-        },
-        "input": {
-          "file": "comments.sss"
         },
         "end": {
           "line": 3,
@@ -67,9 +61,6 @@
               "line": 5,
               "column": 3
             },
-            "input": {
-              "file": "comments.sss"
-            },
             "end": {
               "line": 5,
               "column": 14
@@ -87,9 +78,6 @@
           },
           "type": "comment",
           "source": {
-            "input": {
-              "file": "comments.sss"
-            },
             "start": {
               "line": 5,
               "column": 16
@@ -112,9 +100,6 @@
               "line": 6,
               "column": 3
             },
-            "input": {
-              "file": "comments.sss"
-            },
             "end": {
               "line": 6,
               "column": 12
@@ -128,9 +113,6 @@
         "start": {
           "line": 4,
           "column": 1
-        },
-        "input": {
-          "file": "comments.sss"
         },
         "end": {
           "line": 4,
@@ -151,9 +133,6 @@
         "start": {
           "line": 8,
           "column": 1
-        },
-        "input": {
-          "file": "comments.sss"
         },
         "end": {
           "line": 8,
@@ -176,9 +155,6 @@
           "line": 9,
           "column": 3
         },
-        "input": {
-          "file": "comments.sss"
-        },
         "end": {
           "line": 9,
           "column": 17
@@ -188,9 +164,6 @@
     }
   ],
   "source": {
-    "input": {
-      "file": "comments.sss"
-    },
     "start": {
       "line": 1,
       "column": 1

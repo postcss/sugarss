@@ -2,7 +2,7 @@ let { Input } = require('postcss')
 
 let preprocess = require('../preprocess')
 
-function run (lines, result) {
+function run(lines, result) {
   expect(preprocess(new Input(''), lines)).toEqual(result)
 }
 

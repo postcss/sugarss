@@ -1,7 +1,7 @@
 let { Declaration, Comment, AtRule, Rule, Root } = require('postcss')
 
 module.exports = class Parser {
-  constructor (input) {
+  constructor(input) {
     this.input = input
 
     this.pos = 0
@@ -16,7 +16,7 @@ module.exports = class Parser {
     this.root.source = { input, start: { line: 1, column: 1 } }
   }
 
-  loop () {
+  loop() {
     let part
     while (this.pos < this.parts.length) {
       part = this.parts[this.pos]
@@ -61,7 +61,7 @@ module.exports = class Parser {
     }
   }
 
-  comment (part) {
+  comment(part) {
     let token = part.tokens[0]
     let node = new Comment()
     this.init(node, part)
@@ -69,7 +69,7 @@ module.exports = class Parser {
     this.commentText(node, token)
   }
 
-  atrule (part) {
+  atrule(part) {
     let atword = part.tokens[0]
     let params = part.tokens.slice(1)
 
@@ -93,7 +93,7 @@ module.exports = class Parser {
     this.raw(node, 'params', params, atword)
   }
 
-  decl (part) {
+  decl(part) {
     let node = new Declaration()
     this.init(node, part)
 
@@ -174,7 +174,7 @@ module.exports = class Parser {
     this.raw(node, 'value', value, colon)
   }
 
-  rule (part) {
+  rule(part) {
     let node = new Rule()
     this.init(node, part)
 
@@ -195,7 +195,7 @@ module.exports = class Parser {
 
   /* Helpers */
 
-  indent (part) {
+  indent(part) {
     let indent = part.indent.length
     let isPrev = typeof this.prevIndent !== 'undefined'
 
@@ -232,7 +232,7 @@ module.exports = class Parser {
     this.prevIndent = indent
   }
 
-  init (node, part) {
+  init(node, part) {
     this.indent(part)
 
     if (!this.current.nodes) this.current.nodes = []
@@ -249,7 +249,7 @@ module.exports = class Parser {
     }
   }
 
-  checkCurly (tokens) {
+  checkCurly(tokens) {
     for (let token of tokens) {
       if (token[0] === '{') {
         this.error('Unnecessary curly bracket', token[2], token[3])
@@ -257,7 +257,7 @@ module.exports = class Parser {
     }
   }
 
-  checkSemicolon (tokens) {
+  checkSemicolon(tokens) {
     for (let token of tokens) {
       if (token[0] === ';') {
         this.error('Unnecessary semicolon', token[2], token[3])
@@ -265,7 +265,7 @@ module.exports = class Parser {
     }
   }
 
-  keepTrailingSpace (node, tokens) {
+  keepTrailingSpace(node, tokens) {
     let lastSpace = tokens[tokens.length - 1]
     if (lastSpace && lastSpace[0] === 'space') {
       tokens.pop()
@@ -273,7 +273,7 @@ module.exports = class Parser {
     }
   }
 
-  firstSpaces (tokens) {
+  firstSpaces(tokens) {
     let result = ''
     for (let i = 0; i < tokens.length; i++) {
       if (tokens[i][0] === 'space' || tokens[i][0] === 'newline') {
@@ -286,7 +286,7 @@ module.exports = class Parser {
     return result
   }
 
-  raw (node, prop, tokens, altLast) {
+  raw(node, prop, tokens, altLast) {
     let token, type
     let length = tokens.length
     let value = ''
@@ -329,7 +329,7 @@ module.exports = class Parser {
     }
   }
 
-  nextNonComment (pos) {
+  nextNonComment(pos) {
     let next = pos
     let part
     while (next < this.parts.length) {
@@ -340,7 +340,7 @@ module.exports = class Parser {
     return part
   }
 
-  commentText (node, token) {
+  commentText(node, token) {
     let text = token[1]
     if (token[6] === 'inline') {
       node.raws.inline = true
@@ -363,28 +363,28 @@ module.exports = class Parser {
 
   // Errors
 
-  error (msg, line, column) {
+  error(msg, line, column) {
     throw this.input.error(msg, line, column)
   }
 
-  unnamedAtrule (token) {
+  unnamedAtrule(token) {
     this.error('At-rule without name', token[2], token[3])
   }
 
-  unnamedDecl (token) {
+  unnamedDecl(token) {
     this.error('Declaration without name', token[2], token[3])
   }
 
-  indentedFirstLine (part) {
+  indentedFirstLine(part) {
     this.error('First line should not have indent', part.number, 1)
   }
 
-  wrongIndent (expected, real, part) {
+  wrongIndent(expected, real, part) {
     let msg = `Expected ${expected} indent, but get ${real}`
     this.error(msg, part.number, 1)
   }
 
-  badProp (token) {
+  badProp(token) {
     this.error('Unexpected separator in property', token[2], token[3])
   }
 }

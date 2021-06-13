@@ -22,7 +22,7 @@ const RE_NEW_LINE = /[\n\f\r]/g
 const RE_WORD_END = /[\t\n\f\r !"'(),:;@\\{}]|\/(?=\*)/g
 const RE_BAD_BRACKET = /.[\n"'(/\\]/
 
-module.exports = function tokenize (input) {
+module.exports = function tokenize(input) {
   let tokens = []
   let css = input.css.valueOf()
 
@@ -45,7 +45,7 @@ module.exports = function tokenize (input) {
   let line = 1
   let pos = 0
 
-  function unclosed (what) {
+  function unclosed(what) {
     throw input.error('Unclosed ' + what, line, pos - offset)
   }
 

@@ -22,9 +22,6 @@
               "line": 2,
               "column": 3
             },
-            "input": {
-              "file": "all.sss"
-            },
             "end": {
               "line": 2,
               "column": 13
@@ -38,9 +35,6 @@
         "start": {
           "line": 1,
           "column": 1
-        },
-        "input": {
-          "file": "all.sss"
         },
         "end": {
           "line": 1,
@@ -60,9 +54,6 @@
         "start": {
           "line": 4,
           "column": 1
-        },
-        "input": {
-          "file": "all.sss"
         },
         "end": {
           "line": 4,
@@ -88,9 +79,6 @@
                   "line": 6,
                   "column": 5
                 },
-                "input": {
-                  "file": "all.sss"
-                },
                 "end": {
                   "line": 6,
                   "column": 19
@@ -104,9 +92,6 @@
             "start": {
               "line": 5,
               "column": 3
-            },
-            "input": {
-              "file": "all.sss"
             },
             "end": {
               "line": 5,
@@ -134,9 +119,6 @@
               "line": 9,
               "column": 3
             },
-            "input": {
-              "file": "all.sss"
-            },
             "end": {
               "line": 9,
               "column": 40
@@ -157,9 +139,6 @@
               "line": 10,
               "column": 3
             },
-            "input": {
-              "file": "all.sss"
-            },
             "end": {
               "line": 10,
               "column": 32
@@ -178,9 +157,6 @@
               "line": 11,
               "column": 3
             },
-            "input": {
-              "file": "all.sss"
-            },
             "end": {
               "line": 11,
               "column": 19
@@ -194,9 +170,6 @@
         "start": {
           "line": 8,
           "column": 1
-        },
-        "input": {
-          "file": "all.sss"
         },
         "end": {
           "line": 8,
@@ -221,9 +194,6 @@
             "start": {
               "line": 14,
               "column": 3
-            },
-            "input": {
-              "file": "all.sss"
             },
             "end": {
               "line": 14,
@@ -250,9 +220,6 @@
                   "line": 16,
                   "column": 5
                 },
-                "input": {
-                  "file": "all.sss"
-                },
                 "end": {
                   "line": 16,
                   "column": 16
@@ -267,9 +234,6 @@
               "line": 15,
               "column": 3
             },
-            "input": {
-              "file": "all.sss"
-            },
             "end": {
               "line": 15,
               "column": 9
@@ -282,9 +246,6 @@
         "start": {
           "line": 13,
           "column": 1
-        },
-        "input": {
-          "file": "all.sss"
         },
         "end": {
           "line": 13,
@@ -316,9 +277,6 @@
                   "line": 20,
                   "column": 5
                 },
-                "input": {
-                  "file": "all.sss"
-                },
                 "end": {
                   "line": 20,
                   "column": 16
@@ -338,9 +296,6 @@
                   "line": 21,
                   "column": 5
                 },
-                "input": {
-                  "file": "all.sss"
-                },
                 "end": {
                   "line": 21,
                   "column": 21
@@ -355,9 +310,6 @@
               "line": 19,
               "column": 3
             },
-            "input": {
-              "file": "all.sss"
-            },
             "end": {
               "line": 19,
               "column": 10
@@ -371,9 +323,6 @@
           "line": 18,
           "column": 1
         },
-        "input": {
-          "file": "all.sss"
-        },
         "end": {
           "line": 18,
           "column": 5
@@ -383,9 +332,6 @@
     }
   ],
   "source": {
-    "input": {
-      "file": "all.sss"
-    },
     "start": {
       "line": 1,
       "column": 1

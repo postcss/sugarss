@@ -2,7 +2,7 @@ let { Input } = require('postcss')
 
 let tokenize = require('../tokenize')
 
-function run (css, tokens) {
+function run(css, tokens) {
   expect(tokenize(new Input(css))).toEqual(tokens)
 }
 

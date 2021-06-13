@@ -5,7 +5,7 @@ let tokenizer = require('./tokenize')
 let Parser = require('./parser')
 let liner = require('./liner')
 
-module.exports = function parse (source, opts) {
+module.exports = function parse(source, opts) {
   let input = new Input(source, opts)
 
   let parser = new Parser(input)

@@ -6,20 +6,20 @@ const DEFAULT_RAWS = {
 }
 
 module.exports = class Stringifier {
-  constructor (builder) {
+  constructor(builder) {
     this.builder = builder
   }
 
-  stringify (node, semicolon) {
+  stringify(node, semicolon) {
     this[node.type](node, semicolon)
   }
 
-  root (node) {
+  root(node) {
     this.body(node)
     if (node.raws.after) this.builder(node.raws.after)
   }
 
-  comment (node) {
+  comment(node) {
     let left = DEFAULT_RAWS.commentLeft
     let right = DEFAULT_RAWS.commentRight
     if (this.has(node.raws.left)) left = node.raws.left
@@ -40,7 +40,7 @@ module.exports = class Stringifier {
     }
   }
 
-  decl (node) {
+  decl(node) {
     let between = node.raws.between || DEFAULT_RAWS.colon
     let string = node.prop + between + this.rawValue(node, 'value')
 
@@ -51,11 +51,11 @@ module.exports = class Stringifier {
     this.builder(string, node)
   }
 
-  rule (node) {
+  rule(node) {
     this.block(node, this.rawValue(node, 'selector'))
   }
 
-  atrule (node) {
+  atrule(node) {
     let name = '@' + node.name
     let params = node.params ? this.rawValue(node, 'params') : ''
 
@@ -68,7 +68,7 @@ module.exports = class Stringifier {
     this.block(node, name + params)
   }
 
-  body (node) {
+  body(node) {
     let indent = node.root().raws.indent || DEFAULT_RAWS.indent
 
     for (let i = 0; i < node.nodes.length; i++) {
@@ -83,13 +83,13 @@ module.exports = class Stringifier {
     }
   }
 
-  block (node, start) {
+  block(node, start) {
     let between = node.raws.sssBetween || ''
     this.builder(start + between, node, 'start')
     if (this.has(node.nodes)) this.body(node)
   }
 
-  indent (node, step) {
+  indent(node, step) {
     let result = ''
     while (node.parent) {
       result += step
@@ -98,11 +98,11 @@ module.exports = class Stringifier {
     return result
   }
 
-  has (value) {
+  has(value) {
     return typeof value !== 'undefined'
   }
 
-  rawValue (node, prop) {
+  rawValue(node, prop) {
     let value = node[prop]
     let raw = node.raws[prop]
     if (raw && raw.value === value) {

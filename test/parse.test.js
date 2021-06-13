@@ -95,7 +95,7 @@ let tests = readdirSync(join(__dirname, 'cases')).filter(
   i => extname(i) === '.sss'
 )
 
-function read (file) {
+function read(file) {
   return readFileSync(join(__dirname, 'cases', file)).toString()
 }
 
