@@ -170,12 +170,8 @@ SugarSS needs PostCSS compiler. Install [`postcss-loader`] for webpack,
 [`gulp-postcss`] for Gulp, [`postcss-cli`] for npm scripts.
 [Parcel] has build-in support for PostCSS.
 
-Then install SugarSS: `npm install --save-dev sugarss` if you use npm
-and `yarn add --dev sugarss` if you use Yarn.
-
-You may also install `precss` to have nested rules, variables
-and other CSS syntax extensions: `npm install --save-dev precss`
-or `yarn add --dev precss` if you use Yarn.
+Then install SugarSS: `npm install --save-dev postcss sugarss` if you use npm
+and `yarn add --dev postcss sugarss` if you use Yarn.
 
 Then create `.postcssrc` file:
 
