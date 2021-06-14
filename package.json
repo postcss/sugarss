@@ -30,7 +30,8 @@
     },
     "./parse": "./parse.js",
     "./stringify": "./stringify.js",
-    "./tokenize": "./tokenize.js"
+    "./tokenize": "./tokenize.js",
+    "./package.json": "./package.json"
   },
   "peerDependencies": {
     "postcss": "^8.3.3"
