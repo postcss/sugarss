@@ -1,6 +1,6 @@
 {
   "name": "sugarss",
-  "version": "3.0.3",
+  "version": "4.0.0",
   "description": "Indent-based CSS syntax for PostCSS",
   "keywords": [
     "css",
@@ -33,7 +33,7 @@
     "./tokenize": "./tokenize.js"
   },
   "peerDependencies": {
-    "postcss": "^8.2.14"
+    "postcss": "^8.3.3"
   },
   "devDependencies": {
     "@logux/eslint-config": "^45.4.4",
