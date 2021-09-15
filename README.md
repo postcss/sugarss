@@ -151,7 +151,7 @@ Here are PostCSS plugins which could add you preprocessor features:
 * SublimeText: [Syntax Highlighting for .SSS SugarSS]
 * Atom: [language-postcss], [source-preview-postcss] and [build-sugarss]
 * Vim: [vim-sugarss]
-* VSCode: [vetur], and [postcss-sugarss-language]
+* VSCode: [vetur](https://vuejs.github.io/vetur/), and [postcss-sugarss-language](https://github.com/MhMadHamster/vscode-postcss-language)
 
 We are working on syntax highlight support in text editors.
 
