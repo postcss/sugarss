@@ -1,9 +1,11 @@
+let { equal, throws } = require('uvu/assert')
 let { Input } = require('postcss')
+let { test } = require('uvu')
 
 let preprocess = require('../preprocess')
 
 function run(lines, result) {
-  expect(preprocess(new Input(''), lines)).toEqual(result)
+  equal(preprocess(new Input(''), lines), result)
 }
 
 let defaults = {
@@ -18,7 +20,7 @@ let defaults = {
 
 let end = { before: '', end: true }
 
-it('cleans from lines', () => {
+test('cleans from lines', () => {
   run(
     [
       [['newline', '\n', 1]],
@@ -50,7 +52,7 @@ it('cleans from lines', () => {
   )
 })
 
-it('separates indent = require(other tokens', () => {
+test('separates indent = require(other tokens', () => {
   run(
     [
       [
@@ -69,7 +71,7 @@ it('separates indent = require(other tokens', () => {
   )
 })
 
-it('works with indentless strings', () => {
+test('works with indentless strings', () => {
   run(
     [[['word', 'ab']]],
     [
@@ -83,7 +85,7 @@ it('works with indentless strings', () => {
   )
 })
 
-it('collects line number', () => {
+test('collects line number', () => {
   run(
     [
       [
@@ -115,7 +117,7 @@ it('collects line number', () => {
   )
 })
 
-it('detects at-rules', () => {
+test('detects at-rules', () => {
   run(
     [
       [
@@ -137,7 +139,7 @@ it('detects at-rules', () => {
   )
 })
 
-it('detects last comma', () => {
+test('detects last comma', () => {
   run(
     [
       [
@@ -163,7 +165,7 @@ it('detects last comma', () => {
   )
 })
 
-it('detects last comma with trailing spaces', () => {
+test('detects last comma with trailing spaces', () => {
   run(
     [
       [
@@ -187,7 +189,7 @@ it('detects last comma with trailing spaces', () => {
   )
 })
 
-it('detects last comma with trailing comment', () => {
+test('detects last comma with trailing comment', () => {
   run(
     [
       [
@@ -211,7 +213,7 @@ it('detects last comma with trailing comment', () => {
   )
 })
 
-it('ignore comma inside', () => {
+test('ignore comma inside', () => {
   run(
     [
       [
@@ -235,7 +237,7 @@ it('ignore comma inside', () => {
   )
 })
 
-it('detects colon with space', () => {
+test('detects colon with space', () => {
   run(
     [
       [
@@ -259,7 +261,7 @@ it('detects colon with space', () => {
   )
 })
 
-it('detects colon with newline', () => {
+test('detects colon with newline', () => {
   run(
     [
       [
@@ -285,7 +287,7 @@ it('detects colon with newline', () => {
   )
 })
 
-it('ignores colon without space', () => {
+test('ignores colon without space', () => {
   run(
     [
       [
@@ -309,7 +311,7 @@ it('ignores colon without space', () => {
   )
 })
 
-it('ignores colon inside brackets', () => {
+test('ignores colon inside brackets', () => {
   run(
     [
       [
@@ -335,7 +337,7 @@ it('ignores colon inside brackets', () => {
   )
 })
 
-it('closes brackets', () => {
+test('closes brackets', () => {
   run(
     [
       [
@@ -361,7 +363,7 @@ it('closes brackets', () => {
   )
 })
 
-it('detects comments', () => {
+test('detects comments', () => {
   run(
     [[['comment', '// a']]],
     [
@@ -375,19 +377,19 @@ it('detects comments', () => {
   )
 })
 
-it('detects mixed tabs and spaces in indent', () => {
-  expect(() => {
+test('detects mixed tabs and spaces in indent', () => {
+  throws(() => {
     preprocess(new Input(''), [
       [
         ['space', '\t '],
         ['word', 'ab']
       ]
     ])
-  }).toThrow('<css input>:1:2: Mixed tabs and spaces are not allowed')
+  }, '<css input>:1:2: Mixed tabs and spaces are not allowed')
 })
 
-it('detects mixed tabs and spaces in indents', () => {
-  expect(() => {
+test('detects mixed tabs and spaces in indents', () => {
+  throws(() => {
     preprocess(new Input(''), [
       [
         ['space', ' '],
@@ -398,11 +400,11 @@ it('detects mixed tabs and spaces in indents', () => {
         ['word', 'ab']
       ]
     ])
-  }).toThrow('<css input>:2:1: Mixed tabs and spaces are not allowed')
+  }, '<css input>:2:1: Mixed tabs and spaces are not allowed')
 })
 
-it('shows correct error position', () => {
-  expect(() => {
+test('shows correct error position', () => {
+  throws(() => {
     preprocess(new Input(''), [
       [
         ['comment', '/*\n*/'],
@@ -419,5 +421,7 @@ it('shows correct error position', () => {
         ['newline', '\n', 4]
       ]
     ])
-  }).toThrow('<css input>:4:2: Mixed tabs and spaces are not allowed')
+  }, '<css input>:4:2: Mixed tabs and spaces are not allowed')
 })
+
+test.run()

@@ -1,9 +1,14 @@
+let { equal } = require('uvu/assert')
+let { test } = require('uvu')
+
 let sugarss = require('../')
 
-it('has parse()', () => {
-  expect(typeof sugarss.parse).toEqual('function')
+test('has parse()', () => {
+  equal(typeof sugarss.parse, 'function')
 })
 
-it('has stringify()', () => {
-  expect(typeof sugarss.stringify).toEqual('function')
+test('has stringify()', () => {
+  equal(typeof sugarss.stringify, 'function')
 })
+
+test.run()

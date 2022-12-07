@@ -1,5 +1,7 @@
 let { readdirSync, readFileSync } = require('fs')
 let { join, extname } = require('path')
+let { equal } = require('uvu/assert')
+let { test } = require('uvu')
 
 let stringify = require('../stringify')
 let parse = require('../parse')
@@ -18,15 +20,17 @@ function run(sss) {
   stringify(root, i => {
     output += i
   })
-  expect(sss).toEqual(output)
+  equal(sss, output)
 }
 
-it('saves newlines', () => {
+test('saves newlines', () => {
   run('a\r\n  color: black')
 })
 
 for (let name of tests) {
-  it('stringifies ' + name, () => {
+  test('stringifies ' + name, () => {
     run(read(name))
   })
 }
+
+test.run()

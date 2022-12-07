@@ -1,12 +1,15 @@
+let { equal } = require('uvu/assert')
+let { test } = require('uvu')
+
 let liner = require('../liner')
 
-it('packs tokens by lines', () => {
+test('packs tokens by lines', () => {
   let tokens = [
     ['word', 'a'],
     ['newline', '\n'],
     ['word', 'b']
   ]
-  expect(liner(tokens)).toEqual([
+  equal(liner(tokens), [
     [
       ['word', 'a'],
       ['newline', '\n']
@@ -15,13 +18,13 @@ it('packs tokens by lines', () => {
   ])
 })
 
-it('ignores newline inside brackets', () => {
+test('ignores newline inside brackets', () => {
   let tokens = [
     ['(', '('],
     ['newline', '\n'],
     [')', ')']
   ]
-  expect(liner(tokens)).toEqual([
+  equal(liner(tokens), [
     [
       ['(', '('],
       ['newline', '\n'],
@@ -29,3 +32,5 @@ it('ignores newline inside brackets', () => {
     ]
   ])
 })
+
+test.run()

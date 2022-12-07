@@ -14,7 +14,8 @@
   "license": "MIT",
   "repository": "postcss/sugarss",
   "scripts": {
-    "test": "jest && eslint ."
+    "unit": "uvu . '\\.test\\.js$'",
+    "test": "c8 pnpm unit && eslint ."
   },
   "funding": {
     "type": "opencollective",
@@ -37,27 +38,18 @@
     "postcss": "^8.3.3"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^45.4.4",
-    "clean-publish": "^2.2.0",
-    "eslint": "^7.28.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jest": "^24.3.6",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prefer-let": "^1.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-unicorn": "^33.0.1",
-    "jest": "^27.0.4",
-    "lint-staged": "^11.0.0",
-    "postcss": "^8.3.3",
-    "postcss-parser-tests": "^8.3.5",
-    "postcss-sharec-config": "^0.4.1",
-    "prettier": "^2.2.1",
-    "simple-git-hooks": "^2.4.1"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "@logux/eslint-config": "^48.0.0",
+    "c8": "^7.12.0",
+    "clean-publish": "^4.0.1",
+    "eslint": "^8.29.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-prefer-let": "^3.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "postcss": "^8.4.19",
+    "postcss-parser-tests": "^8.5.2",
+    "uvu": "^0.5.6"
   },
   "prettier": {
     "arrowParens": "avoid",
@@ -67,25 +59,18 @@
     "singleQuote": true,
     "trailingComma": "none"
   },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  },
   "eslintConfig": {
     "extends": "@logux/eslint-config"
   },
-  "jest": {
-    "testEnvironment": "node",
-    "coverageThreshold": {
-      "global": {
-        "statements": 100
-      }
-    }
+  "c8": {
+    "exclude": [
+      "**/*.test.*"
+    ],
+    "lines": 96.36,
+    "reporter": "lcov",
+    "check-coverage": true
   },
-  "sharec": {
-    "config": "postcss-sharec-config",
-    "version": "0.4.1"
+  "clean-publish": {
+    "cleanDocs": true
   }
 }

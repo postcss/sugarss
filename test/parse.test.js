@@ -1,94 +1,96 @@
 let { readdirSync, readFileSync } = require('fs')
+let { equal, throws } = require('uvu/assert')
 let { join, extname } = require('path')
 let { jsonify } = require('postcss-parser-tests')
+let { test } = require('uvu')
 
 let parse = require('../parse')
 
-it('detects indent', () => {
+test('detects indent', () => {
   let root = parse('@one\n  @two\n    @three')
-  expect(root.raws.indent).toEqual('  ')
+  equal(root.raws.indent, '  ')
 })
 
-it('throws on first indent', () => {
-  expect(() => {
+test('throws on first indent', () => {
+  throws(() => {
     parse('  @charset "UTF-8"')
-  }).toThrow('<css input>:1:1: First line should not have indent')
+  }, '<css input>:1:1: First line should not have indent')
 })
 
-it('throws on too big indent', () => {
-  expect(() => {
+test('throws on too big indent', () => {
+  throws(() => {
     parse('@supports\n  @media\n      // test')
-  }).toThrow('<css input>:3:1: Expected 4 indent, but get 6')
+  }, '<css input>:3:1: Expected 4 indent, but get 6')
 })
 
-it('throws on wrong indent step', () => {
-  expect(() => {
+test('throws on wrong indent step', () => {
+  throws(() => {
     parse('@supports\n  @media\n @media')
-  }).toThrow('<css input>:3:1: Expected 0 or 2 indent, but get 1')
+  }, '<css input>:3:1: Expected 0 or 2 indent, but get 1')
 })
 
-it('throws on decl without property', () => {
-  expect(() => {
+test('throws on decl without property', () => {
+  throws(() => {
     parse(': black')
-  }).toThrow('<css input>:1:1: Declaration without name')
+  }, '<css input>:1:1: Declaration without name')
 })
 
-it('throws on space between property', () => {
-  expect(() => {
+test('throws on space between property', () => {
+  throws(() => {
     parse('one two: black')
-  }).toThrow('<css input>:1:5: Unexpected separator in property')
+  }, '<css input>:1:5: Unexpected separator in property')
 })
 
-it('throws on semicolon in declaration', () => {
-  expect(() => {
+test('throws on semicolon in declaration', () => {
+  throws(() => {
     parse('a\n  color: black;')
-  }).toThrow('<css input>:2:15: Unnecessary semicolon')
+  }, '<css input>:2:15: Unnecessary semicolon')
 })
 
-it('throws on semicolon in at-rule', () => {
-  expect(() => {
+test('throws on semicolon in at-rule', () => {
+  throws(() => {
     parse('@charset "UTF-8";')
-  }).toThrow('<css input>:1:17: Unnecessary semicolon')
+  }, '<css input>:1:17: Unnecessary semicolon')
 })
 
-it('throws on curly in rule', () => {
-  expect(() => {
+test('throws on curly in rule', () => {
+  throws(() => {
     parse('a {\n  color: black')
-  }).toThrow('<css input>:1:3: Unnecessary curly bracket')
+  }, '<css input>:1:3: Unnecessary curly bracket')
 })
 
-it('throws on curly in at-rule', () => {
-  expect(() => {
+test('throws on curly in at-rule', () => {
+  throws(() => {
     parse('@media (screen) {\n  color: black')
-  }).toThrow('<css input>:1:17: Unnecessary curly bracket')
+  }, '<css input>:1:17: Unnecessary curly bracket')
 })
 
-it('keeps trailing spaces', () => {
+test('keeps trailing spaces', () => {
   let root = parse('@media  s \n  a\n  b \n    a : \n      b \n//  a \n \n')
-  expect(root.raws.after).toEqual('\n \n')
-  expect(root.first.raws.sssBetween).toEqual(' ')
-  expect(root.first.raws.afterName).toEqual('  ')
-  expect(root.first.first.raws.sssBetween).toEqual(' ')
-  expect(root.first.first.first.raws.between).toEqual(' : \n      ')
-  expect(root.first.first.first.raws.value.raw).toEqual('b ')
-  expect(root.last.raws.left).toEqual('  ')
-  expect(root.last.raws.inlineRight).toEqual(' ')
+  equal(root.raws.after, '\n \n')
+  equal(root.first.raws.sssBetween, ' ')
+  equal(root.first.raws.afterName, '  ')
+  equal(root.first.first.raws.sssBetween, ' ')
+  equal(root.first.first.first.raws.between, ' : \n      ')
+  equal(root.first.first.first.raws.value.raw, 'b ')
+  equal(root.last.raws.left, '  ')
+  equal(root.last.raws.inlineRight, ' ')
 })
 
-it('supports files without last new line', () => {
-  expect(parse('color: black').raws.after).toEqual('')
+test('supports files without last new line', () => {
+  equal(parse('color: black').raws.after, '')
 })
 
-it('keeps last new line', () => {
-  expect(parse('color: black\n').raws.after).toEqual('\n')
+test('keeps last new line', () => {
+  equal(parse('color: black\n').raws.after, '\n')
 })
 
-it('generates correct source maps on trailing spaces', () => {
-  expect(parse('a: 1 ').first.source.end.line).toEqual(1)
+test('generates correct source maps on trailing spaces', () => {
+  equal(parse('a: 1 ').first.source.end.line, 1)
 })
 
-it('sets end position for root', () => {
-  expect(parse('a\n  b: 1\n').source.end).toEqual({ line: 2, column: 6 })
+test('sets end position for root', () => {
+  equal(parse('a\n  b: 1\n').source.end, { line: 2, column: 6 })
 })
 
 let tests = readdirSync(join(__dirname, 'cases')).filter(
@@ -100,7 +102,7 @@ function read(file) {
 }
 
 for (let name of tests) {
-  it('parses ' + name, () => {
+  test('parses ' + name, () => {
     let sss = read(name)
     let css = read(name.replace(/\.sss/, '.css'))
     let json = read(name.replace(/\.sss/, '.json'))
@@ -111,7 +113,9 @@ for (let name of tests) {
         annotation: false
       }
     })
-    expect(result.css).toEqual(css)
-    expect(jsonify(root)).toEqual(json.trim())
+    equal(result.css, css)
+    equal(jsonify(root), json.trim())
   })
 }
+
+test.run()
