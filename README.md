@@ -24,22 +24,22 @@ a
 As any PostCSS custom syntax, SugarSS has source map, [stylelint]
 and [postcss-sorting] support out-of-box.
 
-It was designed to be used with [PreCSS] and [postcss-nested-props].
+It was designed to be used with [postcss-simple-vars] and [postcss-nested].
 But you can use it with any PostCSS plugins
 or use it without any PostCSS plugins.
-With [gulp-sass-to-postcss-mixins] you can use `+mixin` syntax as in Sass.
+With [postcss-mixins] you can use `@mixin` syntax as in Sass.
 
 <a href="https://evilmartians.com/?utm_source=sugarss">
   <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
        alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
 
-[gulp-sass-to-postcss-mixins]:  https://github.com/akella/gulp-sass-to-postcss-mixins
-[postcss-nested-props]:        https://github.com/jedmao/postcss-nested-props
+[postcss-mixins]:              https://github.com/postcss/postcss-mixins
+[postcss-nested]:              https://github.com/postcss/postcss-nested
+[postcss-simple-vars]:         https://github.com/postcss/postcss-simple-vars
 [postcss-sorting]:             https://github.com/hudochenkov/postcss-sorting
 [stylelint]:                   http://stylelint.io/
 [PostCSS]:                     https://github.com/postcss/postcss
-[PreCSS]:                      https://github.com/jonathantneal/precss
 
 
 ## Syntax
@@ -134,16 +134,19 @@ but do not add preprocessor features build-in.
 
 Here are PostCSS plugins which could add you preprocessor features:
 
-* **[PreCSS]** adds variables, nested rules, extend rules, property lookup
-  and CSS polyfills.
-* **[postcss-easy-import]** adds `@import` directive support with globbing.
+* **[postcss-simple-vars]** adds variables.
+* **[postcss-nested]** adds nested rules.
+* **[postcss-import]** adds `@import` directive support.
+* **[postcss-import-ext-glob]** extends [postcss-import] path resolver to allow glob usage as a path.
 * **[postcss-mixins]** add `@mixin` support.
 * **[postcss-functions]** allows you to define own CSS functions in JS.
 
-[postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
 [postcss-functions]: https://github.com/andyjansson/postcss-functions
 [postcss-mixins]: https://github.com/postcss/postcss-mixins
-[PreCSS]: https://github.com/jonathantneal/precss
+[postcss-import-ext-glob]: https://github.com/dimitrinicolas/postcss-import-ext-glob
+[postcss-import]:          https://github.com/postcss/postcss-import
+[postcss-nested]:          https://github.com/postcss/postcss-nested
+[postcss-simple-vars]:     https://github.com/postcss/postcss-simple-vars
 
 
 ## Text Editors
@@ -179,7 +182,7 @@ Then create `.postcssrc` file:
 {
   "parser": "sugarss",
   "plugins": {
-    "precss": {}
+    "postcss-simple-vars": {}
   }
 }
 ```
@@ -195,25 +198,18 @@ Then create `.postcssrc` file:
 If you doesn’t use Webpack or Parcel, you need some PostCSS plugin
 to process `@import` directives.
 
-[postcss-import] doesn’t support `.sss` file extension, because this plugin
-implements W3C specification. If you want smarter `@import`, you should
-use [postcss-easy-import] with the `extensions` option.
+If you want `@import`, install [postcss-import] and add it to `.postcssrc` file:
 
 ```diff js
 {
   "parser": "sugarss",
   "plugins": {
-+   "postcss-easy-import": {
-+     "extensions": [
-+       ".sss"
-+     ]
-+   },
-    "precss": {},
++   "postcss-import": {},
+    "postcss-simple-vars": {}
   }
 }
 ```
 
-[postcss-easy-import]: https://github.com/TrySound/postcss-easy-import
 [postcss-import]:      https://github.com/postcss/postcss-import
 
 
@@ -228,7 +224,7 @@ For mixins support, install [postcss-mixins] and add it to `.postcssrc` file:
 +   "postcss-mixins": {
 +     "mixinsDir": "./mixins"
 +   },
-    "precss": {},
+    "postcss-simple-vars": {}
   }
 }
 ```
@@ -256,7 +252,7 @@ and add it to `.postcssrc` file:
 +   "postcss-functions": {
 +     "glob": "./functions"
 +   },
-    "precss": {},
+    "postcss-simple-vars": {}
   }
 }
 ```
