@@ -17,10 +17,16 @@
     "unit": "uvu . '\\.test\\.js$'",
     "test": "c8 pnpm unit && eslint ."
   },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/postcss/"
-  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/postcss/"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/ai"
+    }
+  ],
   "engines": {
     "node": ">=12.0"
   },
