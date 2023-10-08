@@ -9,13 +9,13 @@ function run(lines, result) {
 }
 
 let defaults = {
-  number: 1,
-  before: '',
-  indent: '',
-  colon: false,
   atrule: false,
+  before: '',
+  colon: false,
   comment: false,
-  lastComma: false
+  indent: '',
+  lastComma: false,
+  number: 1
 }
 
 let end = { before: '', end: true }
@@ -40,8 +40,8 @@ test('cleans from lines', () => {
     [
       {
         ...defaults,
-        number: 3,
         before: '\n \n',
+        number: 3,
         tokens: [['word', 'a']]
       },
       {
@@ -105,9 +105,9 @@ test('collects line number', () => {
       },
       {
         ...defaults,
+        before: '\n',
         number: 2,
-        tokens: [['word', 'b']],
-        before: '\n'
+        tokens: [['word', 'b']]
       },
       {
         ...end,
@@ -128,11 +128,11 @@ test('detects at-rules', () => {
     [
       {
         ...defaults,
+        atrule: true,
         tokens: [
           ['at-word', '@ab'],
           ['space', ' ']
-        ],
-        atrule: true
+        ]
       },
       end
     ]
@@ -151,11 +151,11 @@ test('detects last comma', () => {
     [
       {
         ...defaults,
+        lastComma: true,
         tokens: [
           ['word', 'ab'],
           [',', ',']
-        ],
-        lastComma: true
+        ]
       },
       {
         ...end,
@@ -177,12 +177,12 @@ test('detects last comma with trailing spaces', () => {
     [
       {
         ...defaults,
+        lastComma: true,
         tokens: [
           ['word', 'ab'],
           [',', ','],
           ['space', ' ']
-        ],
-        lastComma: true
+        ]
       },
       end
     ]
@@ -201,12 +201,12 @@ test('detects last comma with trailing comment', () => {
     [
       {
         ...defaults,
+        lastComma: true,
         tokens: [
           ['word', 'ab'],
           [',', ','],
           ['comment', '// a']
-        ],
-        lastComma: true
+        ]
       },
       end
     ]
@@ -225,12 +225,12 @@ test('ignore comma inside', () => {
     [
       {
         ...defaults,
+        lastComma: false,
         tokens: [
           ['word', 'ab'],
           [',', ','],
           ['word', 'ba']
-        ],
-        lastComma: false
+        ]
       },
       end
     ]
@@ -249,12 +249,12 @@ test('detects colon with space', () => {
     [
       {
         ...defaults,
+        colon: true,
         tokens: [
           ['word', 'ab'],
           [':', ':'],
           ['space', ' ']
-        ],
-        colon: true
+        ]
       },
       end
     ]
@@ -273,11 +273,11 @@ test('detects colon with newline', () => {
     [
       {
         ...defaults,
+        colon: true,
         tokens: [
           ['word', 'ab'],
           [':', ':']
-        ],
-        colon: true
+        ]
       },
       {
         ...end,
@@ -299,12 +299,12 @@ test('ignores colon without space', () => {
     [
       {
         ...defaults,
+        colon: false,
         tokens: [
           ['word', 'ab'],
           [':', ':'],
           ['word', 'ba']
-        ],
-        colon: false
+        ]
       },
       end
     ]
@@ -324,13 +324,13 @@ test('ignores colon inside brackets', () => {
     [
       {
         ...defaults,
+        colon: false,
         tokens: [
           ['(', '('],
           [':', ':'],
           ['space', ' '],
           [')', ')']
-        ],
-        colon: false
+        ]
       },
       end
     ]
@@ -350,13 +350,13 @@ test('closes brackets', () => {
     [
       {
         ...defaults,
+        colon: true,
         tokens: [
           ['(', '('],
           [')', ')'],
           [':', ':'],
           ['space', ' ']
-        ],
-        colon: true
+        ]
       },
       end
     ]
@@ -369,8 +369,8 @@ test('detects comments', () => {
     [
       {
         ...defaults,
-        tokens: [['comment', '// a']],
-        comment: true
+        comment: true,
+        tokens: [['comment', '// a']]
       },
       end
     ]

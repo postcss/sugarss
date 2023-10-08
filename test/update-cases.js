@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 let { readdirSync, readFileSync, writeFileSync } = require('fs')
-let { join, extname } = require('path')
+let { extname, join } = require('path')
 let { jsonify } = require('postcss-parser-tests')
 
 let parse = require('../parse')

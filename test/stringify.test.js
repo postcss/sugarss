@@ -1,5 +1,5 @@
 let { readdirSync, readFileSync } = require('fs')
-let { join, extname } = require('path')
+let { extname, join } = require('path')
 let { equal } = require('uvu/assert')
 let { test } = require('uvu')
 

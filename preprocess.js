@@ -78,14 +78,14 @@ module.exports = function preprocess(input, lines) {
     }
 
     return {
-      number,
-      indent,
-      colon,
-      tokens,
       atrule,
+      before: '',
+      colon,
       comment,
+      indent,
       lastComma,
-      before: ''
+      number,
+      tokens
     }
   })
 
@@ -100,7 +100,7 @@ module.exports = function preprocess(input, lines) {
       }
       return all
     },
-    [{ end: true, before: '' }]
+    [{ before: '', end: true }]
   )
 
   parts.forEach((part, i) => {

@@ -1,6 +1,6 @@
 let { readdirSync, readFileSync } = require('fs')
 let { equal, throws } = require('uvu/assert')
-let { join, extname } = require('path')
+let { extname, join } = require('path')
 let { jsonify } = require('postcss-parser-tests')
 let { test } = require('uvu')
 
@@ -90,7 +90,7 @@ test('generates correct source maps on trailing spaces', () => {
 })
 
 test('sets end position for root', () => {
-  equal(parse('a\n  b: 1\n').source.end, { line: 2, column: 6 })
+  equal(parse('a\n  b: 1\n').source.end, { column: 6, line: 2 })
 })
 
 let tests = readdirSync(join(__dirname, 'cases')).filter(
@@ -109,12 +109,12 @@ for (let name of tests) {
     let root = parse(sss, { from: name })
     let result = root.toResult({
       map: {
-        inline: false,
-        annotation: false
+        annotation: false,
+        inline: false
       }
     })
     equal(result.css, css)
-    equal(jsonify(root), json.trim())
+    equal(jsonify(root), JSON.parse(json.trim()))
   })
 }
 
