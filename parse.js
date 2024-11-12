@@ -1,9 +1,9 @@
 let { Input } = require('postcss')
 
+let liner = require('./liner')
+let Parser = require('./parser')
 let preprocess = require('./preprocess')
 let tokenizer = require('./tokenize')
-let Parser = require('./parser')
-let liner = require('./liner')
 
 module.exports = function parse(source, opts) {
   let input = new Input(source, opts)

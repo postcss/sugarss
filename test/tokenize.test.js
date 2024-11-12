@@ -1,6 +1,6 @@
-let { equal } = require('uvu/assert')
 let { Input } = require('postcss')
 let { test } = require('uvu')
+let { equal } = require('uvu/assert')
 
 let tokenize = require('../tokenize')
 

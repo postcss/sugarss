@@ -1,6 +1,6 @@
-let { equal, throws } = require('uvu/assert')
 let { Input } = require('postcss')
 let { test } = require('uvu')
+let { equal, throws } = require('uvu/assert')
 
 let preprocess = require('../preprocess')
 

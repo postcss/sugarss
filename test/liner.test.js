@@ -1,5 +1,5 @@
-let { equal } = require('uvu/assert')
 let { test } = require('uvu')
+let { equal } = require('uvu/assert')
 
 let liner = require('../liner')
 

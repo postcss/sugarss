@@ -1,10 +1,10 @@
-let { readdirSync, readFileSync } = require('fs')
-let { extname, join } = require('path')
-let { equal } = require('uvu/assert')
+let { readdirSync, readFileSync } = require('node:fs')
+let { extname, join } = require('node:path')
 let { test } = require('uvu')
+let { equal } = require('uvu/assert')
 
-let stringify = require('../stringify')
 let parse = require('../parse')
+let stringify = require('../stringify')
 
 let tests = readdirSync(join(__dirname, 'cases')).filter(
   i => extname(i) === '.sss'

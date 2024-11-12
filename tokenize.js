@@ -27,18 +27,18 @@ module.exports = function tokenize(input) {
   let css = input.css.valueOf()
 
   let code,
-    next,
-    quote,
-    lines,
-    last,
     content,
     escape,
-    nextLine,
-    nextOffset,
     escaped,
     escapePos,
+    last,
+    lines,
+    n,
+    next,
+    nextLine,
+    nextOffset,
     prev,
-    n
+    quote
 
   let length = css.length
   let offset = -1

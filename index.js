@@ -1,4 +1,4 @@
-let stringify = require('./stringify')
 let parse = require('./parse')
+let stringify = require('./stringify')
 
 module.exports = { parse, stringify }

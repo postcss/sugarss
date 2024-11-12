@@ -1,8 +1,8 @@
-let { readdirSync, readFileSync } = require('fs')
-let { equal, throws } = require('uvu/assert')
-let { extname, join } = require('path')
+let { readdirSync, readFileSync } = require('node:fs')
+let { extname, join } = require('node:path')
 let { jsonify } = require('postcss-parser-tests')
 let { test } = require('uvu')
+let { equal, throws } = require('uvu/assert')
 
 let parse = require('../parse')
 
