@@ -1,5 +1,5 @@
-let { test } = require('uvu')
-let { equal } = require('uvu/assert')
+let { equal } = require('node:assert')
+let { test } = require('node:test')
 
 let sugarss = require('../')
 
@@ -10,5 +10,3 @@ test('has parse()', () => {
 test('has stringify()', () => {
   equal(typeof sugarss.stringify, 'function')
 })
-
-test.run()

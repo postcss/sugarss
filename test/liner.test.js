@@ -1,5 +1,5 @@
-let { test } = require('uvu')
-let { equal } = require('uvu/assert')
+let { deepStrictEqual } = require('node:assert')
+let { test } = require('node:test')
 
 let liner = require('../liner')
 
@@ -9,7 +9,7 @@ test('packs tokens by lines', () => {
     ['newline', '\n'],
     ['word', 'b']
   ]
-  equal(liner(tokens), [
+  deepStrictEqual(liner(tokens), [
     [
       ['word', 'a'],
       ['newline', '\n']
@@ -24,7 +24,7 @@ test('ignores newline inside brackets', () => {
     ['newline', '\n'],
     [')', ')']
   ]
-  equal(liner(tokens), [
+  deepStrictEqual(liner(tokens), [
     [
       ['(', '('],
       ['newline', '\n'],
@@ -32,5 +32,3 @@ test('ignores newline inside brackets', () => {
     ]
   ])
 })
-
-test.run()

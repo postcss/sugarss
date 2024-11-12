@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": "postcss/sugarss",
   "scripts": {
-    "unit": "uvu . '\\.test\\.js$'",
+    "unit": "node --test test/*.test.js",
     "test:coverage": "c8 pnpm unit",
     "test:lint": "eslint .",
     "test": "pnpm run /^test:/"
@@ -51,8 +51,7 @@
     "clean-publish": "^5.1.0",
     "eslint": "^9.14.0",
     "postcss": "^8.4.49",
-    "postcss-parser-tests": "^8.8.0",
-    "uvu": "^0.5.6"
+    "postcss-parser-tests": "^8.8.0"
   },
   "prettier": {
     "arrowParens": "avoid",

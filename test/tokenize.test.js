@@ -1,11 +1,11 @@
+let { deepStrictEqual } = require('node:assert')
+let { test } = require('node:test')
 let { Input } = require('postcss')
-let { test } = require('uvu')
-let { equal } = require('uvu/assert')
 
 let tokenize = require('../tokenize')
 
 function run(css, tokens) {
-  equal(tokenize(new Input(css)), tokens)
+  deepStrictEqual(tokenize(new Input(css)), tokens)
 }
 
 test('tokenizes inine comments', () => {

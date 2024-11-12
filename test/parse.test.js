@@ -1,8 +1,8 @@
+let { deepStrictEqual, equal, throws } = require('node:assert')
 let { readdirSync, readFileSync } = require('node:fs')
 let { extname, join } = require('node:path')
+let { test } = require('node:test')
 let { jsonify } = require('postcss-parser-tests')
-let { test } = require('uvu')
-let { equal, throws } = require('uvu/assert')
 
 let parse = require('../parse')
 
@@ -14,55 +14,55 @@ test('detects indent', () => {
 test('throws on first indent', () => {
   throws(() => {
     parse('  @charset "UTF-8"')
-  }, '<css input>:1:1: First line should not have indent')
+  }, /<css input>:1:1: First line should not have indent/)
 })
 
 test('throws on too big indent', () => {
   throws(() => {
     parse('@supports\n  @media\n      // test')
-  }, '<css input>:3:1: Expected 4 indent, but get 6')
+  }, /<css input>:3:1: Expected 4 indent, but get 6/)
 })
 
 test('throws on wrong indent step', () => {
   throws(() => {
     parse('@supports\n  @media\n @media')
-  }, '<css input>:3:1: Expected 0 or 2 indent, but get 1')
+  }, /<css input>:3:1: Expected 0 or 2 indent, but get 1/)
 })
 
 test('throws on decl without property', () => {
   throws(() => {
     parse(': black')
-  }, '<css input>:1:1: Declaration without name')
+  }, /<css input>:1:1: Declaration without name/)
 })
 
 test('throws on space between property', () => {
   throws(() => {
     parse('one two: black')
-  }, '<css input>:1:5: Unexpected separator in property')
+  }, /<css input>:1:5: Unexpected separator in property/)
 })
 
 test('throws on semicolon in declaration', () => {
   throws(() => {
     parse('a\n  color: black;')
-  }, '<css input>:2:15: Unnecessary semicolon')
+  }, /<css input>:2:15: Unnecessary semicolon/)
 })
 
 test('throws on semicolon in at-rule', () => {
   throws(() => {
     parse('@charset "UTF-8";')
-  }, '<css input>:1:17: Unnecessary semicolon')
+  }, /<css input>:1:17: Unnecessary semicolon/)
 })
 
 test('throws on curly in rule', () => {
   throws(() => {
     parse('a {\n  color: black')
-  }, '<css input>:1:3: Unnecessary curly bracket')
+  }, /<css input>:1:3: Unnecessary curly bracket/)
 })
 
 test('throws on curly in at-rule', () => {
   throws(() => {
     parse('@media (screen) {\n  color: black')
-  }, '<css input>:1:17: Unnecessary curly bracket')
+  }, /<css input>:1:17: Unnecessary curly bracket/)
 })
 
 test('keeps trailing spaces', () => {
@@ -90,7 +90,7 @@ test('generates correct source maps on trailing spaces', () => {
 })
 
 test('sets end position for root', () => {
-  equal(parse('a\n  b: 1\n').source.end, { column: 6, line: 2 })
+  deepStrictEqual(parse('a\n  b: 1\n').source.end, { column: 6, line: 2 })
 })
 
 let tests = readdirSync(join(__dirname, 'cases')).filter(
@@ -114,8 +114,6 @@ for (let name of tests) {
       }
     })
     equal(result.css, css)
-    equal(jsonify(root), JSON.parse(json.trim()))
+    deepStrictEqual(jsonify(root), JSON.parse(json.trim()))
   })
 }
-
-test.run()

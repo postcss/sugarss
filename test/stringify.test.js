@@ -1,7 +1,7 @@
+let { equal } = require('node:assert')
 let { readdirSync, readFileSync } = require('node:fs')
 let { extname, join } = require('node:path')
-let { test } = require('uvu')
-let { equal } = require('uvu/assert')
+let { test } = require('node:test')
 
 let parse = require('../parse')
 let stringify = require('../stringify')
@@ -32,5 +32,3 @@ for (let name of tests) {
     run(read(name))
   })
 }
-
-test.run()

@@ -1,11 +1,11 @@
+let { deepStrictEqual, throws } = require('node:assert')
+let { test } = require('node:test')
 let { Input } = require('postcss')
-let { test } = require('uvu')
-let { equal, throws } = require('uvu/assert')
 
 let preprocess = require('../preprocess')
 
 function run(lines, result) {
-  equal(preprocess(new Input(''), lines), result)
+  deepStrictEqual(preprocess(new Input(''), lines), result)
 }
 
 let defaults = {
@@ -385,7 +385,7 @@ test('detects mixed tabs and spaces in indent', () => {
         ['word', 'ab']
       ]
     ])
-  }, '<css input>:1:2: Mixed tabs and spaces are not allowed')
+  }, /<css input>:1:2: Mixed tabs and spaces are not allowed/)
 })
 
 test('detects mixed tabs and spaces in indents', () => {
@@ -400,7 +400,7 @@ test('detects mixed tabs and spaces in indents', () => {
         ['word', 'ab']
       ]
     ])
-  }, '<css input>:2:1: Mixed tabs and spaces are not allowed')
+  }, /<css input>:2:1: Mixed tabs and spaces are not allowed/)
 })
 
 test('shows correct error position', () => {
@@ -421,7 +421,5 @@ test('shows correct error position', () => {
         ['newline', '\n', 4]
       ]
     ])
-  }, '<css input>:4:2: Mixed tabs and spaces are not allowed')
+  }, /<css input>:4:2: Mixed tabs and spaces are not allowed/)
 })
-
-test.run()
