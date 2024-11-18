@@ -13,7 +13,7 @@ module.exports = class Parser {
     this.prevIndent = undefined
     this.step = undefined
 
-    this.root.source = { input, start: { column: 1, line: 1 } }
+    this.root.source = { input, start: { offset: 0 } }
   }
 
   atrule(part) {
@@ -64,7 +64,7 @@ module.exports = class Parser {
     let token = part.tokens[0]
     let node = new Comment()
     this.init(node, part)
-    node.source.end = { column: token[5], line: token[4] }
+    node.source.end = { offset: token[2] + token[1].length }
     this.commentText(node, token)
   }
 
@@ -125,7 +125,7 @@ module.exports = class Parser {
       !next.atrule &&
       !next.colon &&
       next.indent.length > part.indent.length
-    ) {
+      ) {
       value.push(['space', next.before + next.indent])
       value = value.concat(next.tokens)
       this.pos += 1
@@ -138,9 +138,9 @@ module.exports = class Parser {
       let comment = new Comment()
       this.current.push(comment)
       comment.source = {
-        end: { column: last[5], line: last[4] },
+        end: { offset: last[2] + last[1].length },
         input: this.input,
-        start: { column: last[3], line: last[2] }
+        start: { offset: last[2] }
       }
       let prev = value[value.length - 1]
       if (prev && prev[0] === 'space') {
@@ -172,8 +172,8 @@ module.exports = class Parser {
     this.raw(node, 'value', value, colon)
   }
 
-  error(msg, line, column) {
-    throw this.input.error(msg, line, column)
+  error(msg, offset) {
+    throw this.input.error(msg, offset)
   }
 
   firstSpaces(tokens) {
@@ -227,7 +227,7 @@ module.exports = class Parser {
   }
 
   indentedFirstLine(part) {
-    this.error('First line should not have indent', part.number, 1)
+    this.error('First line should not have indent', part.offset)
   }
 
   init(node, part) {
@@ -243,7 +243,7 @@ module.exports = class Parser {
     }
     node.source = {
       input: this.input,
-      start: { column: part.tokens[0][3], line: part.tokens[0][2] }
+      start: { offset: part.tokens[0][2] }
     }
   }
 
@@ -292,8 +292,7 @@ module.exports = class Parser {
       if (this.tokens[i].length > 3) {
         let last = this.tokens[i]
         this.root.source.end = {
-          column: last[5] || last[3],
-          line: last[4] || last[2]
+          offset: last[2] + last[1].length
         }
         break
       }
@@ -351,8 +350,7 @@ module.exports = class Parser {
     if (!last) last = altLast
 
     node.source.end = {
-      column: last[5] || last[3],
-      line: last[4] || last[2]
+      offset: last[2] + last[1].length
     }
   }
 
@@ -376,15 +374,15 @@ module.exports = class Parser {
   }
 
   unnamedAtrule(token) {
-    this.error('At-rule without name', token[2], token[3])
+    this.error('At-rule without name', token[2])
   }
 
   unnamedDecl(token) {
-    this.error('Declaration without name', token[2], token[3])
+    this.error('Declaration without name', token[2])
   }
 
   wrongIndent(expected, real, part) {
     let msg = `Expected ${expected} indent, but get ${real}`
-    this.error(msg, part.number, 1)
+    this.error(msg, part.offset)
   }
 }
