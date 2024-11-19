@@ -14,19 +14,19 @@ test('detects indent', () => {
 test('throws on first indent', () => {
   throws(() => {
     parse('  @charset "UTF-8"')
-  }, /<css input>:1:1: First line should not have indent/)
+  }, /<css input>:1:3: First line should not have indent/)
 })
 
 test('throws on too big indent', () => {
   throws(() => {
     parse('@supports\n  @media\n      // test')
-  }, /<css input>:3:1: Expected 4 indent, but get 6/)
+  }, /<css input>:3:7: Expected 4 indent, but get 6/)
 })
 
 test('throws on wrong indent step', () => {
   throws(() => {
     parse('@supports\n  @media\n @media')
-  }, /<css input>:3:1: Expected 0 or 2 indent, but get 1/)
+  }, /<css input>:3:2: Expected 0 or 2 indent, but get 1/)
 })
 
 test('throws on decl without property', () => {
@@ -73,8 +73,8 @@ test('keeps trailing spaces', () => {
   equal(root.first.first.raws.sssBetween, ' ')
   equal(root.first.first.first.raws.between, ' : \n      ')
   equal(root.first.first.first.raws.value.raw, 'b ')
-  equal(root.last.raws.left, '  ')
-  equal(root.last.raws.inlineRight, ' ')
+  equal(root.last.raws.left, '')
+  equal(root.last.raws.inlineRight, '')
 })
 
 test('supports files without last new line', () => {
@@ -90,7 +90,7 @@ test('generates correct source maps on trailing spaces', () => {
 })
 
 test('sets end position for root', () => {
-  deepStrictEqual(parse('a\n  b: 1\n').source.end, { column: 6, line: 2 })
+  deepStrictEqual(parse('a\n  b: 1\n').source.end, { column: 1, line: 3, offset: 9 })
 })
 
 let tests = readdirSync(join(__dirname, 'cases')).filter(
