@@ -20,8 +20,8 @@
         },
         "end": {
           "line": 2,
-          "column": 10,
-          "offset": 20
+          "column": 11,
+          "offset": 19
         }
       },
       "text": "multi\n   line"
@@ -38,11 +38,11 @@
         "start": {
           "line": 3,
           "column": 1,
-          "offset": 21
+          "offset": 20
         },
         "end": {
           "line": 3,
-          "column": 9,
+          "column": 10,
           "offset": 29
         }
       },
@@ -68,8 +68,8 @@
             },
             "end": {
               "line": 5,
-              "column": 14,
-              "offset": 45
+              "column": 15,
+              "offset": 46
             }
           },
           "prop": "color",
@@ -91,8 +91,8 @@
             },
             "end": {
               "line": 5,
-              "column": 25,
-              "offset": 56
+              "column": 23,
+              "offset": 54
             }
           },
           "text": "last"
@@ -107,11 +107,11 @@
             "start": {
               "line": 6,
               "column": 3,
-              "offset": 58
+              "offset": 57
             },
             "end": {
               "line": 6,
-              "column": 12,
+              "column": 13,
               "offset": 67
             }
           },
@@ -127,8 +127,8 @@
         },
         "end": {
           "line": 4,
-          "column": 1,
-          "offset": 30
+          "column": 2,
+          "offset": 31
         }
       },
       "selector": "a"
@@ -145,11 +145,11 @@
         "start": {
           "line": 8,
           "column": 1,
-          "offset": 68
+          "offset": 69
         },
         "end": {
           "line": 8,
-          "column": 6,
+          "column": 5,
           "offset": 73
         }
       },
@@ -168,12 +168,12 @@
         "start": {
           "line": 9,
           "column": 3,
-          "offset": 75
+          "offset": 76
         },
         "end": {
           "line": 9,
-          "column": 21,
-          "offset": 93
+          "column": 18,
+          "offset": 91
         }
       },
       "text": "color: black"
@@ -186,9 +186,9 @@
       "offset": 0
     },
     "end": {
-      "line": 9,
-      "column": 21,
-      "offset": 93
+      "line": 10,
+      "column": 1,
+      "offset": 92
     }
   }
 }

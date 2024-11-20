@@ -74,7 +74,7 @@ test('keeps trailing spaces', () => {
   equal(root.first.first.first.raws.between, ' : \n      ')
   equal(root.first.first.first.raws.value.raw, 'b ')
   equal(root.last.raws.left, '  ')
-  equal(root.last.raws.inlineRight, '')
+  equal(root.last.raws.inlineRight, ' ')
 })
 
 test('supports files without last new line', () => {

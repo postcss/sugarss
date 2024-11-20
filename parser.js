@@ -341,7 +341,7 @@ module.exports = class Parser {
     if (!clean) {
       let sss = tokens.reduce((all, i) => all + i[1], '')
       let raw = tokens.reduce((all, i) => {
-        if (i[0] === 'comment' && i[6] === 'inline') {
+        if (i[0] === 'comment' && i[4] === 'inline') {
           return all + '/* ' + i[1].slice(2).trim() + ' */'
         } else {
           return all + i[1]
