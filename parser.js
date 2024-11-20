@@ -75,7 +75,7 @@ module.exports = class Parser {
 
   commentText(node, token) {
     let text = token[1]
-    if (token[6] === 'inline') {
+    if (token[4] === 'inline') {
       node.raws.inline = true
       text = text.slice(2)
     } else {
