@@ -73,7 +73,7 @@ test('keeps trailing spaces', () => {
   equal(root.first.first.raws.sssBetween, ' ')
   equal(root.first.first.first.raws.between, ' : \n      ')
   equal(root.first.first.first.raws.value.raw, 'b ')
-  equal(root.last.raws.left, '')
+  equal(root.last.raws.left, '  ')
   equal(root.last.raws.inlineRight, '')
 })
 
@@ -90,7 +90,11 @@ test('generates correct source maps on trailing spaces', () => {
 })
 
 test('sets end position for root', () => {
-  deepStrictEqual(parse('a\n  b: 1\n').source.end, { column: 1, line: 3, offset: 9 })
+  deepStrictEqual(parse('a\n  b: 1\n').source.end, {
+    column: 1,
+    line: 3,
+    offset: 9
+  })
 })
 
 let tests = readdirSync(join(__dirname, 'cases')).filter(

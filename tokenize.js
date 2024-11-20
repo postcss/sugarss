@@ -26,15 +26,7 @@ module.exports = function tokenize(input) {
   let tokens = []
   let css = input.css.valueOf()
 
-  let code,
-      content,
-      escape,
-      escaped,
-      escapePos,
-      n,
-      next,
-      prev,
-      quote
+  let code, content, escape, escaped, escapePos, n, next, prev, quote
 
   let length = css.length
   let offset = 0
@@ -50,111 +42,106 @@ module.exports = function tokenize(input) {
     switch (code) {
       case CR:
         if (css.charCodeAt(pos + 1) === NEWLINE) {
-          tokens.push(['newline', '\r\n', offset, offset + 2]);
-          offset += 2;
-          pos += 1;
+          tokens.push(['newline', '\r\n', offset, offset + 2])
+          offset += 2
+          pos += 1
         } else {
-          tokens.push(['newline', '\r', offset, offset + 1]);
+          tokens.push(['newline', '\r', offset, offset + 1])
           offset++
         }
-        break;
+        break
 
       case NEWLINE:
       case FEED:
-        tokens.push(['newline', css.slice(pos, pos + 1), offset, offset + 1]);
+        tokens.push(['newline', css.slice(pos, pos + 1), offset, offset + 1])
         offset++
-        break;
+        break
 
       case SPACE:
       case TAB:
-        next = pos;
+        next = pos
         do {
-          next += 1;
-          code = css.charCodeAt(next);
-        } while (code === SPACE || code === TAB);
+          next += 1
+          code = css.charCodeAt(next)
+        } while (code === SPACE || code === TAB)
 
-        tokens.push(['space', css.slice(pos, next), offset, offset + (next - pos)]);
-        offset += (next - pos);
-        pos = next - 1;
-        break;
+        tokens.push([
+          'space',
+          css.slice(pos, next),
+          offset,
+          offset + (next - pos)
+        ])
+        offset += next - pos
+        pos = next - 1
+        break
 
       case OPEN_CURLY:
-        tokens.push(['{', '{', offset, offset + 1]);
+        tokens.push(['{', '{', offset, offset + 1])
         offset++
-        break;
+        break
 
       case CLOSE_CURLY:
-        tokens.push(['}', '}', offset, offset + 1]);
+        tokens.push(['}', '}', offset, offset + 1])
         offset++
-        break;
+        break
 
       case COLON:
-        tokens.push([':', ':', offset, offset + 1]);
+        tokens.push([':', ':', offset, offset + 1])
         offset++
-        break;
+        break
 
       case SEMICOLON:
-        tokens.push([';', ';', offset, offset + 1]);
+        tokens.push([';', ';', offset, offset + 1])
         offset++
-        break;
+        break
 
       case COMMA:
-        tokens.push([',', ',', offset, offset + 1]);
+        tokens.push([',', ',', offset, offset + 1])
         offset++
-        break;
+        break
 
       case OPEN_PARENTHESES:
-        prev = tokens.length ? tokens[tokens.length - 1][1] : '';
-        n = css.charCodeAt(pos + 1);
+        prev = tokens.length ? tokens[tokens.length - 1][1] : ''
+        n = css.charCodeAt(pos + 1)
         if (
-            prev === 'url' &&
-            n !== SINGLE_QUOTE &&
-            n !== DOUBLE_QUOTE &&
-            n !== SPACE &&
-            n !== NEWLINE &&
-            n !== TAB &&
-            n !== FEED &&
-            n !== CR
+          prev === 'url' &&
+          n !== SINGLE_QUOTE &&
+          n !== DOUBLE_QUOTE &&
+          n !== SPACE &&
+          n !== NEWLINE &&
+          n !== TAB &&
+          n !== FEED &&
+          n !== CR
         ) {
-          next = pos;
+          next = pos
           do {
-            escaped = false;
-            next = css.indexOf(')', next + 1);
-            if (next === -1) unclosed('bracket');
-            escapePos = next;
+            escaped = false
+            next = css.indexOf(')', next + 1)
+            if (next === -1) unclosed('bracket')
+            escapePos = next
             while (css.charCodeAt(escapePos - 1) === BACKSLASH) {
-              escapePos -= 1;
-              escaped = !escaped;
+              escapePos -= 1
+              escaped = !escaped
             }
-          } while (escaped);
+          } while (escaped)
 
-          tokens.push([
-            'brackets',
-            css.slice(pos, next + 1),
-            offset,
-            next + 1
-          ]);
-          offset = next + 1;
-          pos = next;
+          tokens.push(['brackets', css.slice(pos, next + 1), offset, next + 1])
+          offset = next + 1
+          pos = next
         } else {
-          next = css.indexOf(')', pos + 1);
-          content = css.slice(pos, next + 1);
+          next = css.indexOf(')', pos + 1)
+          content = css.slice(pos, next + 1)
 
           if (next === -1 || RE_BAD_BRACKET.test(content)) {
-            tokens.push(['(', '(', offset]);
+            tokens.push(['(', '(', offset])
             offset++
           } else {
-            tokens.push([
-              'brackets',
-              content,
-              offset,
-              next + 1
-            ]);
-            offset = next + 1;
-            pos = next;
+            tokens.push(['brackets', content, offset, next + 1])
+            offset = next + 1
+            pos = next
           }
         }
-        break;
+        break
 
       case CLOSE_PARENTHESES:
         tokens.push([')', ')', offset])
@@ -163,39 +150,34 @@ module.exports = function tokenize(input) {
 
       case SINGLE_QUOTE:
       case DOUBLE_QUOTE:
-        quote = code === SINGLE_QUOTE ? "'" : '"';
-        next = pos;
+        quote = code === SINGLE_QUOTE ? "'" : '"'
+        next = pos
         do {
-          escaped = false;
-          next = css.indexOf(quote, next + 1);
-          if (next === -1) unclosed('quote');
-          escapePos = next;
+          escaped = false
+          next = css.indexOf(quote, next + 1)
+          if (next === -1) unclosed('quote')
+          escapePos = next
           while (css.charCodeAt(escapePos - 1) === BACKSLASH) {
-            escapePos -= 1;
-            escaped = !escaped;
+            escapePos -= 1
+            escaped = !escaped
           }
-        } while (escaped);
+        } while (escaped)
 
-        content = css.slice(pos, next + 1);
+        content = css.slice(pos, next + 1)
 
-        tokens.push([
-          'string',
-          content,
-          offset,
-          offset + content.length
-        ]);
+        tokens.push(['string', content, offset, offset + content.length])
 
-        offset += content.length;
-        pos = next;
-        break;
+        offset += content.length
+        pos = next
+        break
 
       case AT:
-        RE_AT_END.lastIndex = pos + 1;
-        RE_AT_END.test(css);
+        RE_AT_END.lastIndex = pos + 1
+        RE_AT_END.test(css)
         if (RE_AT_END.lastIndex === 0) {
-          next = css.length - 1;
+          next = css.length - 1
         } else {
-          next = RE_AT_END.lastIndex - 2;
+          next = RE_AT_END.lastIndex - 2
         }
 
         tokens.push([
@@ -203,28 +185,28 @@ module.exports = function tokenize(input) {
           css.slice(pos, next + 1),
           offset,
           offset + (next - pos + 1)
-        ]);
+        ])
 
-        offset += (next - pos + 1);
-        pos = next;
-        break;
+        offset += next - pos + 1
+        pos = next
+        break
 
       case BACKSLASH:
-        next = pos;
-        escape = true;
+        next = pos
+        escape = true
 
         while (css.charCodeAt(next + 1) === BACKSLASH) {
-          next += 1;
-          escape = !escape;
+          next += 1
+          escape = !escape
         }
-        code = css.charCodeAt(next + 1);
+        code = css.charCodeAt(next + 1)
         if (escape) {
           if (code === CR && css.charCodeAt(next + 2) === NEWLINE) {
-            next += 2;
+            next += 2
           } else if (code === CR || code === NEWLINE || code === FEED) {
-            next += 1;
+            next += 1
           } else {
-            next += 1;
+            next += 1
           }
         }
 
@@ -233,40 +215,35 @@ module.exports = function tokenize(input) {
           css.slice(pos, next + 1),
           offset,
           offset + (next - pos + 1)
-        ]);
+        ])
 
-        offset += (next - pos + 1);
-        pos = next;
-        break;
+        offset += next - pos + 1
+        pos = next
+        break
 
       default:
-        n = css.charCodeAt(pos + 1);
+        n = css.charCodeAt(pos + 1)
 
         if (code === SLASH && n === ASTERICK) {
-          next = css.indexOf('*/', pos + 2) + 1;
-          if (next === 0) unclosed('comment');
+          next = css.indexOf('*/', pos + 2) + 1
+          if (next === 0) unclosed('comment')
 
-          content = css.slice(pos, next + 1);
+          content = css.slice(pos, next + 1)
 
-          tokens.push([
-            'comment',
-            content,
-            offset,
-            offset + content.length
-          ]);
+          tokens.push(['comment', content, offset, offset + content.length])
 
-          offset += content.length;
-          pos = next;
+          offset += content.length
+          pos = next
         } else if (code === SLASH && n === SLASH) {
-          RE_NEW_LINE.lastIndex = pos + 1;
-          RE_NEW_LINE.test(css);
+          RE_NEW_LINE.lastIndex = pos + 1
+          RE_NEW_LINE.test(css)
           if (RE_NEW_LINE.lastIndex === 0) {
-            next = css.length - 1;
+            next = css.length - 1
           } else {
-            next = RE_NEW_LINE.lastIndex - 2;
+            next = RE_NEW_LINE.lastIndex - 2
           }
 
-          content = css.slice(pos, next + 1);
+          content = css.slice(pos, next + 1)
 
           tokens.push([
             'comment',
@@ -274,33 +251,28 @@ module.exports = function tokenize(input) {
             offset,
             offset + content.length,
             'inline'
-          ]);
+          ])
 
-          offset += content.length;
-          pos = next;
+          offset += content.length
+          pos = next
         } else {
-          RE_WORD_END.lastIndex = pos + 1;
-          RE_WORD_END.test(css);
+          RE_WORD_END.lastIndex = pos + 1
+          RE_WORD_END.test(css)
           if (RE_WORD_END.lastIndex === 0) {
-            next = css.length - 1;
+            next = css.length - 1
           } else {
-            next = RE_WORD_END.lastIndex - 2;
+            next = RE_WORD_END.lastIndex - 2
           }
 
-          content = css.slice(pos, next + 1);
+          content = css.slice(pos, next + 1)
 
-          tokens.push([
-            'word',
-            content,
-            offset,
-            offset + content.length
-          ]);
+          tokens.push(['word', content, offset, offset + content.length])
 
-          offset += content.length;
-          pos = next;
+          offset += content.length
+          pos = next
         }
 
-        break;
+        break
     }
 
     pos++
