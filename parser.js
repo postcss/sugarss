@@ -67,7 +67,7 @@ module.exports = class Parser {
     let token = part.tokens[0]
     let node = new Comment()
     this.init(node, part)
-    node.source.end = this.getPosition(token[3] || token[2])
+    node.source.end = this.getPosition(token[3])
     this.commentText(node, token)
   }
 
@@ -141,7 +141,7 @@ module.exports = class Parser {
       let comment = new Comment()
       this.current.push(comment)
       comment.source = {
-        end: this.getPosition(last[3] || last[2]),
+        end: this.getPosition(last[3]),
         input: this.input,
         start: this.getPosition(last[2])
       }
@@ -305,7 +305,7 @@ module.exports = class Parser {
     for (let i = this.tokens.length - 1; i >= 0; i--) {
       if (this.tokens[i].length > 3) {
         let last = this.tokens[i]
-        this.root.source.end = this.getPosition(last[3] || last[2])
+        this.root.source.end = this.getPosition(last[3])
         break
       }
     }
@@ -361,7 +361,7 @@ module.exports = class Parser {
     }
     if (!last) last = altLast
 
-    node.source.end = this.getPosition(last[3] || last[2])
+    node.source.end = this.getPosition(last[3])
   }
 
   rule(part) {
