@@ -73,4 +73,20 @@ test('escapes new line', () => {
   ])
 })
 
+test('tokenizes close curly brace', () => {
+  run('a { color: black; }', [
+    ['word', 'a', 0, 1],
+    ['space', ' ', 1, 2],
+    ['{', '{', 2, 3],
+    ['space', ' ', 3, 4],
+    ['word', 'color', 4, 9],
+    [':', ':', 9, 10],
+    ['space', ' ', 10, 11],
+    ['word', 'black', 11, 16],
+    [';', ';', 16, 17],
+    ['space', ' ', 17, 18],
+    ['}', '}', 18, 19]
+  ])
+})
+
 test.run()
