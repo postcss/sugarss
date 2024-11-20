@@ -15,11 +15,13 @@
       "source": {
         "start": {
           "line": 1,
-          "column": 1
+          "column": 1,
+          "offset": 0
         },
         "end": {
           "line": 1,
-          "column": 2
+          "column": 3,
+          "offset": 2
         }
       },
       "text": ""
@@ -28,11 +30,13 @@
   "source": {
     "start": {
       "line": 1,
-      "column": 1
+      "column": 1,
+      "offset": 0
     },
     "end": {
-      "line": 1,
-      "column": 2
+      "line": 2,
+      "column": 1,
+      "offset": 3
     }
   }
 }

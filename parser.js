@@ -13,7 +13,7 @@ module.exports = class Parser {
     this.prevIndent = undefined
     this.step = undefined
 
-    this.root.source = { input, start: { column: 1, line: 1 } }
+    this.root.source = { input, start: { column: 1, line: 1, offset: 0 } }
   }
 
   atrule(part) {
@@ -41,13 +41,15 @@ module.exports = class Parser {
   }
 
   badProp(token) {
-    this.error('Unexpected separator in property', token[2], token[3])
+    let pos = this.getPosition(token[2])
+    this.error('Unexpected separator in property', pos.offset)
   }
 
   checkCurly(tokens) {
     for (let token of tokens) {
       if (token[0] === '{') {
-        this.error('Unnecessary curly bracket', token[2], token[3])
+        let pos = this.getPosition(token[2])
+        this.error('Unnecessary curly bracket', pos.offset)
       }
     }
   }
@@ -55,7 +57,8 @@ module.exports = class Parser {
   checkSemicolon(tokens) {
     for (let token of tokens) {
       if (token[0] === ';') {
-        this.error('Unnecessary semicolon', token[2], token[3])
+        let pos = this.getPosition(token[2])
+        this.error('Unnecessary semicolon', pos.offset)
       }
     }
   }
@@ -64,7 +67,7 @@ module.exports = class Parser {
     let token = part.tokens[0]
     let node = new Comment()
     this.init(node, part)
-    node.source.end = { column: token[5], line: token[4] }
+    node.source.end = this.getPosition(token[3])
     this.commentText(node, token)
   }
 
@@ -72,7 +75,7 @@ module.exports = class Parser {
 
   commentText(node, token) {
     let text = token[1]
-    if (token[6] === 'inline') {
+    if (token[4] === 'inline') {
       node.raws.inline = true
       text = text.slice(2)
     } else {
@@ -80,6 +83,7 @@ module.exports = class Parser {
     }
 
     let match = text.match(/^(\s*)([^]*\S)(\s*)\n?$/)
+
     if (match) {
       node.text = match[2]
       node.raws.left = match[1]
@@ -138,9 +142,9 @@ module.exports = class Parser {
       let comment = new Comment()
       this.current.push(comment)
       comment.source = {
-        end: { column: last[5], line: last[4] },
+        end: this.getPosition(last[3]),
         input: this.input,
-        start: { column: last[3], line: last[2] }
+        start: this.getPosition(last[2])
       }
       let prev = value[value.length - 1]
       if (prev && prev[0] === 'space') {
@@ -172,8 +176,9 @@ module.exports = class Parser {
     this.raw(node, 'value', value, colon)
   }
 
-  error(msg, line, column) {
-    throw this.input.error(msg, line, column)
+  error(msg, offset) {
+    let pos = this.getPosition(offset)
+    throw this.input.error(msg, pos.line, pos.column)
   }
 
   firstSpaces(tokens) {
@@ -187,6 +192,15 @@ module.exports = class Parser {
       }
     }
     return result
+  }
+
+  getPosition(offset) {
+    let pos = this.input.fromOffset(offset)
+    return {
+      column: pos.col,
+      line: pos.line,
+      offset
+    }
   }
 
   indent(part) {
@@ -227,7 +241,8 @@ module.exports = class Parser {
   }
 
   indentedFirstLine(part) {
-    this.error('First line should not have indent', part.number, 1)
+    let pos = this.getPosition(part.tokens[0][2])
+    this.error('First line should not have indent', pos.offset)
   }
 
   init(node, part) {
@@ -243,7 +258,7 @@ module.exports = class Parser {
     }
     node.source = {
       input: this.input,
-      start: { column: part.tokens[0][3], line: part.tokens[0][2] }
+      start: this.getPosition(part.tokens[0][2])
     }
   }
 
@@ -291,10 +306,7 @@ module.exports = class Parser {
     for (let i = this.tokens.length - 1; i >= 0; i--) {
       if (this.tokens[i].length > 3) {
         let last = this.tokens[i]
-        this.root.source.end = {
-          column: last[5] || last[3],
-          line: last[4] || last[2]
-        }
+        this.root.source.end = this.getPosition(last[3])
         break
       }
     }
@@ -330,7 +342,7 @@ module.exports = class Parser {
     if (!clean) {
       let sss = tokens.reduce((all, i) => all + i[1], '')
       let raw = tokens.reduce((all, i) => {
-        if (i[0] === 'comment' && i[6] === 'inline') {
+        if (i[0] === 'comment' && i[4] === 'inline') {
           return all + '/* ' + i[1].slice(2).trim() + ' */'
         } else {
           return all + i[1]
@@ -350,10 +362,7 @@ module.exports = class Parser {
     }
     if (!last) last = altLast
 
-    node.source.end = {
-      column: last[5] || last[3],
-      line: last[4] || last[2]
-    }
+    node.source.end = this.getPosition(last[3])
   }
 
   rule(part) {
@@ -376,15 +385,18 @@ module.exports = class Parser {
   }
 
   unnamedAtrule(token) {
-    this.error('At-rule without name', token[2], token[3])
+    let pos = this.getPosition(token[2])
+    this.error('At-rule without name', pos.offset)
   }
 
   unnamedDecl(token) {
-    this.error('Declaration without name', token[2], token[3])
+    let pos = this.getPosition(token[2])
+    this.error('Declaration without name', pos.offset)
   }
 
   wrongIndent(expected, real, part) {
+    let pos = this.getPosition(part.tokens[0][2])
     let msg = `Expected ${expected} indent, but get ${real}`
-    this.error(msg, part.number, 1)
+    this.error(msg, pos.offset)
   }
 }

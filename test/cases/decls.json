@@ -13,11 +13,13 @@
       "source": {
         "start": {
           "line": 1,
-          "column": 1
+          "column": 1,
+          "offset": 0
         },
         "end": {
           "line": 1,
-          "column": 12
+          "column": 13,
+          "offset": 12
         }
       },
       "prop": "color",
@@ -32,11 +34,13 @@
       "source": {
         "start": {
           "line": 3,
-          "column": 1
+          "column": 1,
+          "offset": 14
         },
         "end": {
           "line": 4,
-          "column": 41
+          "column": 42,
+          "offset": 98
         }
       },
       "prop": "background",
@@ -51,11 +55,13 @@
       "source": {
         "start": {
           "line": 6,
-          "column": 1
+          "column": 1,
+          "offset": 100
         },
         "end": {
           "line": 8,
-          "column": 16
+          "column": 17,
+          "offset": 147
         }
       },
       "prop": "box-shadow",
@@ -70,11 +76,13 @@
       "source": {
         "start": {
           "line": 10,
-          "column": 1
+          "column": 1,
+          "offset": 149
         },
         "end": {
           "line": 10,
-          "column": 19
+          "column": 20,
+          "offset": 168
         }
       },
       "prop": "$(var)-color",
@@ -84,11 +92,13 @@
   "source": {
     "start": {
       "line": 1,
-      "column": 1
+      "column": 1,
+      "offset": 0
     },
     "end": {
-      "line": 10,
-      "column": 19
+      "line": 11,
+      "column": 1,
+      "offset": 169
     }
   }
 }
