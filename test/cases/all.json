@@ -363,7 +363,8 @@
         }
       },
       "selector": ":root"
-    }],
+    }
+  ],
   "source": {
     "start": {
       "line": 1,
