@@ -82,7 +82,8 @@ module.exports = class Parser {
       text = text.slice(2, -2)
     }
 
-    let match = text.match(/^(\s*)([\s\S]*?)(\s*)$/)
+    let match = text.match(/^(\s*)([^]*\S)(\s*)\n?$/)
+
     if (match) {
       node.text = match[2]
       node.raws.left = match[1]
