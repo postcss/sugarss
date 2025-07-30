@@ -133,7 +133,7 @@ module.exports = function tokenize(input) {
           content = css.slice(pos, next + 1)
 
           if (next === -1 || RE_BAD_BRACKET.test(content)) {
-            tokens.push(['(', '(', offset])
+            tokens.push(['(', '(', offset, offset + 1])
             offset++
           } else {
             tokens.push(['brackets', content, offset, next + 1])
@@ -144,7 +144,7 @@ module.exports = function tokenize(input) {
         break
 
       case CLOSE_PARENTHESES:
-        tokens.push([')', ')', offset])
+        tokens.push([')', ')', offset, offset + 1])
         offset++
         break
 
