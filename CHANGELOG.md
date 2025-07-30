@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 5.0.1
+* Fixed `Invalid mapping` errors (by @BaliBalo).
+
 ## 5.0.0
 * Added `source.offset` (by @RamazanIttiev).
 * Removed Node.js 16 support.
