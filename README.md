@@ -29,23 +29,22 @@ But you can use it with any PostCSS plugins
 or use it without any PostCSS plugins.
 With [postcss-mixins] you can use `@mixin` syntax as in Sass.
 
-<a href="https://evilmartians.com/?utm_source=sugarss">
-  <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
-       alt="Sponsored by Evil Martians" width="236" height="54">
-</a>
+---
 
-[postcss-mixins]:              https://github.com/postcss/postcss-mixins
-[postcss-nested]:              https://github.com/postcss/postcss-nested
-[postcss-simple-vars]:         https://github.com/postcss/postcss-simple-vars
-[postcss-sorting]:             https://github.com/hudochenkov/postcss-sorting
-[stylelint]:                   http://stylelint.io/
-[PostCSS]:                     https://github.com/postcss/postcss
+<img src="https://cdn.evilmartians.com/badges/logo-no-label.svg" alt="" width="22" height="16" />  SugarSS is built by <b><a href="https://evilmartians.com/">Evil Martians</a></b>, an American design and engineering consultancy for <b>developer tools, AI, and cybersecurity startups</b>.
 
+---
+
+[postcss-mixins]: https://github.com/postcss/postcss-mixins
+[postcss-nested]: https://github.com/postcss/postcss-nested
+[postcss-simple-vars]: https://github.com/postcss/postcss-simple-vars
+[postcss-sorting]: https://github.com/hudochenkov/postcss-sorting
+[stylelint]: http://stylelint.io/
+[PostCSS]: https://github.com/postcss/postcss
 
 ## Syntax
 
 SugarSS MIME-type is `text/x-sugarss` with `.sss` file extension.
-
 
 ### Indent
 
@@ -53,7 +52,6 @@ We recommend 2 spaces indent. However, SugarSS autodetects indent
 and can be used with tabs or spaces.
 
 But it is prohibited to mix spaces and tabs in SugarSS sources.
-
 
 ### Multiline
 
@@ -99,7 +97,6 @@ for the value:
     linear-gradient(red, rgba(255, 0, 0, 0))
 ```
 
-
 ### Comments
 
 SugarSS supports two types of comments:
@@ -118,14 +115,12 @@ for Sass’s silent/loud comments behaviour.
 
 [postcss-discard-comments]: https://www.npmjs.com/package/postcss-discard-comments
 
-
 ### Rule and Declarations
 
 SugarSS separates selectors and declarations by `:\s` or `:\n` token.
 
 So you must write a space after the property name: `color: black` is good,
 `color:black` is prohibited.
-
 
 ### Other
 
@@ -134,38 +129,36 @@ but do not add preprocessor features build-in.
 
 Here are PostCSS plugins which could add you preprocessor features:
 
-* **[postcss-simple-vars]** adds variables.
-* **[postcss-nested]** adds nested rules.
-* **[postcss-import]** adds `@import` directive support.
-* **[postcss-import-ext-glob]** extends [postcss-import] path resolver to allow glob usage as a path.
-* **[postcss-mixins]** add `@mixin` support.
-* **[postcss-functions]** allows you to define own CSS functions in JS.
+- **[postcss-simple-vars]** adds variables.
+- **[postcss-nested]** adds nested rules.
+- **[postcss-import]** adds `@import` directive support.
+- **[postcss-import-ext-glob]** extends [postcss-import] path resolver to allow glob usage as a path.
+- **[postcss-mixins]** add `@mixin` support.
+- **[postcss-functions]** allows you to define own CSS functions in JS.
 
 [postcss-functions]: https://github.com/andyjansson/postcss-functions
 [postcss-mixins]: https://github.com/postcss/postcss-mixins
 [postcss-import-ext-glob]: https://github.com/dimitrinicolas/postcss-import-ext-glob
-[postcss-import]:          https://github.com/postcss/postcss-import
-[postcss-nested]:          https://github.com/postcss/postcss-nested
-[postcss-simple-vars]:     https://github.com/postcss/postcss-simple-vars
-
+[postcss-import]: https://github.com/postcss/postcss-import
+[postcss-nested]: https://github.com/postcss/postcss-nested
+[postcss-simple-vars]: https://github.com/postcss/postcss-simple-vars
 
 ## Text Editors
 
-* SublimeText: [Syntax Highlighting for .SSS SugarSS]
-* Atom: [language-postcss], [source-preview-postcss] and [build-sugarss]
-* Vim: [vim-sugarss]
-* VSCode: [vetur](https://vuejs.github.io/vetur/), and [postcss-sugarss-language](https://github.com/MhMadHamster/vscode-postcss-language)
+- SublimeText: [Syntax Highlighting for .SSS SugarSS]
+- Atom: [language-postcss], [source-preview-postcss] and [build-sugarss]
+- Vim: [vim-sugarss]
+- VSCode: [vetur](https://vuejs.github.io/vetur/), and [postcss-sugarss-language](https://github.com/MhMadHamster/vscode-postcss-language)
 
 We are working on syntax highlight support in text editors.
 
 Right now, you can set `Sass` or `Stylus` syntax highlight for `.sss` files.
 
 [Syntax Highlighting for .SSS SugarSS]: https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20SSS%20SugarSS
-[source-preview-postcss]:          https://atom.io/packages/source-preview-postcss
-[language-postcss]:                https://atom.io/packages/language-postcss
-[build-sugarss]:                   https://atom.io/packages/build-sugarss
-[vim-sugarss]:                     https://github.com/hhsnopek/vim-sugarss
-
+[source-preview-postcss]: https://atom.io/packages/source-preview-postcss
+[language-postcss]: https://atom.io/packages/language-postcss
+[build-sugarss]: https://atom.io/packages/build-sugarss
+[vim-sugarss]: https://github.com/hhsnopek/vim-sugarss
 
 ## Usage
 
@@ -192,7 +185,6 @@ Then create `.postcssrc` file:
 [`postcss-cli`]: https://github.com/postcss/postcss-cli
 [Parcel]: https://parceljs.org/transforms.html
 
-
 ### Imports
 
 If you doesn’t use Webpack or Parcel, you need some PostCSS plugin
@@ -210,8 +202,7 @@ If you want `@import`, install [postcss-import] and add it to `.postcssrc` file:
 }
 ```
 
-[postcss-import]:      https://github.com/postcss/postcss-import
-
+[postcss-import]: https://github.com/postcss/postcss-import
 
 ### Mixins
 
@@ -239,7 +230,6 @@ For example create `mixins/circle.sss` with:
   height: $size
 ```
 
-
 ### Functions
 
 To define custom functions you need to install [postcss-functions]
@@ -266,7 +256,6 @@ module.exports = function (args) {
 }
 ```
 
-
 ### SugarSS to SugarSS
 
 Sometimes we use PostCSS not to build CSS, but to fix source files.
@@ -276,14 +265,14 @@ For this cases use the `syntax` option, instead of `parser`:
 
 ```js
 gulp.task('sort', function () {
-    return gulp.src('src/**/*.sss')
-        .pipe(postcss([sorting], { syntax: sugarss }))
-        .pipe(gulp.dest('src'));
-});
+  return gulp
+    .src('src/**/*.sss')
+    .pipe(postcss([sorting], { syntax: sugarss }))
+    .pipe(gulp.dest('src'))
+})
 ```
 
 [postcss-sorting]: https://github.com/hudochenkov/postcss-sorting
-
 
 ### CSS to SugarSS
 
@@ -291,11 +280,12 @@ You can even compile existing CSS sources to SugarSS syntax.
 Just use `stringifier` option instead of `parser`:
 
 ```js
-postcss().process(css, { stringifier: sugarss }).then(function (result) {
+postcss()
+  .process(css, { stringifier: sugarss })
+  .then(function (result) {
     result.content // Converted SugarSS content
-});
+  })
 ```
-
 
 ## Thanks
 
