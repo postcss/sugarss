@@ -1,0 +1,14 @@
+@media screen and
+       (min-width: 600px) {
+  .one
+  .two {
+    margin: 1px
+            2px
+  }
+}
+
+.input {
+  @apply
+    px-10
+    border-gray-300
+}

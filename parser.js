@@ -1,5 +1,15 @@
 let { AtRule, Comment, Declaration, Root, Rule } = require('postcss')
 
+// Backslash before a new line continues the line in SugarSS. CSS has no such
+// escape, so browsers reject the value if the backslash stays in the output.
+function isLineContinuation(token) {
+  return (
+    token[0] === 'word' &&
+    token[1][0] === '\\' &&
+    /^[\n\f\r]/.test(token[1].slice(1))
+  )
+}
+
 module.exports = class Parser {
   constructor(input) {
     this.input = input
@@ -335,6 +345,9 @@ module.exports = class Parser {
       type = token[0]
       if (type === 'comment' || (type === 'space' && i === length - 1)) {
         clean = false
+      } else if (isLineContinuation(token)) {
+        clean = false
+        value += token[1].slice(1)
       } else {
         value += token[1]
       }
@@ -344,6 +357,8 @@ module.exports = class Parser {
       let raw = tokens.reduce((all, i) => {
         if (i[0] === 'comment' && i[4] === 'inline') {
           return all + '/* ' + i[1].slice(2).trim() + ' */'
+        } else if (isLineContinuation(i)) {
+          return all + i[1].slice(1)
         } else {
           return all + i[1]
         }
