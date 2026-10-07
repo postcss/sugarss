@@ -88,5 +88,3 @@ test('tokenizes close curly brace', () => {
     ['}', '}', 18, 19]
   ])
 })
-
-test.run()
