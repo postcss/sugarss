@@ -2,6 +2,11 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 5.0.2
+
+- Remove backslash line continuations from the CSS output (by @wahidrizka).
+- Added npm provenance.
+
 ## 5.0.1
 
 - Fixed `Invalid mapping` errors (by @BaliBalo).
