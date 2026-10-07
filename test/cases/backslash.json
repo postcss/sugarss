@@ -1,0 +1,148 @@
+{
+  "raws": {
+    "indent": "  ",
+    "after": "\n"
+  },
+  "type": "root",
+  "nodes": [
+    {
+      "raws": {
+        "before": "",
+        "afterName": " ",
+        "params": {
+          "raw": "screen and\n       (min-width: 600px)",
+          "value": "screen and\n       (min-width: 600px)",
+          "sss": "screen and\\\n       (min-width: 600px)"
+        }
+      },
+      "type": "atrule",
+      "name": "media",
+      "source": {
+        "end": {
+          "column": 26,
+          "line": 2,
+          "offset": 44
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
+      "params": "screen and\n       (min-width: 600px)",
+      "nodes": [
+        {
+          "raws": {
+            "before": "\n  ",
+            "selector": {
+              "raw": ".one\n  .two",
+              "value": ".one\n  .two",
+              "sss": ".one\\\n  .two"
+            }
+          },
+          "type": "rule",
+          "nodes": [
+            {
+              "raws": {
+                "before": "\n    ",
+                "between": ": ",
+                "value": {
+                  "raw": "1px\n            2px",
+                  "value": "1px\n            2px",
+                  "sss": "1px\\\n            2px"
+                }
+              },
+              "type": "decl",
+              "source": {
+                "end": {
+                  "column": 16,
+                  "line": 6,
+                  "offset": 92
+                },
+                "start": {
+                  "column": 5,
+                  "line": 5,
+                  "offset": 64
+                }
+              },
+              "prop": "margin",
+              "value": "1px\n            2px"
+            }
+          ],
+          "source": {
+            "end": {
+              "column": 7,
+              "line": 4,
+              "offset": 59
+            },
+            "start": {
+              "column": 3,
+              "line": 3,
+              "offset": 47
+            }
+          },
+          "selector": ".one\n  .two"
+        }
+      ]
+    },
+    {
+      "raws": {
+        "before": "\n\n"
+      },
+      "type": "rule",
+      "nodes": [
+        {
+          "raws": {
+            "before": "\n  ",
+            "afterName": "",
+            "params": {
+              "raw": "\n    px-10\n    border-gray-300",
+              "value": "\n    px-10\n    border-gray-300",
+              "sss": "\\\n    px-10\\\n    border-gray-300"
+            }
+          },
+          "type": "atrule",
+          "name": "apply",
+          "source": {
+            "end": {
+              "column": 20,
+              "line": 11,
+              "offset": 141
+            },
+            "start": {
+              "column": 3,
+              "line": 9,
+              "offset": 103
+            }
+          },
+          "params": "\n    px-10\n    border-gray-300"
+        }
+      ],
+      "source": {
+        "end": {
+          "column": 7,
+          "line": 8,
+          "offset": 100
+        },
+        "start": {
+          "column": 1,
+          "line": 8,
+          "offset": 94
+        }
+      },
+      "selector": ".input"
+    }
+  ],
+  "source": {
+    "end": {
+      "column": 1,
+      "line": 12,
+      "offset": 142
+    },
+    "start": {
+      "column": 1,
+      "line": 1,
+      "offset": 0
+    }
+  }
+}
